@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="NewFilter1">
+      <UniqueIdentifier>{da462059-3108-455d-abc8-1eec1addeace}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -27,6 +30,9 @@
     <ClCompile Include="DAOUsuari.cxx">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="connexioBD.cxx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CapaDePresentacio.hxx">
@@ -36,6 +42,9 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="DTOUsuari.hxx">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="connexioBD.hxx">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

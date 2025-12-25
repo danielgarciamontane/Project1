@@ -1,4 +1,6 @@
 #pragma once
+//CapaDePresentacio.hxx
+#pragma once
 #include <iostream>
 #include <string>
 #include "CapaDeDomini.hxx"
@@ -6,6 +8,7 @@
 using namespace std;
 using namespace boost::gregorian;
 class CapaDePresentacio
+
 {
 public:
 	// Patró Solter
