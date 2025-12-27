@@ -33,19 +33,34 @@
     <ClCompile Include="connexioBD.cxx">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Usuari.cxx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="usuari-odb.cxx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CapaDePresentacio.hxx">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DAOUsuari.hxx">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DTOUsuari.hxx">
-      <Filter>Source Files</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="connexioBD.hxx">
-      <Filter>Source Files</Filter>
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DTOUsuari.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DAOUsuari.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CapaDeDomini.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="usuari-odb.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Usuari.hxx">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

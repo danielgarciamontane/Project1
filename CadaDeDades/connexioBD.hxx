@@ -2,6 +2,7 @@
 #pragma once
 #include <memory>
 #include <string>
+#include <map>
 #include <odb/mysql/database.hxx>
 using namespace std;
 class connexioBD

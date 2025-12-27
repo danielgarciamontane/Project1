@@ -4,25 +4,7 @@
 #include <locale>
 #include "CapaDePresentacio.hxx"
 using namespace std;
-void menu_principal()
-{
-	int opcio;
-	do
-	{
-		cout << "\n===== MENU PRINCIPAL =====\n";
-		cout << "1. Gestio d'usuaris\n";
-		//Poden anar més menús
-		cout << "0. Sortir\n";
-		cout << "Opcio: ";
-		cin >> opcio;
-		switch (opcio)
-		{
-		case 1: menu_usuari(); break;
-		case 0:cout << "Adeu!\n"; break;
-		default:cout << "Opcio no valida.\n"; break;
-		}
-	} while (opcio != 0);
-}
+
 void menu_usuari()
 {
 	int opcio;
@@ -51,6 +33,27 @@ void menu_usuari()
 		}
 	} while (opcio != 0);
 }
+
+void menu_principal()
+{
+	int opcio;
+	do
+	{
+		cout << "\n===== MENU PRINCIPAL =====\n";
+		cout << "1. Gestio d'usuaris\n";
+		//Poden anar més menús
+		cout << "0. Sortir\n";
+		cout << "Opcio: ";
+		cin >> opcio;
+		switch (opcio)
+		{
+		case 1: menu_usuari(); break;
+		case 0:cout << "Adeu!\n"; break;
+		default:cout << "Opcio no valida.\n"; break;
+		}
+	} while (opcio != 0);
+}
+
 int main()
 {
 	// Aquí ja NO hi ha cap connexió a la BD

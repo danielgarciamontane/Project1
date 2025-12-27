@@ -100,12 +100,15 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>LIBODB_SHARED</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\Users\Jordi\Desktop\obd\include;C:\Users\Jordi\Downloads\boost_1_90_0\boost_1_90_0</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\Users\Jordi\Desktop\obd\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>odb-mysqlD.dll.lib;odbD.dll.lib;odb-boostD.dll.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -114,12 +117,15 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>LIBODB_SHARED</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\Users\Jordi\Desktop\obd\include;C:\Users\Jordi\Downloads\boost_1_90_0\boost_1_90_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\Users\Jordi\Desktop\obd\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>odbD.dll.lib;odb-mysqlD.dll.lib;odb-boostD.dll.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -128,12 +134,32 @@
     <ClCompile Include="connexioBD.cxx" />
     <ClCompile Include="DAOUsuari.cxx" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="usuari-odb.cxx" />
+    <ClCompile Include="Usuari.cxx" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CapaDePresentacio.hxx" />
     <ClInclude Include="connexioBD.hxx" />
     <ClInclude Include="DAOUsuari.hxx" />
     <ClInclude Include="DTOUsuari.hxx" />
+    <ClInclude Include="CapaDeDomini.hxx" />
+    <ClInclude Include="usuari-odb.hxx" />
+    <ClInclude Include="Usuari.hxx">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"C:\odb\bin\odb.exe" -v -I "C:\odb\include" -I "C:\Users\Jordi\Downloads\boost_1_90_0\boost_1_90_0" --std c++11 -d mysql --generate-schema --fkeys-deferrable-mode not_deferrable --generate-query --generate-session --default-pointer std::shared_ptr --profile boost/date-time "C:\Users\Jordi\Desktop\University\Q3\INEP\Practica2025\Project1\Usuari.hxx"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">"C:\odb\bin\odb.exe" -v -I "C:\odb\include" -I "C:\Users\Jordi\Downloads\boost_1_90_0\boost_1_90_0" --std c++11 -d mysql --generate-schema --fkeys-deferrable-mode not_deferrable --generate-query --generate-session --default-pointer std::shared_ptr --profile boost/date-time "C:\Users\Jordi\Desktop\University\Q3\INEP\Practica2025\Project1\Usuari.hxx"</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectDir)Header\usuari-odb.hxx
+;$(ProjectDir)Source\usuari-odb.cxx
+;$(ProjectDir)Header\usuari-odb.ixx;
+$(ProjectDir)Schema\usuari.sql;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ProjectDir)Header\usuari-odb.hxx
+;$(ProjectDir)Source\usuari-odb.cxx
+;$(ProjectDir)Header\usuari-odb.ixx;
+$(ProjectDir)Schema\usuari.sql;%(Outputs)</Outputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Generar archivos ODB para usuari.hxx</Message>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectDir)Header\usuari.hxx</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Generar archivos ODB para usuari.hxx</Message>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ProjectDir)Header\usuari.hxx</AdditionalInputs>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="configuracio.env" />

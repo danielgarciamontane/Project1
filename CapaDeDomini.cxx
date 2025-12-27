@@ -32,10 +32,11 @@ void CapaDeDomini::modificarUsuari(const string& username,
 	u.set_nomcomplet(nou_nom);
 	u.set_data_naixement(nova_data);
 	usuariDao.modifica(u);
-}//implementació del mètode amb DTOUsuari
+}
+//implementació del mètode amb DTOUsuari
 DTOUsuari CapaDeDomini::consultarUsuari(const string& username)
 {
 	DAOUsuari usuariDao;
 	usuari u = usuariDao.obte(username);
 	return u;
-}
+}
