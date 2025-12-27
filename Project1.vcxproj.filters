@@ -21,46 +21,49 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CapaDePresentacio.cxx">
+    <ClCompile Include="CapaDeDades\connexioBD.cxx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CapaDeDomini.cxx">
+    <ClCompile Include="CapaDeDades\DAOUsuari.cxx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="DAOUsuari.cxx">
+    <ClCompile Include="CapaDeDomini\Model\Usuari.cxx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="connexioBD.cxx">
+    <ClCompile Include="CapaDeDomini\CtrlIniciSessio.cxx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Usuari.cxx">
+    <ClCompile Include="CapaDePresentacio\CapaDePresentacio.cxx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="usuari-odb.cxx">
+    <ClCompile Include="CapaDeDomini\Model\Usuari-odb.cxx">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CapaDePresentacio.hxx">
+    <ClInclude Include="CapaDeDades\connexioBD.hxx">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="connexioBD.hxx">
+    <ClInclude Include="CapaDeDades\DAOUsuari.hxx">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="DTOUsuari.hxx">
+    <ClInclude Include="CapaDeDomini\DTOs\DTOUsuari.hxx">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="DAOUsuari.hxx">
+    <ClInclude Include="CapaDeDomini\CtrlIniciSessio.hxx">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CapaDeDomini.hxx">
+    <ClInclude Include="CapaDeDomini\Model\Usuari.hxx">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="usuari-odb.hxx">
+    <ClInclude Include="CapaDePresentacio\CapaDePresentacio.hxx">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Usuari.hxx">
+    <ClInclude Include="CapaDeDomini\Model\Usuari-odb.hxx">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CapaDeDomini\Model\usuari-odb.ixx">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

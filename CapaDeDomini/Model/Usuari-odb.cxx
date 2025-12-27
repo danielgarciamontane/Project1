@@ -6,7 +6,7 @@
 
 #include <odb/pre.hxx>
 
-#include "usuari-odb.hxx"
+#include "Usuari-odb.hxx"
 
 #include <cassert>
 #include <cstring>  // std::memcpy
@@ -87,9 +87,25 @@ namespace odb
       grew = true;
     }
 
+    // _correuElectronic
+    //
+    if (t[2UL])
+    {
+      i._correuElectronic_value.capacity (i._correuElectronic_size);
+      grew = true;
+    }
+
+    // _contrasenya
+    //
+    if (t[3UL])
+    {
+      i._contrasenya_value.capacity (i._contrasenya_size);
+      grew = true;
+    }
+
     // _data_naixement
     //
-    t[2UL] = 0;
+    t[4UL] = 0;
 
     return grew;
   }
@@ -126,6 +142,26 @@ namespace odb
       i._nomcomplet_value.capacity ());
     b[n].length = &i._nomcomplet_size;
     b[n].is_null = &i._nomcomplet_null;
+    n++;
+
+    // _correuElectronic
+    //
+    b[n].buffer_type = MYSQL_TYPE_STRING;
+    b[n].buffer = i._correuElectronic_value.data ();
+    b[n].buffer_length = static_cast<unsigned long> (
+      i._correuElectronic_value.capacity ());
+    b[n].length = &i._correuElectronic_size;
+    b[n].is_null = &i._correuElectronic_null;
+    n++;
+
+    // _contrasenya
+    //
+    b[n].buffer_type = MYSQL_TYPE_STRING;
+    b[n].buffer = i._contrasenya_value.data ();
+    b[n].buffer_length = static_cast<unsigned long> (
+      i._contrasenya_value.capacity ());
+    b[n].length = &i._contrasenya_size;
+    b[n].is_null = &i._contrasenya_null;
     n++;
 
     // _data_naixement
@@ -204,6 +240,48 @@ namespace odb
       grew = grew || (cap != i._nomcomplet_value.capacity ());
     }
 
+    // _correuElectronic
+    //
+    {
+      ::std::string const& v =
+        o._correuElectronic;
+
+      bool is_null (false);
+      std::size_t size (0);
+      std::size_t cap (i._correuElectronic_value.capacity ());
+      mysql::value_traits<
+          ::std::string,
+          mysql::id_string >::set_image (
+        i._correuElectronic_value,
+        size,
+        is_null,
+        v);
+      i._correuElectronic_null = is_null;
+      i._correuElectronic_size = static_cast<unsigned long> (size);
+      grew = grew || (cap != i._correuElectronic_value.capacity ());
+    }
+
+    // _contrasenya
+    //
+    {
+      ::std::string const& v =
+        o._contrasenya;
+
+      bool is_null (false);
+      std::size_t size (0);
+      std::size_t cap (i._contrasenya_value.capacity ());
+      mysql::value_traits<
+          ::std::string,
+          mysql::id_string >::set_image (
+        i._contrasenya_value,
+        size,
+        is_null,
+        v);
+      i._contrasenya_null = is_null;
+      i._contrasenya_size = static_cast<unsigned long> (size);
+      grew = grew || (cap != i._contrasenya_value.capacity ());
+    }
+
     // _data_naixement
     //
     {
@@ -260,6 +338,36 @@ namespace odb
         i._nomcomplet_null);
     }
 
+    // _correuElectronic
+    //
+    {
+      ::std::string& v =
+        o._correuElectronic;
+
+      mysql::value_traits<
+          ::std::string,
+          mysql::id_string >::set_value (
+        v,
+        i._correuElectronic_value,
+        i._correuElectronic_size,
+        i._correuElectronic_null);
+    }
+
+    // _contrasenya
+    //
+    {
+      ::std::string& v =
+        o._contrasenya;
+
+      mysql::value_traits<
+          ::std::string,
+          mysql::id_string >::set_value (
+        v,
+        i._contrasenya_value,
+        i._contrasenya_size,
+        i._contrasenya_null);
+    }
+
     // _data_naixement
     //
     {
@@ -303,14 +411,18 @@ namespace odb
   "INSERT INTO `usuari` "
   "(`username`, "
   "`nomcomplet`, "
+  "`correuElectronic`, "
+  "`contrasenya`, "
   "`data_naixement`) "
   "VALUES "
-  "(?, ?, ?)";
+  "(?, ?, ?, ?, ?)";
 
   const char access::object_traits_impl< ::usuari, id_mysql >::find_statement[] =
   "SELECT "
   "`usuari`.`username`, "
   "`usuari`.`nomcomplet`, "
+  "`usuari`.`correuElectronic`, "
+  "`usuari`.`contrasenya`, "
   "`usuari`.`data_naixement` "
   "FROM `usuari` "
   "WHERE `usuari`.`username`=?";
@@ -319,6 +431,8 @@ namespace odb
   "UPDATE `usuari` "
   "SET "
   "`nomcomplet`=?, "
+  "`correuElectronic`=?, "
+  "`contrasenya`=?, "
   "`data_naixement`=? "
   "WHERE `username`=?";
 
@@ -330,6 +444,8 @@ namespace odb
   "SELECT "
   "`usuari`.`username`, "
   "`usuari`.`nomcomplet`, "
+  "`usuari`.`correuElectronic`, "
+  "`usuari`.`contrasenya`, "
   "`usuari`.`data_naixement` "
   "FROM `usuari`";
 

@@ -4,6 +4,7 @@
 #include <string>
 #include <boost/date_time/gregorian/gregorian.hpp>
 #include <odb/core.hxx>
+#include "../DTOs/DTOUsuari.hxx"
 using namespace std;
 
 // Indica que és un objecte perquè el reconeixi el compilador de ODB
@@ -26,6 +27,8 @@ public:
     const std::string& get_username() const;
     const std::string& get_nomcomplet() const;
     const boost::gregorian::date& get_data_naixement() const;
+	const std::string& obteContrasenya() const; 
+	DTOUsuari obteInfoUsuari() const;
 
     // Setters
     void set_username(const std::string& v);
@@ -40,6 +43,10 @@ private:
     #pragma db id
     string _username;
     string _nomcomplet;
+
+	string _correuElectronic;
+
+	string _contrasenya;
     #pragma db type("DATE")
     boost::gregorian::date _data_naixement;
 };

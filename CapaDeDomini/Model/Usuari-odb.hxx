@@ -26,7 +26,7 @@
 
 #include <odb/pre.hxx>
 
-#include "usuari.hxx"
+#include "Usuari.hxx"
 
 #include <memory>
 #include <cstddef>
@@ -134,6 +134,30 @@ namespace odb
 
     static const nomcomplet_type_ nomcomplet;
 
+    // correuElectronic
+    //
+    typedef
+    mysql::query_column<
+      mysql::value_traits<
+        ::std::string,
+        mysql::id_string >::query_type,
+      mysql::id_string >
+    correuElectronic_type_;
+
+    static const correuElectronic_type_ correuElectronic;
+
+    // contrasenya
+    //
+    typedef
+    mysql::query_column<
+      mysql::value_traits<
+        ::std::string,
+        mysql::id_string >::query_type,
+      mysql::id_string >
+    contrasenya_type_;
+
+    static const contrasenya_type_ contrasenya;
+
     // data_naixement
     //
     typedef
@@ -156,6 +180,16 @@ namespace odb
   const typename query_columns< ::usuari, id_mysql, A >::nomcomplet_type_
   query_columns< ::usuari, id_mysql, A >::
   nomcomplet (A::table_name, "`nomcomplet`", 0);
+
+  template <typename A>
+  const typename query_columns< ::usuari, id_mysql, A >::correuElectronic_type_
+  query_columns< ::usuari, id_mysql, A >::
+  correuElectronic (A::table_name, "`correuElectronic`", 0);
+
+  template <typename A>
+  const typename query_columns< ::usuari, id_mysql, A >::contrasenya_type_
+  query_columns< ::usuari, id_mysql, A >::
+  contrasenya (A::table_name, "`contrasenya`", 0);
 
   template <typename A>
   const typename query_columns< ::usuari, id_mysql, A >::data_naixement_type_
@@ -195,6 +229,18 @@ namespace odb
       details::buffer _nomcomplet_value;
       unsigned long _nomcomplet_size;
       my_bool _nomcomplet_null;
+
+      // _correuElectronic
+      //
+      details::buffer _correuElectronic_value;
+      unsigned long _correuElectronic_size;
+      my_bool _correuElectronic_null;
+
+      // _contrasenya
+      //
+      details::buffer _contrasenya_value;
+      unsigned long _contrasenya_size;
+      my_bool _contrasenya_null;
 
       // _data_naixement
       //
@@ -240,7 +286,7 @@ namespace odb
 
     typedef mysql::query_base query_base_type;
 
-    static const std::size_t column_count = 3UL;
+    static const std::size_t column_count = 5UL;
     static const std::size_t id_column_count = 1UL;
     static const std::size_t inverse_column_count = 0UL;
     static const std::size_t readonly_column_count = 0UL;
@@ -308,7 +354,7 @@ namespace odb
   //
 }
 
-#include "usuari-odb.ixx"
+#include "Usuari-odb.ixx"
 
 #include <odb/post.hxx>
 

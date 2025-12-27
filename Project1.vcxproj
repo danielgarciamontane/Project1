@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -129,37 +129,25 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="CapaDeDomini.cxx" />
-    <ClCompile Include="CapaDePresentacio.cxx" />
-    <ClCompile Include="connexioBD.cxx" />
-    <ClCompile Include="DAOUsuari.cxx" />
+    <ClCompile Include="CapaDeDades\connexioBD.cxx" />
+    <ClCompile Include="CapaDeDades\DAOUsuari.cxx" />
+    <ClCompile Include="CapaDeDomini\Model\Usuari.cxx" />
+    <ClCompile Include="CapaDeDomini\CtrlIniciSessio.cxx" />
+    <ClCompile Include="CapaDePresentacio\CapaDePresentacio.cxx" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="usuari-odb.cxx" />
-    <ClCompile Include="Usuari.cxx" />
+    <ClCompile Include="CapaDeDomini\Model\Usuari-odb.cxx" />
+    <ClInclude Include="CapaDeDomini\Model\usuari-odb.ixx">
+      <FileType>Document</FileType>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CapaDePresentacio.hxx" />
-    <ClInclude Include="connexioBD.hxx" />
-    <ClInclude Include="DAOUsuari.hxx" />
-    <ClInclude Include="DTOUsuari.hxx" />
-    <ClInclude Include="CapaDeDomini.hxx" />
-    <ClInclude Include="usuari-odb.hxx" />
-    <ClInclude Include="Usuari.hxx">
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"C:\odb\bin\odb.exe" -v -I "C:\odb\include" -I "C:\Users\Jordi\Downloads\boost_1_90_0\boost_1_90_0" --std c++11 -d mysql --generate-schema --fkeys-deferrable-mode not_deferrable --generate-query --generate-session --default-pointer std::shared_ptr --profile boost/date-time "C:\Users\Jordi\Desktop\University\Q3\INEP\Practica2025\Project1\Usuari.hxx"</Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">"C:\odb\bin\odb.exe" -v -I "C:\odb\include" -I "C:\Users\Jordi\Downloads\boost_1_90_0\boost_1_90_0" --std c++11 -d mysql --generate-schema --fkeys-deferrable-mode not_deferrable --generate-query --generate-session --default-pointer std::shared_ptr --profile boost/date-time "C:\Users\Jordi\Desktop\University\Q3\INEP\Practica2025\Project1\Usuari.hxx"</Command>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectDir)Header\usuari-odb.hxx
-;$(ProjectDir)Source\usuari-odb.cxx
-;$(ProjectDir)Header\usuari-odb.ixx;
-$(ProjectDir)Schema\usuari.sql;%(Outputs)</Outputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ProjectDir)Header\usuari-odb.hxx
-;$(ProjectDir)Source\usuari-odb.cxx
-;$(ProjectDir)Header\usuari-odb.ixx;
-$(ProjectDir)Schema\usuari.sql;%(Outputs)</Outputs>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Generar archivos ODB para usuari.hxx</Message>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectDir)Header\usuari.hxx</AdditionalInputs>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Generar archivos ODB para usuari.hxx</Message>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ProjectDir)Header\usuari.hxx</AdditionalInputs>
-    </ClInclude>
+    <ClInclude Include="CapaDeDades\connexioBD.hxx" />
+    <ClInclude Include="CapaDeDades\DAOUsuari.hxx" />
+    <ClInclude Include="CapaDeDomini\DTOs\DTOUsuari.hxx" />
+    <ClInclude Include="CapaDeDomini\CtrlIniciSessio.hxx" />
+    <ClInclude Include="CapaDeDomini\Model\Usuari.hxx" />
+    <ClInclude Include="CapaDePresentacio\CapaDePresentacio.hxx" />
+    <ClInclude Include="CapaDeDomini\Model\Usuari-odb.hxx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="configuracio.env" />
