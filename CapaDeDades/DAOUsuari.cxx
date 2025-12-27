@@ -29,5 +29,4 @@ shared_ptr<usuari> DAOUsuari::obte(const string& sobrenom) {
 
     // Devolvemos el puntero
     return u;
-
 }

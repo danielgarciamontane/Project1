@@ -133,9 +133,11 @@
     <ClCompile Include="CapaDeDades\DAOUsuari.cxx" />
     <ClCompile Include="CapaDeDomini\Model\Usuari.cxx" />
     <ClCompile Include="CapaDeDomini\CtrlIniciSessio.cxx" />
+    <ClCompile Include="CapaDeDomini\CtrlTancaSessio.cxx" />
     <ClCompile Include="CapaDePresentacio\CapaDePresentacio.cxx" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="CapaDeDomini\Model\Usuari-odb.cxx" />
+    <ClInclude Include="CapaDeDomini\CtrlTancaSessio.hxx" />
     <ClInclude Include="CapaDeDomini\Model\usuari-odb.ixx">
       <FileType>Document</FileType>
     </ClInclude>

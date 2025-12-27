@@ -39,6 +39,9 @@
     <ClCompile Include="CapaDeDomini\Model\Usuari-odb.cxx">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CapaDeDomini\CtrlTancaSessio.cxx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CapaDeDades\connexioBD.hxx">
@@ -64,6 +67,9 @@
     </ClInclude>
     <ClInclude Include="CapaDeDomini\Model\usuari-odb.ixx">
       <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CapaDeDomini\CtrlTancaSessio.hxx">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

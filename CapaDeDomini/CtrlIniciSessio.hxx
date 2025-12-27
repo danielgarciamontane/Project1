@@ -1,3 +1,4 @@
+#pragma once
 #include <string>
 #include "DTOs/DTOUsuari.hxx"
 using namespace std;

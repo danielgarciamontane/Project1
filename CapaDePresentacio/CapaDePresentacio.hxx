@@ -1,4 +1,3 @@
-#pragma once
 //CapaDePresentacio.hxx
 #pragma once
 #include <iostream>
@@ -16,9 +15,11 @@ private:
 	CapaDePresentacio();
 
 	void iniciarSessio();
+	void tancarSessio();
 
 	// Mètodes auxiliars
 	void mostrarMenuPrincipal();
+	void mostrarMenuSessioIniciada();
 
 	string _usuariActual;
 	static CapaDePresentacio* _instancia;

@@ -4,6 +4,8 @@
 #include <string>
 #include <boost/date_time/gregorian/gregorian.hpp>
 #include "../CapaDeDomini/CtrlIniciSessio.hxx"
+#include "../CapaDeDomini/CtrlTancaSessio.hxx"
+#include "../CapaDeDades/DAOUsuari.hxx"
 
 CapaDePresentacio* CapaDePresentacio::_instancia = nullptr;
 
@@ -43,7 +45,32 @@ void CapaDePresentacio::executar() {
                 cout << "\nOpció no vàlida. Torna-ho a intentar.\n";
             }
         }
-        
+        else {
+            // *** Menú quan hi ha sessió iniciada ***
+            mostrarMenuSessioIniciada();
+            std::cout << "Selecciona una opció: ";
+            if (!(std::cin >> opcio)) {
+                std::cin.clear();
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                continue;
+            }
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+            switch (opcio) {
+            case 1:
+                tancarSessio(); // <-- implementar a sota
+                break;
+            case 2:
+                std::cout << "\n[TODO] Veure experiències disponibles (requereix sessió)\n";
+                break;
+            case 0:
+                sortir = true;
+                std::cout << "\nAdéu! Gràcies per utilitzar PlanGo.\n";
+                break;
+            default:
+                std::cout << "\nOpció no vàlida. Torna-ho a intentar.\n";
+            }
+        }
     }
 }
 
@@ -57,6 +84,18 @@ void CapaDePresentacio::mostrarMenuPrincipal() {
     cout << "  3. Veure experiències disponibles\n";
     cout << "  0. Sortir\n\n";
 }
+
+
+void CapaDePresentacio::mostrarMenuSessioIniciada() {
+    std::cout << "-----------------------------------------\n";
+    std::cout << "-           Sessio iniciada             -\n";
+    std::cout << "-----------------------------------------\n\n";
+    std::cout << " Usuari: " << _usuariActual << "\n\n";
+    std::cout << "  1. Tancar sessio\n";
+    std::cout << "  2. Veure experiencies disponibles\n";
+    std::cout << "  0. Sortir\n\n";
+}
+
 
 void CapaDePresentacio::iniciarSessio() {
     cout << "--- INICIAR SESSIÓ ---\n\n";
@@ -76,3 +115,15 @@ void CapaDePresentacio::iniciarSessio() {
         cout << "\n? Error: " << e.what() << "\n";
     }
 }
+
+void CapaDePresentacio::tancarSessio() {
+    try {
+        CtrlTancaSessio ctrl;
+        bool confirma = ctrl.tancarSessio(_usuariActual);
+         if (confirma) _usuariActual.clear();
+    }
+    catch (const std::exception& e) {
+        std::cout << "\n? Error en tancar sessio: " << e.what() << "\n";
+    }
+}
+
