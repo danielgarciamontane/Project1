@@ -74,14 +74,14 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>LIBODB_SHARED;%(AdditionalDependecies)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\Jordi\Downloads\boost_1_90_0\boost_1_90_0;C:\Users\Jordi\Desktop\obd\include;%(AdditionalDependecies)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\boost_1_88_0;C:\odb\include;%(AdditionalDependecies)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\Jordi\Desktop\obd\lib;%(AdditionalDependecies)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\odb\lib;%(AdditionalDependecies)</AdditionalLibraryDirectories>
       <AdditionalDependencies>odb-mysqlD.dll.lib;odbD.dll.lib;odb-boostD.dll.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -103,14 +103,14 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>LIBODB_SHARED</PreprocessorDefinitions>
+      <PreprocessorDefinitions>LIBODB_SHARED;%(AdditionalDependecies)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\Jordi\Downloads\boost_1_90_0\boost_1_90_0;C:\Users\Jordi\Desktop\obd\include;%(AdditionalDependecies)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\boost_1_88_0;C:\odb\include;%(AdditionalDependecies)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\Jordi\Desktop\obd\lib;%(AdditionalDependecies)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\odb\lib;%(AdditionalDependecies)</AdditionalLibraryDirectories>
       <AdditionalDependencies>odb-mysqlD.dll.lib;odbD.dll.lib;odb-boostD.dll.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
