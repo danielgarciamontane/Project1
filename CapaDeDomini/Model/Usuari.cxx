@@ -12,6 +12,10 @@ const string& usuari::get_nomcomplet() const {
     return _nomcomplet;
 }
 
+const string& usuari::get_correuElectronic() const {
+    return _correuElectronic;
+}
+
 const int& usuari::get_edat() const {
     return _edat;
 }
@@ -24,6 +28,7 @@ DTOUsuari usuari::obteInfoUsuari() const {
 	dto.nomComplet = _nomcomplet;
 	dto.email = _correuElectronic;
 	dto.edat = _edat;
+	dto.numReserves = _reserves.size();
 
     return dto;
 }

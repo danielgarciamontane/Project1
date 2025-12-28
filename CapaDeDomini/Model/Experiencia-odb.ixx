@@ -6,19 +6,19 @@
 
 namespace odb
 {
-  // usuari
+  // Experiencia
   //
 
   inline
-  access::object_traits< ::usuari >::id_type
-  access::object_traits< ::usuari >::
+  access::object_traits< ::Experiencia >::id_type
+  access::object_traits< ::Experiencia >::
   id (const object_type& o)
   {
-    return o._username;
+    return o.id;
   }
 
   inline
-  void access::object_traits< ::usuari >::
+  void access::object_traits< ::Experiencia >::
   callback (database& db, object_type& x, callback_event e)
   {
     ODB_POTENTIALLY_UNUSED (db);
@@ -27,7 +27,7 @@ namespace odb
   }
 
   inline
-  void access::object_traits< ::usuari >::
+  void access::object_traits< ::Experiencia >::
   callback (database& db, const object_type& x, callback_event e)
   {
     ODB_POTENTIALLY_UNUSED (db);
@@ -36,18 +36,21 @@ namespace odb
   }
 }
 
+#include <odb/details/unique-ptr.hxx>
+
 namespace odb
 {
-  // usuari
+  // Experiencia
   //
 
   inline
-  void access::object_traits_impl< ::usuari, id_mysql >::
-  erase (database& db, const object_type& obj)
+  void access::object_traits_impl< ::Experiencia, id_mysql >::
+  load_ (statements_type& sts,
+         object_type& obj,
+         bool)
   {
-    callback (db, obj, callback_event::pre_erase);
-    erase (db, id (obj));
-    callback (db, obj, callback_event::post_erase);
+    ODB_POTENTIALLY_UNUSED (sts);
+    ODB_POTENTIALLY_UNUSED (obj);
   }
 }
 

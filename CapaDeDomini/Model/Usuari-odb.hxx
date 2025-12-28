@@ -28,6 +28,8 @@
 
 #include "Usuari.hxx"
 
+#include "Reserva-odb.hxx"
+
 #include <memory>
 #include <cstddef>
 #include <utility>
@@ -251,6 +253,90 @@ namespace odb
     };
 
     struct extra_statement_cache_type;
+
+    // _reserves
+    //
+    struct reserves_traits
+    {
+      static const std::size_t id_column_count = 1UL;
+      static const std::size_t data_column_count = 3UL;
+
+      static const bool versioned = false;
+
+      static const char insert_statement[];
+      static const char select_statement[];
+      static const char delete_statement[];
+
+      typedef ::std::vector< ::std::shared_ptr< ::Reserva > > container_type;
+      typedef
+      odb::access::container_traits<container_type>
+      container_traits_type;
+      typedef container_traits_type::index_type index_type;
+      typedef container_traits_type::value_type value_type;
+
+      typedef ordered_functions<index_type, value_type> functions_type;
+      typedef mysql::container_statements< reserves_traits > statements_type;
+
+      struct data_image_type
+      {
+        // index
+        //
+        unsigned long long index_value;
+        my_bool index_null;
+
+        // value
+        //
+        int value_value;
+        my_bool value_null;
+
+        std::size_t version;
+      };
+
+      static void
+      bind (MYSQL_BIND*,
+            const MYSQL_BIND* id,
+            std::size_t id_size,
+            data_image_type&);
+
+      static void
+      grow (data_image_type&,
+            my_bool*);
+
+      static void
+      init (data_image_type&,
+            index_type*,
+            const value_type&);
+
+      static void
+      init (index_type&,
+            value_type&,
+            const data_image_type&,
+            database*);
+
+      static void
+      insert (index_type, const value_type&, void*);
+
+      static bool
+      select (index_type&, value_type&, void*);
+
+      static void
+      delete_ (void*);
+
+      static void
+      persist (const container_type&,
+               statements_type&);
+
+      static void
+      load (container_type&,
+            statements_type&);
+
+      static void
+      update (const container_type&,
+              statements_type&);
+
+      static void
+      erase (statements_type&);
+    };
 
     using object_traits<object_type>::id;
 

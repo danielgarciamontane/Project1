@@ -12,11 +12,13 @@ public:
     DTOUsuari(const std::string& sobrenomU,
         const std::string& nomComplet,
         const std::string& email,
-        const int& edat)
+        const int& edat,
+        const int& numReserves)
         : sobrenomU(sobrenomU),
         nomComplet(nomComplet),
         email(email),
-        edat(edat)
+        edat(edat),
+		numReserves(numReserves)
     {
     }
 
@@ -25,4 +27,5 @@ public:
     std::string nomComplet;
     std::string email;
     int edat;
+	int numReserves;
 };
