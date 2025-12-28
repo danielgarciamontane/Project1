@@ -7,6 +7,7 @@
 #include "../CapaDeDomini/CtrlTancaSessio.hxx"
 #include "../CapaDeDomini/CtrlRegistraUsuari.hxx"
 #include "../CapaDeDades/DAOUsuari.hxx"
+#include "../CapaDeDomini/CtrlConsultaUsuari.hxx"
 
 CapaDePresentacio* CapaDePresentacio::_instancia = nullptr;
 
@@ -67,6 +68,9 @@ void CapaDePresentacio::executar() {
             case 2:
                 std::cout << "\n[TODO] Veure experiències disponibles (requereix sessió)\n";
                 break;
+            case 3:
+                consultarUsuari();
+                break;
             case 0:
                 sortir = true;
                 std::cout << "\nAdéu! Gràcies per utilitzar PlanGo.\n";
@@ -97,6 +101,7 @@ void CapaDePresentacio::mostrarMenuSessioIniciada() {
     std::cout << " Usuari: " << _usuariActual << "\n\n";
     std::cout << "  1. Tancar sessio\n";
     std::cout << "  2. Veure experiencies disponibles\n";
+	std::cout << "  3. Consultar Usuari\n";
     std::cout << "  0. Sortir\n\n";
 }
 
@@ -167,6 +172,24 @@ void CapaDePresentacio::registrarUsuari() {
     }
     catch (const std::exception& e) {
         std::cout<< e.what() << "\n";
+    }
+}
+
+void CapaDePresentacio::consultarUsuari() {
+    std::cout << "--- CONSULTAR USUARI ---\n\n";
+    try {
+        DTOUsuari dto;
+        CtrlConsultaUsuari ctrl;
+        dto = ctrl.consultarUsuari(_usuariActual);
+        std::cout << "Informació de l'usuari:\n";
+        std::cout << "Sobrenom: " << dto.sobrenomU << "\n";
+        std::cout << "Nom complet: " << dto.nomComplet << "\n";
+        std::cout << "Correu electrònic: " << dto.email << "\n";
+        std::cout << "Edat: " << dto.edat << "\n";
+        std::cout << "Número de reserves: " << dto.numReserves << "\n\n";
+    }
+    catch (const std::exception& e) {
+        std::cout << "\n? Error en consultar usuari: " << e.what() << "\n";
     }
 }
 

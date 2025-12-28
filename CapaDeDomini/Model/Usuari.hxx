@@ -56,5 +56,6 @@ private:
 	string _correuElectronic;
 	string _contrasenya;
     int _edat;
+    #pragma db inverse(_usuari)
     vector<shared_ptr<Reserva>> _reserves;
 };

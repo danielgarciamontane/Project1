@@ -76,12 +76,12 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\boost_1_88_0;C:\odb\include;%(AdditionalDependecies)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Jordi\Downloads\boost_1_90_0\boost_1_90_0;C:\Users\Jordi\Desktop\obd\include;%(AdditionalDependecies)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\odb\lib;%(AdditionalDependecies)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Users\Jordi\Desktop\obd\lib;%(AdditionalDependecies)</AdditionalLibraryDirectories>
       <AdditionalDependencies>odb-mysqlD.dll.lib;odbD.dll.lib;odb-boostD.dll.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -105,12 +105,12 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>LIBODB_SHARED</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\boost_1_88_0;C:\odb\include;%(AdditionalDependecies)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Jordi\Downloads\boost_1_90_0\boost_1_90_0;C:\Users\Jordi\Desktop\obd\include;%(AdditionalDependecies)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\odb\lib;%(AdditionalDependecies)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Users\Jordi\Desktop\obd\lib;%(AdditionalDependecies)</AdditionalLibraryDirectories>
       <AdditionalDependencies>odb-mysqlD.dll.lib;odbD.dll.lib;odb-boostD.dll.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -132,15 +132,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Activitat.cxx" />
     <ClCompile Include="CapaDeDades\connexioBD.cxx" />
+    <ClCompile Include="CapaDeDades\DAOReserva.cxx" />
     <ClCompile Include="CapaDeDades\DAOUsuari.cxx" />
+    <ClCompile Include="CapaDeDomini\Model\Activitat.cxx" />
+    <ClCompile Include="CapaDeDomini\Model\Escapada.cxx" />
     <ClCompile Include="CapaDeDomini\Model\Experiencia-odb.cxx" />
     <ClInclude Include="CapaDeDades\DAOReserva.hxx" />
     <ClInclude Include="CapaDeDomini\CtrlConsultaUsuari.hxx" />
+    <ClInclude Include="CapaDeDomini\Model\Escapada.hxx" />
     <ClInclude Include="CapaDeDomini\Model\Experiencia-odb.ixx">
       <FileType>Document</FileType>
     </ClInclude>
+    <ClCompile Include="CapaDeDomini\Model\Experiencia.cxx" />
+    <ClInclude Include="CapaDeDomini\Model\Experiencia.hxx" />
     <ClCompile Include="CapaDeDomini\Model\Reserva-odb.cxx" />
     <ClInclude Include="CapaDeDomini\Model\Reserva-odb.ixx">
       <FileType>Document</FileType>
@@ -160,13 +165,9 @@
     <ClCompile Include="CapaDeDomini\CtrlRegistraUsuari.cxx" />
     <ClCompile Include="CapaDeDomini\CtrlConsultaUsuari.cxx" />
     <ClCompile Include="CapaDePresentacio\CapaDePresentacio.cxx" />
-    <ClCompile Include="Escapada.cxx" />
-    <ClCompile Include="Experiencia.cxx" />
     <ClCompile Include="main.cpp" />
     <ClInclude Include="CapaDeDomini\CtrlTancaSessio.hxx" />
     <ClInclude Include="CapaDeDomini\CtrlRegistraUsuari.hxx" />
-    <ClInclude Include="Escapada.hxx" />
-    <ClInclude Include="Experiencia.hxx" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CapaDeDades\connexioBD.hxx" />

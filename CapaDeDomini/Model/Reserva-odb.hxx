@@ -196,7 +196,7 @@ namespace odb
   template <typename A>
   const typename pointer_query_columns< ::Reserva, id_mysql, A >::usuari_type_
   pointer_query_columns< ::Reserva, id_mysql, A >::
-  usuari (A::table_name, "`usuari`", 0);
+  usuari (A::table_name, "`usuari_username`", 0);
 
   template <>
   class access::object_traits_impl< ::Reserva, id_mysql >:
@@ -472,7 +472,7 @@ namespace odb
   template <typename A>
   const typename query_columns< ::Reserva, id_mysql, A >::usuari_type_
   query_columns< ::Reserva, id_mysql, A >::
-  usuari (A::table_name, "`usuari`", 0);
+  usuari (A::table_name, "`usuari_username`", 0);
 }
 
 #include "Reserva-odb.ixx"

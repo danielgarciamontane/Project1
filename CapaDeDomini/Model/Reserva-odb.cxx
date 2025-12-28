@@ -32,7 +32,7 @@ namespace odb
   const char alias_traits<  ::usuari,
     id_mysql,
     access::object_traits_impl< ::Reserva, id_mysql >::usuari_tag>::
-  table_name[] = "`usuari`";
+  table_name[] = "`usuari_username`";
 
   struct access::object_traits_impl< ::Reserva, id_mysql >::extra_statement_cache_type
   {
@@ -389,7 +389,7 @@ namespace odb
   "`dataReserva`, "
   "`numPlaces`, "
   "`preuPagat`, "
-  "`usuari`) "
+  "`usuari_username`) "
   "VALUES "
   "(?, ?, ?, ?, ?)";
 
@@ -399,7 +399,7 @@ namespace odb
   "`Reserva`.`dataReserva`, "
   "`Reserva`.`numPlaces`, "
   "`Reserva`.`preuPagat`, "
-  "`Reserva`.`usuari` "
+  "`Reserva`.`usuari_username` "
   "FROM `Reserva` "
   "WHERE `Reserva`.`idReserva`=?";
 
@@ -409,7 +409,7 @@ namespace odb
   "`dataReserva`=?, "
   "`numPlaces`=?, "
   "`preuPagat`=?, "
-  "`usuari`=? "
+  "`usuari_username`=? "
   "WHERE `idReserva`=?";
 
   const char access::object_traits_impl< ::Reserva, id_mysql >::erase_statement[] =
@@ -422,9 +422,9 @@ namespace odb
   "`Reserva`.`dataReserva`,\n"
   "`Reserva`.`numPlaces`,\n"
   "`Reserva`.`preuPagat`,\n"
-  "`Reserva`.`usuari`\n"
+  "`Reserva`.`usuari_username`\n"
   "FROM `Reserva`\n"
-  "LEFT JOIN `usuari` AS `usuari` ON `usuari`.`username`=`Reserva`.`usuari`";
+  "LEFT JOIN `usuari` AS `usuari_username` ON `usuari_username`.`username`=`Reserva`.`usuari_username`";
 
   const char access::object_traits_impl< ::Reserva, id_mysql >::erase_query_statement[] =
   "DELETE FROM `Reserva`";

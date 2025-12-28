@@ -50,24 +50,17 @@ namespace odb
   const char access::object_traits_impl< ::usuari, id_mysql >::reserves_traits::
   select_statement[] =
   "SELECT "
-  "`usuari_reserves`.`index`, "
-  "`usuari_reserves`.`value` "
-  "FROM `usuari_reserves` "
-  "WHERE `usuari_reserves`.`object_id`=? ORDER BY `usuari_reserves`.`index`";
+  "`Reserva`.`idReserva` "
+  "FROM `Reserva` "
+  "WHERE `Reserva`.`usuari`=?";
 
   const char access::object_traits_impl< ::usuari, id_mysql >::reserves_traits::
   insert_statement[] =
-  "INSERT INTO `usuari_reserves` "
-  "(`object_id`, "
-  "`index`, "
-  "`value`) "
-  "VALUES "
-  "(?, ?, ?)";
+  "";
 
   const char access::object_traits_impl< ::usuari, id_mysql >::reserves_traits::
   delete_statement[] =
-  "DELETE FROM `usuari_reserves` "
-  "WHERE `object_id`=?";
+  "";
 
   void access::object_traits_impl< ::usuari, id_mysql >::reserves_traits::
   bind (MYSQL_BIND* b,
@@ -88,14 +81,6 @@ namespace odb
       std::memcpy (&b[n], id, id_size * sizeof (id[0]));
     n += id_size;
 
-    // index
-    //
-    b[n].buffer_type = MYSQL_TYPE_LONGLONG;
-    b[n].is_unsigned = 1;
-    b[n].buffer = &d.index_value;
-    b[n].is_null = &d.index_null;
-    n++;
-
     // value
     //
     b[n].buffer_type = MYSQL_TYPE_LONG;
@@ -110,86 +95,20 @@ namespace odb
   {
     bool grew (false);
 
-    // index
+    // value
     //
     t[0UL] = 0;
 
-    // value
-    //
-    t[1UL] = 0;
-
     if (grew)
       i.version++;
   }
 
   void access::object_traits_impl< ::usuari, id_mysql >::reserves_traits::
-  init (data_image_type& i,
-        index_type* j,
-        const value_type& v)
-  {
-    using namespace mysql;
-
-    statement_kind sk (statement_insert);
-    ODB_POTENTIALLY_UNUSED (sk);
-
-    bool grew (false);
-
-    // index
-    //
-    if (j != 0)
-    {
-      bool is_null (false);
-      mysql::value_traits<
-          index_type,
-          mysql::id_ulonglong >::set_image (
-        i.index_value, is_null, *j);
-      i.index_null = is_null;
-    }
-
-    // value
-    //
-    {
-      typedef object_traits< ::Reserva > obj_traits;
-      typedef odb::pointer_traits< value_type > ptr_traits;
-
-      bool is_null (ptr_traits::null_ptr (v));
-      if (!is_null)
-      {
-        const obj_traits::id_type& ptr_id (
-          obj_traits::id (ptr_traits::get_ref (v)));
-
-        mysql::value_traits<
-            obj_traits::id_type,
-            mysql::id_long >::set_image (
-          i.value_value, is_null, ptr_id);
-        i.value_null = is_null;
-      }
-      else
-        i.value_null = 1;
-    }
-
-    if (grew)
-      i.version++;
-  }
-
-  void access::object_traits_impl< ::usuari, id_mysql >::reserves_traits::
-  init (index_type& j,
-        value_type& v,
+  init (value_type& v,
         const data_image_type& i,
         database* db)
   {
     ODB_POTENTIALLY_UNUSED (db);
-
-    // index
-    //
-    {
-      mysql::value_traits<
-          index_type,
-          mysql::id_ulonglong >::set_value (
-        j,
-        i.index_value,
-        i.index_null);
-    }
 
     // value
     //
@@ -221,28 +140,12 @@ namespace odb
   }
 
   void access::object_traits_impl< ::usuari, id_mysql >::reserves_traits::
-  insert (index_type i, const value_type& v, void* d)
+  insert (index_type, const value_type&, void*)
   {
-    using namespace mysql;
-
-    statements_type& sts (*static_cast< statements_type* > (d));
-    data_image_type& di (sts.data_image ());
-
-    init (di, &i, v);
-
-    if (sts.data_binding_test_version ())
-    {
-      const binding& id (sts.id_binding ());
-      bind (sts.data_bind (), id.bind, id.count, di);
-      sts.data_binding_update_version ();
-    }
-
-    if (!sts.insert_statement ().execute ())
-      throw object_already_persistent ();
   }
 
   bool access::object_traits_impl< ::usuari, id_mysql >::reserves_traits::
-  select (index_type& i, value_type& v, void* d)
+  select (index_type&, value_type& v, void* d)
   {
     using namespace mysql;
     using mysql::select_statement;
@@ -250,7 +153,7 @@ namespace odb
     statements_type& sts (*static_cast< statements_type* > (d));
     data_image_type& di (sts.data_image ());
 
-    init (i, v, di, &sts.connection ().database ());
+    init (v, di, &sts.connection ().database ());
 
     if (sts.data_binding_test_version ())
     {
@@ -265,23 +168,8 @@ namespace odb
   }
 
   void access::object_traits_impl< ::usuari, id_mysql >::reserves_traits::
-  delete_ (void* d)
+  delete_ (void*)
   {
-    using namespace mysql;
-
-    statements_type& sts (*static_cast< statements_type* > (d));
-    sts.delete_statement ().execute ();
-  }
-
-  void access::object_traits_impl< ::usuari, id_mysql >::reserves_traits::
-  persist (const container_type& c,
-           statements_type& sts)
-  {
-    using namespace mysql;
-
-    functions_type& fs (sts.functions ());
-    fs.ordered_ = true;
-    container_traits_type::persist (c, fs);
   }
 
   void access::object_traits_impl< ::usuari, id_mysql >::reserves_traits::
@@ -307,29 +195,8 @@ namespace odb
     bool more (r != select_statement::no_data);
 
     functions_type& fs (sts.functions ());
-    fs.ordered_ = true;
+    fs.ordered_ = false;
     container_traits_type::load (c, more, fs);
-  }
-
-  void access::object_traits_impl< ::usuari, id_mysql >::reserves_traits::
-  update (const container_type& c,
-          statements_type& sts)
-  {
-    using namespace mysql;
-
-    functions_type& fs (sts.functions ());
-    fs.ordered_ = true;
-    container_traits_type::update (c, fs);
-  }
-
-  void access::object_traits_impl< ::usuari, id_mysql >::reserves_traits::
-  erase (statements_type& sts)
-  {
-    using namespace mysql;
-
-    functions_type& fs (sts.functions ());
-    fs.ordered_ = true;
-    container_traits_type::erase (fs);
   }
 
   access::object_traits_impl< ::usuari, id_mysql >::id_type
@@ -779,30 +646,6 @@ namespace odb
     if (!st.execute ())
       throw object_already_persistent ();
 
-    id_image_type& i (sts.id_image ());
-    init (i, id (obj));
-
-    binding& idb (sts.id_image_binding ());
-    if (i.version != sts.id_image_version () || idb.version == 0)
-    {
-      bind (idb.bind, i);
-      sts.id_image_version (i.version);
-      idb.version++;
-    }
-
-    extra_statement_cache_type& esc (sts.extra_statement_cache ());
-
-    // _reserves
-    //
-    {
-      ::std::vector< ::std::shared_ptr< ::Reserva > > const& v =
-        obj._reserves;
-
-      reserves_traits::persist (
-        v,
-        esc._reserves);
-    }
-
     callback (db,
               obj,
               callback_event::post_persist);
@@ -863,19 +706,6 @@ namespace odb
     if (st.execute () == 0)
       throw object_not_persistent ();
 
-    extra_statement_cache_type& esc (sts.extra_statement_cache ());
-
-    // _reserves
-    //
-    {
-      ::std::vector< ::std::shared_ptr< ::Reserva > > const& v =
-        obj._reserves;
-
-      reserves_traits::update (
-        v,
-        esc._reserves);
-    }
-
     callback (db, obj, callback_event::post_update);
     pointer_cache_traits::update (db, obj);
   }
@@ -899,15 +729,6 @@ namespace odb
       bind (idb.bind, i);
       sts.id_image_version (i.version);
       idb.version++;
-    }
-
-    extra_statement_cache_type& esc (sts.extra_statement_cache ());
-
-    // _reserves
-    //
-    {
-      reserves_traits::erase (
-        esc._reserves);
     }
 
     if (sts.erase_statement ().execute () != 1)

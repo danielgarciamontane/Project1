@@ -259,7 +259,7 @@ namespace odb
     struct reserves_traits
     {
       static const std::size_t id_column_count = 1UL;
-      static const std::size_t data_column_count = 3UL;
+      static const std::size_t data_column_count = 2UL;
 
       static const bool versioned = false;
 
@@ -279,11 +279,6 @@ namespace odb
 
       struct data_image_type
       {
-        // index
-        //
-        unsigned long long index_value;
-        my_bool index_null;
-
         // value
         //
         int value_value;
@@ -303,13 +298,7 @@ namespace odb
             my_bool*);
 
       static void
-      init (data_image_type&,
-            index_type*,
-            const value_type&);
-
-      static void
-      init (index_type&,
-            value_type&,
+      init (value_type&,
             const data_image_type&,
             database*);
 
@@ -323,19 +312,8 @@ namespace odb
       delete_ (void*);
 
       static void
-      persist (const container_type&,
-               statements_type&);
-
-      static void
       load (container_type&,
             statements_type&);
-
-      static void
-      update (const container_type&,
-              statements_type&);
-
-      static void
-      erase (statements_type&);
     };
 
     using object_traits<object_type>::id;
