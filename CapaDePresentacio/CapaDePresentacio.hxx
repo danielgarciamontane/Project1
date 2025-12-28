@@ -16,6 +16,7 @@ private:
 
 	void iniciarSessio();
 	void tancarSessio();
+	void registrarUsuari();
 
 	// Mètodes auxiliars
 	void mostrarMenuPrincipal();

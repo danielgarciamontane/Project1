@@ -103,7 +103,7 @@ namespace odb
       grew = true;
     }
 
-    // _data_naixement
+    // _edat
     //
     t[4UL] = 0;
 
@@ -164,11 +164,12 @@ namespace odb
     b[n].is_null = &i._contrasenya_null;
     n++;
 
-    // _data_naixement
+    // _edat
     //
-    b[n].buffer_type = MYSQL_TYPE_DATE;
-    b[n].buffer = &i._data_naixement_value;
-    b[n].is_null = &i._data_naixement_null;
+    b[n].buffer_type = MYSQL_TYPE_LONG;
+    b[n].is_unsigned = 0;
+    b[n].buffer = &i._edat_value;
+    b[n].is_null = &i._edat_null;
     n++;
   }
 
@@ -282,18 +283,18 @@ namespace odb
       grew = grew || (cap != i._contrasenya_value.capacity ());
     }
 
-    // _data_naixement
+    // _edat
     //
     {
-      ::boost::gregorian::date const& v =
-        o._data_naixement;
+      int const& v =
+        o._edat;
 
-      bool is_null (true);
+      bool is_null (false);
       mysql::value_traits<
-          ::boost::gregorian::date,
-          mysql::id_date >::set_image (
-        i._data_naixement_value, is_null, v);
-      i._data_naixement_null = is_null;
+          int,
+          mysql::id_long >::set_image (
+        i._edat_value, is_null, v);
+      i._edat_null = is_null;
     }
 
     return grew;
@@ -368,18 +369,18 @@ namespace odb
         i._contrasenya_null);
     }
 
-    // _data_naixement
+    // _edat
     //
     {
-      ::boost::gregorian::date& v =
-        o._data_naixement;
+      int& v =
+        o._edat;
 
       mysql::value_traits<
-          ::boost::gregorian::date,
-          mysql::id_date >::set_value (
+          int,
+          mysql::id_long >::set_value (
         v,
-        i._data_naixement_value,
-        i._data_naixement_null);
+        i._edat_value,
+        i._edat_null);
     }
   }
 
@@ -413,7 +414,7 @@ namespace odb
   "`nomcomplet`, "
   "`correuElectronic`, "
   "`contrasenya`, "
-  "`data_naixement`) "
+  "`edat`) "
   "VALUES "
   "(?, ?, ?, ?, ?)";
 
@@ -423,7 +424,7 @@ namespace odb
   "`usuari`.`nomcomplet`, "
   "`usuari`.`correuElectronic`, "
   "`usuari`.`contrasenya`, "
-  "`usuari`.`data_naixement` "
+  "`usuari`.`edat` "
   "FROM `usuari` "
   "WHERE `usuari`.`username`=?";
 
@@ -433,7 +434,7 @@ namespace odb
   "`nomcomplet`=?, "
   "`correuElectronic`=?, "
   "`contrasenya`=?, "
-  "`data_naixement`=? "
+  "`edat`=? "
   "WHERE `username`=?";
 
   const char access::object_traits_impl< ::usuari, id_mysql >::erase_statement[] =
@@ -446,7 +447,7 @@ namespace odb
   "`usuari`.`nomcomplet`, "
   "`usuari`.`correuElectronic`, "
   "`usuari`.`contrasenya`, "
-  "`usuari`.`data_naixement` "
+  "`usuari`.`edat` "
   "FROM `usuari`";
 
   const char access::object_traits_impl< ::usuari, id_mysql >::erase_query_statement[] =

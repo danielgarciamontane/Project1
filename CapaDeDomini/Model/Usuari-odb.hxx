@@ -158,17 +158,17 @@ namespace odb
 
     static const contrasenya_type_ contrasenya;
 
-    // data_naixement
+    // edat
     //
     typedef
     mysql::query_column<
       mysql::value_traits<
-        ::boost::gregorian::date,
-        mysql::id_date >::query_type,
-      mysql::id_date >
-    data_naixement_type_;
+        int,
+        mysql::id_long >::query_type,
+      mysql::id_long >
+    edat_type_;
 
-    static const data_naixement_type_ data_naixement;
+    static const edat_type_ edat;
   };
 
   template <typename A>
@@ -192,9 +192,9 @@ namespace odb
   contrasenya (A::table_name, "`contrasenya`", 0);
 
   template <typename A>
-  const typename query_columns< ::usuari, id_mysql, A >::data_naixement_type_
+  const typename query_columns< ::usuari, id_mysql, A >::edat_type_
   query_columns< ::usuari, id_mysql, A >::
-  data_naixement (A::table_name, "`data_naixement`", 0);
+  edat (A::table_name, "`edat`", 0);
 
   template <typename A>
   struct pointer_query_columns< ::usuari, id_mysql, A >:
@@ -242,10 +242,10 @@ namespace odb
       unsigned long _contrasenya_size;
       my_bool _contrasenya_null;
 
-      // _data_naixement
+      // _edat
       //
-      MYSQL_TIME _data_naixement_value;
-      my_bool _data_naixement_null;
+      int _edat_value;
+      my_bool _edat_null;
 
       std::size_t version;
     };

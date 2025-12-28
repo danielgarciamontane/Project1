@@ -131,25 +131,27 @@
   <ItemGroup>
     <ClCompile Include="CapaDeDades\connexioBD.cxx" />
     <ClCompile Include="CapaDeDades\DAOUsuari.cxx" />
+    <ClCompile Include="CapaDeDomini\Model\Usuari-odb.cxx" />
+    <ClInclude Include="CapaDeDomini\Model\Usuari-odb.ixx">
+      <FileType>Document</FileType>
+    </ClInclude>
     <ClCompile Include="CapaDeDomini\Model\Usuari.cxx" />
     <ClCompile Include="CapaDeDomini\CtrlIniciSessio.cxx" />
     <ClCompile Include="CapaDeDomini\CtrlTancaSessio.cxx" />
+    <ClCompile Include="CapaDeDomini\CtrlRegistraUsuari.cxx" />
     <ClCompile Include="CapaDePresentacio\CapaDePresentacio.cxx" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="CapaDeDomini\Model\Usuari-odb.cxx" />
     <ClInclude Include="CapaDeDomini\CtrlTancaSessio.hxx" />
-    <ClInclude Include="CapaDeDomini\Model\usuari-odb.ixx">
-      <FileType>Document</FileType>
-    </ClInclude>
+    <ClInclude Include="CapaDeDomini\CtrlRegistraUsuari.hxx" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CapaDeDades\connexioBD.hxx" />
     <ClInclude Include="CapaDeDades\DAOUsuari.hxx" />
     <ClInclude Include="CapaDeDomini\DTOs\DTOUsuari.hxx" />
     <ClInclude Include="CapaDeDomini\CtrlIniciSessio.hxx" />
+    <ClInclude Include="CapaDeDomini\Model\Usuari-odb.hxx" />
     <ClInclude Include="CapaDeDomini\Model\Usuari.hxx" />
     <ClInclude Include="CapaDePresentacio\CapaDePresentacio.hxx" />
-    <ClInclude Include="CapaDeDomini\Model\Usuari-odb.hxx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="configuracio.env" />

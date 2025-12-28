@@ -12,8 +12,8 @@ const string& usuari::get_nomcomplet() const {
     return _nomcomplet;
 }
 
-const boost::gregorian::date& usuari::get_data_naixement() const {
-    return _data_naixement;
+const int& usuari::get_edat() const {
+    return _edat;
 }
 const std::string& usuari::obteContrasenya() const {
     return _contrasenya;
@@ -23,7 +23,7 @@ DTOUsuari usuari::obteInfoUsuari() const {
 	dto.sobrenomU = _username;
 	dto.nomComplet = _nomcomplet;
 	dto.email = _correuElectronic;
-	dto.data_naixement = _data_naixement;
+	dto.edat = _edat;
 
     return dto;
 }
@@ -38,6 +38,6 @@ void usuari::set_nomcomplet(const std::string& v) {
     _nomcomplet = v;
 }
 
-void usuari::set_data_naixement(const boost::gregorian::date& d) {
-    _data_naixement = d;
+void usuari::set_edat(const int& d) {
+    _edat = d;
 }

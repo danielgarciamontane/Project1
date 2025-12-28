@@ -5,6 +5,7 @@
 #include <boost/date_time/gregorian/gregorian.hpp>
 #include "../CapaDeDomini/CtrlIniciSessio.hxx"
 #include "../CapaDeDomini/CtrlTancaSessio.hxx"
+#include "../CapaDeDomini/CtrlRegistraUsuari.hxx"
 #include "../CapaDeDades/DAOUsuari.hxx"
 
 CapaDePresentacio* CapaDePresentacio::_instancia = nullptr;
@@ -36,6 +37,9 @@ void CapaDePresentacio::executar() {
             switch (opcio) {
             case 1:
                 iniciarSessio();
+                break;
+            case 2:
+                registrarUsuari();
                 break;
             case 0:
                 sortir = true;
@@ -124,6 +128,45 @@ void CapaDePresentacio::tancarSessio() {
     }
     catch (const std::exception& e) {
         std::cout << "\n? Error en tancar sessio: " << e.what() << "\n";
+    }
+}
+
+
+void CapaDePresentacio::registrarUsuari() {
+    std::cout << "--- REGISTRAR USUARI ---\n\n";
+
+    std::string nomU, sobrenomU, contrasenyaU, correuU, edatStr;
+    int edatU = 0;
+
+    std::cout << "Nom complet: ";
+    std::getline(std::cin, nomU);
+
+    std::cout << "Sobrenom (username): ";
+    std::getline(std::cin, sobrenomU);
+
+    std::cout << "Contrasenya: ";
+    std::getline(std::cin, contrasenyaU);
+
+    std::cout << "Correu electronic: ";
+    std::getline(std::cin, correuU);
+
+    std::cout << "Edat: ";
+    std::getline(std::cin, edatStr);
+    try {
+        edatU = std::stoi(edatStr);
+    }
+    catch (...) {
+        std::cout << "\n? Error: L'edat ha de ser un enter valid.\n";
+        return;
+    }
+
+    try {
+        CtrlRegistraUsuari ctrl;
+        ctrl.registrarUsuari(nomU, sobrenomU, contrasenyaU, correuU, edatU);
+        std::cout << "\nUsuari registrat amb èxit\n";
+    }
+    catch (const std::exception& e) {
+        std::cout<< e.what() << "\n";
     }
 }
 

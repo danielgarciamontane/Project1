@@ -30,3 +30,37 @@ shared_ptr<usuari> DAOUsuari::obte(const string& sobrenom) {
     // Devolvemos el puntero
     return u;
 }
+
+
+bool DAOUsuari::existeixSobrenom(const string& sobrenom) const {
+    using namespace odb::core;
+    using query = odb::query<usuari>;
+    shared_ptr<database> db = connexioBD::getInstance().getDB();
+    transaction t(db->begin());
+    auto u = db->query_one<usuari>(query::username == sobrenom);
+    t.commit();
+    return static_cast<bool>(u);
+}
+
+bool DAOUsuari::existeixCorreu(const string& correuElectronic) const {
+    using namespace odb::core;
+    using query = odb::query<usuari>;
+    shared_ptr<odb::database> db = connexioBD::getInstance().getDB();
+    transaction t(db->begin());
+    auto u = db->query_one<usuari>(query::correuElectronic == correuElectronic);
+    t.commit();
+    return static_cast<bool>(u);
+}
+
+
+void DAOUsuari::crearUsuari(shared_ptr<usuari> u) {
+    using namespace odb::core;
+    // Obtenemos la conexión a la base de datos desde el singleton
+    shared_ptr<odb::database> db = connexioBD::getInstance().getDB();
+    // Abrimos transacción (escritura)
+    transaction t(db->begin());
+
+    // Persistimos el objeto en la base de datos
+    db->persist(u);
+    t.commit();
+}

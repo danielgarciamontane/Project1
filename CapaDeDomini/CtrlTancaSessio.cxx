@@ -41,8 +41,9 @@ bool CtrlTancaSessio::tancarSessio(const std::string& username) {
         std::cout << "S'ha cancel·lat l'operacio. La sessio continua oberta.\n";
 		return false;
     }
-    if (confirm == 'S') {
+    else if (confirm == 'S') {
         std::cout << "Sessio tancada correctament.\n";
 		return true;
-    } 
+    }
+    else return true;
 }

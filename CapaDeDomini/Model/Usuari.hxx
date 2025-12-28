@@ -17,23 +17,27 @@ public:
     // Constructor de conveniencia
     usuari(string username,
         string nomcomplet,
-        boost::gregorian::date data_naixement)
+        string correuElectronic,
+        string contrasenya,
+        int edat)
         : _username(move(username)),
         _nomcomplet(move(nomcomplet)),
-        _data_naixement(data_naixement) {
+		_correuElectronic(move(correuElectronic)),
+		_contrasenya(move(contrasenya)),
+        _edat(edat) {
     }
 
     // Getters (const, no modifican el objeto)
     const std::string& get_username() const;
     const std::string& get_nomcomplet() const;
-    const boost::gregorian::date& get_data_naixement() const;
+    const int& get_edat() const;
 	const std::string& obteContrasenya() const; 
 	DTOUsuari obteInfoUsuari() const;
 
     // Setters
     void set_username(const std::string& v);
     void set_nomcomplet(const std::string& v);
-    void set_data_naixement(const boost::gregorian::date& d);
+    void set_edat(const int& d);
 
 private:
     // Permet a ODB accedir als membres privats de la classe per fer la persistència
@@ -43,10 +47,7 @@ private:
     #pragma db id
     string _username;
     string _nomcomplet;
-
 	string _correuElectronic;
-
 	string _contrasenya;
-    #pragma db type("DATE")
-    boost::gregorian::date _data_naixement;
+    int _edat;
 };
