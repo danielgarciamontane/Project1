@@ -74,12 +74,15 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>LIBODB_SHARED;%(AdditionalDependecies)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\boost_1_88_0;C:\odb\include;%(AdditionalDependecies)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\odb\lib;%(AdditionalDependecies)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>odb-mysqlD.dll.lib;odbD.dll.lib;odb-boostD.dll.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -100,15 +103,15 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>LIBODB_SHARED</PreprocessorDefinitions>
+      <PreprocessorDefinitions>LIBODB_SHARED;%(AdditionalDependecies)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\Jordi\Desktop\obd\include;C:\Users\Jordi\Downloads\boost_1_90_0\boost_1_90_0</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\boost_1_88_0;C:\odb\include;%(AdditionalDependecies)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\Jordi\Desktop\obd\lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>odb-mysqlD.dll.lib;odbD.dll.lib;odb-boostD.dll.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\odb\lib;%(AdditionalDependecies)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>odb-mysqlD.dll.lib;odbD.dll.lib;odb-boostD.dll.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -129,9 +132,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Activitat.cxx" />
     <ClCompile Include="CapaDeDades\connexioBD.cxx" />
     <ClCompile Include="CapaDeDades\DAOUsuari.cxx" />
     <ClCompile Include="CapaDeDomini\Model\Usuari-odb.cxx" />
+    <ClInclude Include="Activitat.hxx" />
     <ClInclude Include="CapaDeDomini\Model\Usuari-odb.ixx">
       <FileType>Document</FileType>
     </ClInclude>
@@ -140,9 +145,13 @@
     <ClCompile Include="CapaDeDomini\CtrlTancaSessio.cxx" />
     <ClCompile Include="CapaDeDomini\CtrlRegistraUsuari.cxx" />
     <ClCompile Include="CapaDePresentacio\CapaDePresentacio.cxx" />
+    <ClCompile Include="Escapada.cxx" />
+    <ClCompile Include="Experiencia.cxx" />
     <ClCompile Include="main.cpp" />
     <ClInclude Include="CapaDeDomini\CtrlTancaSessio.hxx" />
     <ClInclude Include="CapaDeDomini\CtrlRegistraUsuari.hxx" />
+    <ClInclude Include="Escapada.hxx" />
+    <ClInclude Include="Experiencia.hxx" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CapaDeDades\connexioBD.hxx" />
