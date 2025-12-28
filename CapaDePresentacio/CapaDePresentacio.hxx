@@ -17,8 +17,9 @@ private:
 	void iniciarSessio();
 	void tancarSessio();
 	void registrarUsuari();
+	void consultarUsuari();
 
-	// Mètodes auxiliars
+	// Mï¿½todes auxiliars
 	void mostrarMenuPrincipal();
 	void mostrarMenuSessioIniciada();
 	void mostrarMenuGestioUsuari();

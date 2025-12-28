@@ -5,7 +5,12 @@
 #include <boost/date_time/gregorian/gregorian.hpp>
 #include <odb/core.hxx>
 #include "../DTOs/DTOUsuari.hxx"
+#include "Reserva.hxx"
+#include <vector>
+#include <memory>
 using namespace std;
+
+class Reserva;
 
 // Indica que és un objecte perquè el reconeixi el compilador de ODB
 #pragma db object
@@ -30,6 +35,7 @@ public:
     // Getters (const, no modifican el objeto)
     const std::string& get_username() const;
     const std::string& get_nomcomplet() const;
+	const std::string& get_correuElectronic() const;
     const int& get_edat() const;
 	const std::string& obteContrasenya() const; 
 	DTOUsuari obteInfoUsuari() const;
@@ -50,4 +56,6 @@ private:
 	string _correuElectronic;
 	string _contrasenya;
     int _edat;
+    #pragma db inverse(_usuari)
+    vector<shared_ptr<Reserva>> _reserves;
 };

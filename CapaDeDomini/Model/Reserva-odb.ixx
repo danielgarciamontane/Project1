@@ -6,19 +6,19 @@
 
 namespace odb
 {
-  // usuari
+  // Reserva
   //
 
   inline
-  access::object_traits< ::usuari >::id_type
-  access::object_traits< ::usuari >::
+  access::object_traits< ::Reserva >::id_type
+  access::object_traits< ::Reserva >::
   id (const object_type& o)
   {
-    return o._username;
+    return o._idReserva;
   }
 
   inline
-  void access::object_traits< ::usuari >::
+  void access::object_traits< ::Reserva >::
   callback (database& db, object_type& x, callback_event e)
   {
     ODB_POTENTIALLY_UNUSED (db);
@@ -27,7 +27,7 @@ namespace odb
   }
 
   inline
-  void access::object_traits< ::usuari >::
+  void access::object_traits< ::Reserva >::
   callback (database& db, const object_type& x, callback_event e)
   {
     ODB_POTENTIALLY_UNUSED (db);
@@ -38,16 +38,26 @@ namespace odb
 
 namespace odb
 {
-  // usuari
+  // Reserva
   //
 
   inline
-  void access::object_traits_impl< ::usuari, id_mysql >::
+  void access::object_traits_impl< ::Reserva, id_mysql >::
   erase (database& db, const object_type& obj)
   {
     callback (db, obj, callback_event::pre_erase);
     erase (db, id (obj));
     callback (db, obj, callback_event::post_erase);
+  }
+
+  inline
+  void access::object_traits_impl< ::Reserva, id_mysql >::
+  load_ (statements_type& sts,
+         object_type& obj,
+         bool)
+  {
+    ODB_POTENTIALLY_UNUSED (sts);
+    ODB_POTENTIALLY_UNUSED (obj);
   }
 }
 
