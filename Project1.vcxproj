@@ -132,12 +132,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Activitat.cxx" />
     <ClCompile Include="CapaDeDades\connexioBD.cxx" />
     <ClCompile Include="CapaDeDades\DAOReserva.cxx" />
     <ClCompile Include="CapaDeDades\DAOUsuari.cxx" />
     <ClCompile Include="CapaDeDomini\Model\Activitat.cxx" />
-    <ClCompile Include="CapaDeDomini\Model\Escapada.cxx" />
     <ClCompile Include="CapaDeDomini\Model\Experiencia-odb.cxx" />
     <ClInclude Include="CapaDeDades\DAOReserva.hxx" />
     <ClInclude Include="CapaDeDomini\CtrlConsultaUsuari.hxx" />
@@ -157,7 +155,6 @@
     <ClInclude Include="CapaDeDomini\Model\Reserva-odb.hxx" />
     <ClInclude Include="CapaDeDomini\Model\Reserva.hxx" />
     <ClCompile Include="CapaDeDomini\Model\Usuari-odb.cxx" />
-    <ClInclude Include="Activitat.hxx" />
     <ClInclude Include="CapaDeDomini\Model\Usuari-odb.ixx">
       <FileType>Document</FileType>
     </ClInclude>
@@ -170,14 +167,11 @@
     <ClCompile Include="CtrlEsborraUsuari.cxx" />
     <ClCompile Include="CtrlModificaUsuari.cxx" />
     <ClCompile Include="Escapada.cxx" />
-    <ClCompile Include="Experiencia.cxx" />
     <ClCompile Include="main.cpp" />
     <ClInclude Include="CapaDeDomini\CtrlTancaSessio.hxx" />
     <ClInclude Include="CapaDeDomini\CtrlRegistraUsuari.hxx" />
     <ClInclude Include="CtrlEsborraUsuari.hxx" />
     <ClInclude Include="CtrlModificaUsuari.hxx" />
-    <ClInclude Include="Escapada.hxx" />
-    <ClInclude Include="Experiencia.hxx" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CapaDeDades\connexioBD.hxx" />

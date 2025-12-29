@@ -117,7 +117,8 @@ void CapaDePresentacio::executar() {
                     case 0:
                         sortir = true;
                         std::cout << "\nAdeu! Gracies per utilitzar PlanGo.\n";
-                    break;                    default:
+                    break;                    
+                    default:
                         std::cout << "Opcio no valida.\n";
                     }
                 }
