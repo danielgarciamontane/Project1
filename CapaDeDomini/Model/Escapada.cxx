@@ -1,4 +1,4 @@
-#include "CapaDeDomini\Model\Escapada.hxx"
+#include "Escapada.hxx"
 
 Escapada::Escapada(const std::string& nom,
     double preu,

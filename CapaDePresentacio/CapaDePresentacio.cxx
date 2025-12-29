@@ -89,8 +89,6 @@ void CapaDePresentacio::executar() {
                         opcioUsuari = 0; // salir del submenu
                         break;
                     case 0:
-                        sortir = true;
-                        std::cout << "\nAdéu! Gràcies per utilitzar PlanGo.\n";
                         break;
                     default:
                         std::cout << "Opcio no valida.\n";
@@ -118,8 +116,6 @@ void CapaDePresentacio::executar() {
                         std::cout << "Visualitzar reserves (pendent)\n";
                         break;
                     case 0:
-                        sortir = true;
-                        std::cout << "\nAdéu! Gràcies per utilitzar PlanGo.\n";
                     break;                   
                     default:
                         std::cout << "Opcio no valida.\n";
