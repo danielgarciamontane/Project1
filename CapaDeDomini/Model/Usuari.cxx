@@ -43,6 +43,10 @@ void usuari::set_nomcomplet(const std::string& v) {
     _nomcomplet = v;
 }
 
+void usuari::set_correuElectronic(const std::string& v) {
+    _correuElectronic = v;
+}
+
 void usuari::set_edat(const int& d) {
     _edat = d;
 }

@@ -18,10 +18,14 @@ private:
 	void tancarSessio();
 	void registrarUsuari();
 	void consultarUsuari();
+	void modificarUsuari();
 
 	// Mètodes auxiliars
 	void mostrarMenuPrincipal();
 	void mostrarMenuSessioIniciada();
+	void mostrarMenuGestioUsuari();
+	void mostrarMenuGestioReserves();
+	void mostrarMenuConsultes();
 
 	string _usuariActual;
 	static CapaDePresentacio* _instancia;

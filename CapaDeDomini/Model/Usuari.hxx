@@ -43,6 +43,7 @@ public:
     // Setters
     void set_username(const std::string& v);
     void set_nomcomplet(const std::string& v);
+	void set_correuElectronic(const std::string& v);
     void set_edat(const int& d);
 
 private:

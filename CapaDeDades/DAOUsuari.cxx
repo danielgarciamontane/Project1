@@ -64,3 +64,14 @@ void DAOUsuari::crearUsuari(shared_ptr<usuari> u) {
     db->persist(u);
     t.commit();
 }
+
+void DAOUsuari::modUsu(shared_ptr<usuari> u) {
+    using namespace odb::core;
+    // Obtenemos la conexión a la base de datos desde el singleton
+    shared_ptr<odb::database> db = connexioBD::getInstance().getDB();
+    // Abrimos transacción (escritura)
+    transaction t(db->begin());
+    // Actualizamos el objeto en la base de datos
+    db->update(u);
+    t.commit();
+}

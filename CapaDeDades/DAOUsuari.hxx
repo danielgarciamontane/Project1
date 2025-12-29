@@ -16,6 +16,6 @@ public:
 
 	std::vector<usuari> tots();
 	void inserta(const usuari& u);
-	void modifica(const usuari& u);
+	static void modUsu(shared_ptr<usuari> u);
 	void esborra(const std::string& username);
 };
