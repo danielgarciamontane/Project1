@@ -10,6 +10,7 @@
 #include "../CapaDeDomini/CtrlConsultaUsuari.hxx"
 #include "../CapaDeDomini/CtrlModificaUsuari.hxx"
 #include "../CapaDeDomini/CtrlEsborraUsuari.hxx"
+#include "../CapaDeDomini/CtrlReservaEscapada.hxx"
 
 CapaDePresentacio* CapaDePresentacio::_instancia = nullptr;
 
@@ -378,4 +379,36 @@ void CapaDePresentacio::esborraUsuari() {
     else {
         std::cout << "Esborrat d'usuari cancel·lat.\n";
     }
+}
+
+void CapaDePresentacio::reservarEscapada() {
+    std::cout << "--- RESERVAR ESCAPADA ---\n\n";
+    try {
+        CtrlReservaEscapada ctrl;
+        DTOExperiencia dto;
+        string nomEscapada;
+        cin >> nomEscapada;
+
+        dto = ctrl.consultarEscapada(nomEscapada);
+        cout << "Informació de l'escapada:\n";
+        cout << "Nom: " << dto.nom << "\n";
+        cout << "Descripció: " << dto.descripcio << "\n";
+        cout << "Ciutat: " << dto.ciutat << "\n";
+        cout << "Hotel: " << dto.hotel << "\n";
+        cout << "Nº nits: " << dto.numNits << "\n";
+        cout << "Preu per persona: " << dto.preu << " €\n";
+
+
+        // 3. Número de plazas
+        char siono;
+        std::cout << "Vols continuar amb la reserva? (S/N)\n";
+        std::cin >> siono;
+
+        if (siono == 'S') {
+            float preu = ctrl.reservarEscapada(_usuariActual, nomEscapada);
+        }
+    }
+    catch (const std::exception& e) {
+        std::cout << "\n? Error en reservar escapada: " << e.what() << "\n";
+	}
 }

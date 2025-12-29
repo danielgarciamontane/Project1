@@ -2,13 +2,23 @@
 #include <string>
 #include <ostream>
 #include <odb/core.hxx>
+#include <boost/date_time/gregorian/gregorian.hpp>
+#include "../DTOs/DTOExperiencia.hxx"
+using namespace std;
 
 #pragma db object polymorphic
 class Experiencia {
 public:
     Experiencia() = default;
-    Experiencia(const std::string& nom, double preu);
+    Experiencia(const std::string& nom, float preu);
 
+    // Getters
+	DTOExperiencia obteInfoExperiencia() const;
+    int get_maxPlaces() const;
+
+
+    float calculaPreu(int numP, bool primRes) const;
+	void sumaReserva();
     virtual ~Experiencia() = default;
 
     // Métodos polimórficos
@@ -19,9 +29,12 @@ public:
 private:
     friend class odb::access;   
 
-#pragma db id auto
-    unsigned long id;
-
-    std::string nom;
-    double preu;
+    #pragma db id auto
+    string _nom;
+    string _descripcio;
+	string _ciutat;
+	int _maxPlaces;
+    float _preu;
+	boost::gregorian::date _dataAlta;
+	int _numReserves;
 };

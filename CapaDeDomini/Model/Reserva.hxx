@@ -5,24 +5,26 @@
 #include <ostream>
 #include <odb/core.hxx>
 #include "Usuari.hxx"
+#include <memory>
+#include "Experiencia.hxx"
+using std::shared_ptr;
 
 class usuari;
 
 #pragma db object
 class Reserva {
 public:
-    Reserva() = default;
 
-    Reserva(const int& idReserva,
-        const boost::gregorian::date& dataReserva,
-        const int& numPlaces,
-        const float& preuPagat);
+    static shared_ptr<Reserva> creaReserva(shared_ptr<usuari> u, shared_ptr<Experiencia> e,
+        int numP, bool primRes);
 
     // Getters
     const int& get_idReserva() const;
     const boost::gregorian::date& get_dataReserva() const;
     const int& get_numPlaces() const;
     const float& get_preuPagat() const;
+	shared_ptr<usuari> get_usuari() const;
+    shared_ptr<Experiencia> get_Experiencia() const;
 
     // Setters
     void set_idReserva(const int& idReserva);
@@ -33,13 +35,22 @@ public:
 private:
     friend class odb::access;
 
-#pragma db id
+    Reserva();
+
+    Reserva(shared_ptr<usuari> u, shared_ptr<Experiencia> e,
+        int num, float preu);
+
+    #pragma db id
     int _idReserva;
 
     boost::gregorian::date _dataReserva;
     int _numPlaces;
     float _preuPagat;
 
-    #pragma db not_null
-    std::shared_ptr<usuari> _usuari;
+    #pragma db member(_usuari) not_null on_delete(cascade)
+    shared_ptr<usuari> _usuari;
+
+    #pragma db member(_experiencia) not_null
+    shared_ptr<Experiencia> _experiencia;
 };
+#pragma db member(Reserva::_data) unique(Reserva::_usuari, Reserva::_experiencia)

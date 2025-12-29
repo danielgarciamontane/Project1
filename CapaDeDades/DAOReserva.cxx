@@ -2,6 +2,7 @@
 #include "connexioBD.hxx"
 #include "../CapaDeDomini/Model/Reserva-odb.hxx"
 #include "../CapaDeDomini/Model/Usuari-odb.hxx"
+#include "../CapaDeDomini/Model/Reserva.hxx"
 
 #include <odb/database.hxx>
 #include <odb/transaction.hxx>
@@ -26,4 +27,10 @@ int DAOReserva::comptarReservesUsuari(const string& sobrenom)
 
     t.commit();
     return count;
+}
+void DAOReserva::inserta(shared_ptr<Reserva> r) {
+    shared_ptr<odb::database> db = connexioBD::getInstance().getDB();
+    odb::transaction t(db->begin());
+    db->persist(r);
+    t.commit();
 }

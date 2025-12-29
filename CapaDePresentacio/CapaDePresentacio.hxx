@@ -20,6 +20,7 @@ private:
 	void consultarUsuari();
 	void modificarUsuari();
 	void esborraUsuari();
+	void reservarEscapada();
 
 	// Mètodes auxiliars
 	void mostrarMenuPrincipal();

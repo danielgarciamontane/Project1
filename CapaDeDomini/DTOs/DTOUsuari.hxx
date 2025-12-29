@@ -22,7 +22,7 @@ public:
     {
     }
 
-    // Campos públicos (como ya tienes)
+    // Campos públicos
     std::string sobrenomU;
     std::string nomComplet;
     std::string email;

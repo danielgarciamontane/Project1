@@ -1,5 +1,6 @@
 // usuari.cxx
 #include "usuari.hxx"
+#include "../../CapaDeDades/DAOReserva.hxx"
 #include <utility> // std::move
 
 
@@ -49,4 +50,20 @@ void usuari::set_correuElectronic(const std::string& v) {
 
 void usuari::set_edat(const int& d) {
     _edat = d;
+}
+
+float usuari::afegirReserva(shared_ptr<Experiencia>& escapada) {
+    bool primRes;
+    if (_reserves.empty()) {
+        primRes = true;
+    }
+    else {
+        primRes = false;
+    }
+    int numPlaces = escapada->get_maxPlaces();
+    shared_ptr<Reserva> novaReserva = Reserva::creaReserva(shared_ptr<usuari>(this), escapada, numPlaces, primRes);
+    DAOReserva dao;
+	dao.inserta(novaReserva);
+    _reserves.push_back(novaReserva);
+    return novaReserva->get_preuPagat();
 }

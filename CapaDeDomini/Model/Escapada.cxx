@@ -8,6 +8,7 @@ Escapada::Escapada(const std::string& nom,
 {
 }
 
+
 std::string Escapada::get_tipus() const
 {
     return "ESCAPADA";
@@ -16,4 +17,8 @@ std::string Escapada::get_tipus() const
 void Escapada::print_info_detalls(std::ostream& os) const
 {
     os << "Dies: " << dies << "\n";
+}
+
+float Escapada::calculaPreuEscapada(int nPersones) const {
+    return _preu;
 }
