@@ -167,12 +167,14 @@
     <ClCompile Include="CapaDeDomini\CtrlRegistraUsuari.cxx" />
     <ClCompile Include="CapaDeDomini\CtrlConsultaUsuari.cxx" />
     <ClCompile Include="CapaDePresentacio\CapaDePresentacio.cxx" />
+    <ClCompile Include="CtrlEsborraUsuari.cxx" />
     <ClCompile Include="CtrlModificaUsuari.cxx" />
     <ClCompile Include="Escapada.cxx" />
     <ClCompile Include="Experiencia.cxx" />
     <ClCompile Include="main.cpp" />
     <ClInclude Include="CapaDeDomini\CtrlTancaSessio.hxx" />
     <ClInclude Include="CapaDeDomini\CtrlRegistraUsuari.hxx" />
+    <ClInclude Include="CtrlEsborraUsuari.hxx" />
     <ClInclude Include="CtrlModificaUsuari.hxx" />
     <ClInclude Include="Escapada.hxx" />
     <ClInclude Include="Experiencia.hxx" />

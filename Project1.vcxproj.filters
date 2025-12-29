@@ -81,6 +81,9 @@
     <ClCompile Include="CtrlModificaUsuari.cxx">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CtrlEsborraUsuari.cxx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CapaDeDades\connexioBD.hxx">
@@ -153,6 +156,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CtrlModificaUsuari.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CtrlEsborraUsuari.hxx">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
