@@ -8,7 +8,8 @@
 #include "../CapaDeDomini/CtrlRegistraUsuari.hxx"
 #include "../CapaDeDades/DAOUsuari.hxx"
 #include "../CapaDeDomini/CtrlConsultaUsuari.hxx"
-
+#include "../CtrlModificaUsuari.hxx"
+    
 CapaDePresentacio* CapaDePresentacio::_instancia = nullptr;
 
 CapaDePresentacio::CapaDePresentacio() : _usuariActual("") {
@@ -31,7 +32,7 @@ void CapaDePresentacio::executar() {
     while (!sortir) {
         if (_usuariActual.empty()) {
             mostrarMenuPrincipal();
-            cout << "Selecciona una opci�: ";
+            cout << "Selecciona una opcio: ";
             cin >> opcio;
             cin.ignore();
 
@@ -44,16 +45,16 @@ void CapaDePresentacio::executar() {
                 break;
             case 0:
                 sortir = true;
-                cout << "\nAd�u! Gr�cies per utilitzar PlanGo.\n";
+                cout << "\nAdeu! Gracies per utilitzar PlanGo.\n";
                 break;
             default:
-                cout << "\nOpci� no v�lida. Torna-ho a intentar.\n";
+                cout << "\nOpcio no valida. Torna-ho a intentar.\n";
             }
         }
         else {
-            // *** Men� quan hi ha sessi� iniciada ***
+            // *** Menu quan hi ha sessio iniciada ***
             mostrarMenuSessioIniciada();
-            std::cout << "Selecciona una opci�: ";
+            std::cout << "Selecciona una opcio: ";
             if (!(std::cin >> opcio)) {
                 std::cin.clear();
                 std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
@@ -66,7 +67,7 @@ void CapaDePresentacio::executar() {
                 int opcioUsuari = -1;
                 while (opcioUsuari != 0) {
                     mostrarMenuGestioUsuari();
-                    std::cout << "Selecciona una opci�: ";
+                    std::cout << "Selecciona una opcio: ";
                     std::cin >> opcioUsuari;
                     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
@@ -75,21 +76,21 @@ void CapaDePresentacio::executar() {
 						consultarUsuari();
                         break;
                     case 2:
-                        std::cout << "Modifica usuari (pendent)\n";
+                        modificaUsuari();
                         break;
                     case 3:
-                        std::cout << "Esborra usuari (pendent)\n";
+                        esborraUsuari();
                         break;
                     case 4:
                         tancarSessio();
-                        opcioUsuari = 0; // salir del submen�
+                        opcioUsuari = 0; // salir del submenu
                         break;
                     case 0:
                         sortir = true;
-                        std::cout << "\nAd�u! Gr�cies per utilitzar PlanGo.\n";
+                        std::cout << "\nAdeu! Gracies per utilitzar PlanGo.\n";
                         break;
                     default:
-                        std::cout << "Opci� no v�lida.\n";
+                        std::cout << "Opcio no valida.\n";
                     }
                 }
                 break;
@@ -99,7 +100,7 @@ void CapaDePresentacio::executar() {
                 int opcioReserves = -1;
                 while (opcioReserves != 0) {
                     mostrarMenuGestioReserves();
-                    std::cout << "Selecciona una opci�: ";
+                    std::cout << "Selecciona una opcio: ";
                     std::cin >> opcioReserves;
                     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
@@ -115,9 +116,9 @@ void CapaDePresentacio::executar() {
                         break;
                     case 0:
                         sortir = true;
-                        std::cout << "\nAd�u! Gr�cies per utilitzar PlanGo.\n";
+                        std::cout << "\nAdeu! Gracies per utilitzar PlanGo.\n";
                     break;                    default:
-                        std::cout << "Opci� no v�lida.\n";
+                        std::cout << "Opcio no valida.\n";
                     }
                 }
                 break;
@@ -127,7 +128,7 @@ void CapaDePresentacio::executar() {
                 int opcioConsultes = -1;
                 while (opcioConsultes != 0) {
                     mostrarMenuConsultes();
-                    std::cout << "Selecciona una opci�: ";
+                    std::cout << "Selecciona una opcio: ";
                     std::cin >> opcioConsultes;
                     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
@@ -139,14 +140,14 @@ void CapaDePresentacio::executar() {
                         std::cout << "Consulta novetats (pendent)\n";
                         break;
                     case 3:
-                        std::cout << "Consulta m�s reservades (pendent)\n";
+                        std::cout << "Consulta mas reservades (pendent)\n";
                         break;
                     case 0:
                         sortir = true;
-                        std::cout << "\nAd�u! Gr�cies per utilitzar PlanGo.\n";
+                        std::cout << "\nAdeu! Gracies per utilitzar PlanGo.\n";
                         break;
                     default:
-                        std::cout << "Opci� no v�lida.\n";
+                        std::cout << "Opcio no valida.\n";
                     }
                 }
                 break;
@@ -157,10 +158,10 @@ void CapaDePresentacio::executar() {
                 break;
             case 0:
                 sortir = true;
-                std::cout << "\nAd�u! Gr�cies per utilitzar PlanGo.\n";
+                std::cout << "\nAdeu! Gracies per utilitzar PlanGo.\n";
                 break;
             default:
-                std::cout << "\nOpci� no v�lida. Torna-ho a intentar.\n";
+                std::cout << "\nOpcio no valida. Torna-ho a intentar.\n";
             }
         }
     }
@@ -169,9 +170,9 @@ void CapaDePresentacio::executar() {
 void CapaDePresentacio::mostrarMenuPrincipal() {
     cout << "-----------------------------------------\n";
     cout << "-          SISTEMA PLAN-GO                -\n";
-    cout << "-    Gesti� de Reserves d'Experi�ncies  -\n";
+    cout << "-    Gestio de Reserves d'Experiencies  -\n";
     cout << "------------------------------------------\n\n";
-    cout << "  1. Iniciar sessi�\n";
+    cout << "  1. Iniciar sessio\n";
     cout << "  2. Registrar-se\n";
     cout << "  3. Consultes\n";
     cout << "  0. Sortir\n\n";
@@ -216,11 +217,11 @@ void CapaDePresentacio::mostrarMenuConsultes() {
     std::cout << "-----------------------------------------\n\n";
     std::cout << "  1. Consulta experiencies \n";
     std::cout << "  2. Consulta novetats\n";
-    std::cout << "  3. Consulta m�s reservades \n";
+    std::cout << "  3. Consulta mas reservades \n";
     std::cout << "  0. Sortir\n\n";
 }
 void CapaDePresentacio::iniciarSessio() {
-    cout << "--- INICIAR SESSI� ---\n\n";
+    cout << "--- INICIAR SESSIO ---\n\n";
 
     string sobrenom, contrasenya;
     cout << "Username: ";
@@ -281,7 +282,7 @@ void CapaDePresentacio::registrarUsuari() {
     try {
         CtrlRegistraUsuari ctrl;
         ctrl.registrarUsuari(nomU, sobrenomU, contrasenyaU, correuU, edatU);
-        std::cout << "\nUsuari registrat amb �xit\n";
+        std::cout << "\nUsuari registrat amb exit\n";
     }
     catch (const std::exception& e) {
         std::cout<< e.what() << "\n";
@@ -294,15 +295,69 @@ void CapaDePresentacio::consultarUsuari() {
         DTOUsuari dto;
         CtrlConsultaUsuari ctrl;
         dto = ctrl.consultarUsuari(_usuariActual);
-        std::cout << "Informaci� de l'usuari:\n";
+        std::cout << "Informacio de l'usuari:\n";
         std::cout << "Sobrenom: " << dto.sobrenomU << "\n";
         std::cout << "Nom complet: " << dto.nomComplet << "\n";
-        std::cout << "Correu electr�nic: " << dto.email << "\n";
+        std::cout << "Correu electronic: " << dto.email << "\n";
         std::cout << "Edat: " << dto.edat << "\n";
-        std::cout << "N�mero de reserves: " << dto.numReserves << "\n\n";
+        std::cout << "Numero de reserves: " << dto.numReserves << "\n\n";
     }
     catch (const std::exception& e) {
         std::cout << "\n? Error en consultar usuari: " << e.what() << "\n";
     }
 }
+void CapaDePresentacio::modificaUsuari() {
+    std::cout << "--- MODIFICAR USUARI ---\n\n";
 
+    try {
+        CtrlConsultaUsuari ctrlConsulta;
+        DTOUsuari dto = ctrlConsulta.consultarUsuari(_usuariActual);
+
+        std::cout << "Dades actual:\n";
+        std::cout << "Nom complet: " << dto.nomComplet << "\n";
+        std::cout << "Correu electronic: " << dto.email << "\n";
+        std::cout << "Edat: " << dto.edat << "\n\n";
+
+        std::string nouNom, nouEmail, liniaEdat;
+        int novaEdat = -1;
+
+        std::cout << "Nou nom complet (<Intro> per mantenir): ";
+        std::getline(std::cin, nouNom);
+
+        std::cout << "Nou correu electronic (<Intro> per mantenir): ";
+        std::getline(std::cin, nouEmail);
+
+        std::cout << "Nova edat (<Intro> per mantenir): ";
+        std::getline(std::cin, liniaEdat);
+
+        if (!liniaEdat.empty()) {
+            try {
+                novaEdat = std::stoi(liniaEdat);
+            }
+            catch (...) {
+                throw std::runtime_error("L'edat ha de ser un nombre valid");
+            }
+        }
+
+        CtrlModificaUsuari ctrl(_usuariActual);
+        ctrl.modificaUsuari(nouNom, nouEmail, novaEdat);
+
+        std::cout << "\nUsuari modificat correctament.\n";
+    }
+    catch (const std::exception& e) {
+        std::cout << "\n? Error en modificar usuari: " << e.what() << "\n";
+    }
+}
+void CapaDePresentacio::esborraUsuari() {
+    std::cout << "--- ESBORRAR USUARI ---\n\n";
+    try{
+        DAOUsuari dao;
+        dao.esborra(_usuariActual);
+        std::cout << "Usuari esborrat correctament.\n";
+        _usuariActual.clear();
+    }
+    catch (const std::exception& e) {
+        std::cout << "\n? Error en esborrar usuari: " << e.what() << "\n";
+	}
+
+}

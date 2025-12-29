@@ -18,7 +18,8 @@ private:
 	void tancarSessio();
 	void registrarUsuari();
 	void consultarUsuari();
-
+	void modificaUsuari();
+	void esborraUsuari();
 	// M�todes auxiliars
 	void mostrarMenuPrincipal();
 	void mostrarMenuSessioIniciada();

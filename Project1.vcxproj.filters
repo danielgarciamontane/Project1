@@ -69,6 +69,18 @@
     <ClCompile Include="CapaDeDomini\CtrlConsultaUsuari.cxx">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Activitat.cxx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Escapada.cxx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Experiencia.cxx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CtrlModificaUsuari.cxx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CapaDeDades\connexioBD.hxx">
@@ -129,6 +141,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CapaDeDomini\Model\Reserva.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Activitat.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Escapada.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Experiencia.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CtrlModificaUsuari.hxx">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

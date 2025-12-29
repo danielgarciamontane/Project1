@@ -44,6 +44,9 @@ public:
     void set_username(const std::string& v);
     void set_nomcomplet(const std::string& v);
     void set_edat(const int& d);
+    void set_correuElectronic(const std::string& v) {
+        _correuElectronic = v;
+    }
 
 private:
     // Permet a ODB accedir als membres privats de la classe per fer la persistència
