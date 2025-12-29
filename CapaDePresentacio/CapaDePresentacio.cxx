@@ -1,4 +1,4 @@
-//CapaDePresentacio.cxx
+﻿//CapaDePresentacio.cxx
 #include "CapaDePresentacio.hxx"
 #include <iostream>
 #include <string>
@@ -43,12 +43,15 @@ void CapaDePresentacio::executar() {
             case 2:
                 registrarUsuari();
                 break;
+			case 3: 
+                executarConsultes();
+                break;
             case 0:
                 sortir = true;
-                cout << "\nAdeu! Gracies per utilitzar PlanGo.\n";
+                cout << "\nAdéu! Gràcies per utilitzar PlanGo.\n";
                 break;
             default:
-                cout << "\nOpcio no valida. Torna-ho a intentar.\n";
+                cout << "\nOpció no vàlida. Torna-ho a intentar.\n";
             }
         }
         else {
@@ -87,7 +90,7 @@ void CapaDePresentacio::executar() {
                         break;
                     case 0:
                         sortir = true;
-                        std::cout << "\nAdeu! Gracies per utilitzar PlanGo.\n";
+                        std::cout << "\nAdéu! Gràcies per utilitzar PlanGo.\n";
                         break;
                     default:
                         std::cout << "Opcio no valida.\n";
@@ -100,7 +103,7 @@ void CapaDePresentacio::executar() {
                 int opcioReserves = -1;
                 while (opcioReserves != 0) {
                     mostrarMenuGestioReserves();
-                    std::cout << "Selecciona una opcio: ";
+                    std::cout << "Selecciona una opció: ";
                     std::cin >> opcioReserves;
                     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
@@ -116,8 +119,8 @@ void CapaDePresentacio::executar() {
                         break;
                     case 0:
                         sortir = true;
-                        std::cout << "\nAdeu! Gracies per utilitzar PlanGo.\n";
-                    break;                    
+                        std::cout << "\nAdéu! Gràcies per utilitzar PlanGo.\n";
+                    break;                   
                     default:
                         std::cout << "Opcio no valida.\n";
                     }
@@ -125,44 +128,19 @@ void CapaDePresentacio::executar() {
                 break;
             }
 
-            case 3: {
-                int opcioConsultes = -1;
-                while (opcioConsultes != 0) {
-                    mostrarMenuConsultes();
-                    std::cout << "Selecciona una opcio: ";
-                    std::cin >> opcioConsultes;
-                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-
-                    switch (opcioConsultes) {
-                    case 1:
-                        std::cout << "Consulta experiencies (pendent)\n";
-                        break;
-                    case 2:
-                        std::cout << "Consulta novetats (pendent)\n";
-                        break;
-                    case 3:
-                        std::cout << "Consulta mas reservades (pendent)\n";
-                        break;
-                    case 0:
-                        sortir = true;
-                        std::cout << "\nAdeu! Gracies per utilitzar PlanGo.\n";
-                        break;
-                    default:
-                        std::cout << "Opcio no valida.\n";
-                    }
-                }
+            case 3:
+                executarConsultes();
                 break;
-            }
 
             case 4:
                 tancarSessio(); // <-- implementar a sota
                 break;
             case 0:
                 sortir = true;
-                std::cout << "\nAdeu! Gracies per utilitzar PlanGo.\n";
+                std::cout << "\nAdéu! Gràcies per utilitzar PlanGo.\n";
                 break;
             default:
-                std::cout << "\nOpcio no valida. Torna-ho a intentar.\n";
+                std::cout << "\nOpció no vàlida. Torna-ho a intentar.\n";
             }
         }
     }
@@ -218,8 +196,33 @@ void CapaDePresentacio::mostrarMenuConsultes() {
     std::cout << "-----------------------------------------\n\n";
     std::cout << "  1. Consulta experiencies \n";
     std::cout << "  2. Consulta novetats\n";
-    std::cout << "  3. Consulta mas reservades \n";
+    std::cout << "  3. Consulta més reservades \n";
     std::cout << "  0. Sortir\n\n";
+}
+void CapaDePresentacio::executarConsultes() {
+    int opcioConsultes = -1;
+    while (opcioConsultes != 0) {
+        mostrarMenuConsultes();
+        cout << "Selecciona una opció: ";
+        cin >> opcioConsultes;
+        cin.ignore();
+
+        switch (opcioConsultes) {
+        case 1:
+            cout << "Consulta experiencies (pendent)\n";
+            break;
+        case 2:
+            cout << "Consulta novetats (pendent)\n";
+            break;
+        case 3:
+            cout << "Consulta més reservades (pendent)\n";
+            break;
+        case 0:
+            break;
+        default:
+            cout << "Opció no vàlida.\n";
+        }
+    }
 }
 void CapaDePresentacio::iniciarSessio() {
     cout << "--- INICIAR SESSIO ---\n\n";
@@ -296,7 +299,7 @@ void CapaDePresentacio::consultarUsuari() {
         DTOUsuari dto;
         CtrlConsultaUsuari ctrl;
         dto = ctrl.consultarUsuari(_usuariActual);
-        std::cout << "Informacio de l'usuari:\n";
+        std::cout << "Informació de l'usuari:\n";
         std::cout << "Sobrenom: " << dto.sobrenomU << "\n";
         std::cout << "Nom complet: " << dto.nomComplet << "\n";
         std::cout << "Correu electronic: " << dto.email << "\n";
@@ -362,7 +365,7 @@ void CapaDePresentacio::esborraUsuari() {
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
         if (confirmacio != 'S' && confirmacio != 's') {
-            std::cout << "Esborrat cancel�lat.\n";
+            std::cout << "Esborrat cancel�lat.\n";
             return;
         }
         CtrlEsborrarUsuari ctrl(_usuariActual);

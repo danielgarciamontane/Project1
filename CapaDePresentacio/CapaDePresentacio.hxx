@@ -26,6 +26,7 @@ private:
 	void mostrarMenuGestioUsuari();
 	void mostrarMenuGestioReserves();
 	void mostrarMenuConsultes();
+	void executarConsultes();
 	string _usuariActual;
 	static CapaDePresentacio* _instancia;
 };
