@@ -9,6 +9,7 @@
 #include "../CapaDeDades/DAOUsuari.hxx"
 #include "../CapaDeDomini/CtrlConsultaUsuari.hxx"
 #include "../CapaDeDomini/CtrlModificaUsuari.hxx"
+#include "../CapaDeDomini/CtrlEsborraUsuari.hxx"
 
 CapaDePresentacio* CapaDePresentacio::_instancia = nullptr;
 
@@ -79,7 +80,7 @@ void CapaDePresentacio::executar() {
 						modificarUsuari();
                         break;
                     case 3:
-                        std::cout << "Esborra usuari (pendent)\n";
+						esborraUsuari();
                         break;
                     case 4:
                         tancarSessio();
@@ -351,4 +352,30 @@ void CapaDePresentacio::modificarUsuari() {
     catch (const std::exception& e) {
         std::cout << "\n? Error en modificar usuari: " << e.what() << "\n";
 	}
+}
+
+void CapaDePresentacio::esborraUsuari() {
+    std::cout << "--- ESBORRAR USUARI ---\n\n";
+    std::string contrasenya;
+    std::cout << "Per confirmar has d'entrar la contrasenya: ";
+    std::cout << "Contrasenya: ";
+    std::getline(std::cin, contrasenya);
+    std::cout << "Vols confirmar l'esborrar (S/N): ";
+    char confirmacio;
+    std::cin >> confirmacio;
+    if (confirmacio == 'S') {
+
+        try {
+            CtrlEsborraUsuari ctrl;
+            ctrl.esborraUsuari(_usuariActual, contrasenya);
+            std::cout << "Usuari esborrat correctament.\n";
+            _usuariActual.clear();
+        }
+        catch (const std::exception& e) {
+            std::cout << "\n? Error en esborrar usuari: " << e.what() << "\n";
+        }
+    }
+    else {
+        std::cout << "Esborrat d'usuari cancel·lat.\n";
+    }
 }

@@ -139,6 +139,7 @@
     <ClCompile Include="CapaDeDomini\Model\Escapada.cxx" />
     <ClCompile Include="CapaDeDomini\Model\Experiencia-odb.cxx" />
     <ClInclude Include="CapaDeDades\DAOReserva.hxx" />
+    <ClInclude Include="CapaDeDomini\CtrlEsborraUsuari.hxx" />
     <ClInclude Include="CapaDeDomini\CtrlConsultaUsuari.hxx" />
     <ClInclude Include="CapaDeDomini\CtrlModificaUsuari.hxx" />
     <ClInclude Include="CapaDeDomini\Model\Escapada.hxx" />
@@ -166,6 +167,7 @@
     <ClCompile Include="CapaDeDomini\CtrlRegistraUsuari.cxx" />
     <ClCompile Include="CapaDeDomini\CtrlConsultaUsuari.cxx" />
     <ClCompile Include="CapaDeDomini\CtrlModificaUsuari.cxx" />
+    <ClCompile Include="CapaDeDomini\CtrlEsborraUsuari.cxx" />
     <ClCompile Include="CapaDePresentacio\CapaDePresentacio.cxx" />
     <ClCompile Include="main.cpp" />
     <ClInclude Include="CapaDeDomini\CtrlTancaSessio.hxx" />

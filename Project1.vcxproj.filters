@@ -45,6 +45,36 @@
     <ClCompile Include="CapaDeDomini\Model\Usuari-odb.cxx">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CapaDeDades\DAOReserva.cxx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CapaDeDomini\Model\Activitat.cxx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CapaDeDomini\Model\Escapada.cxx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CapaDeDomini\Model\Experiencia-odb.cxx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CapaDeDomini\Model\Experiencia.cxx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CapaDeDomini\Model\Reserva-odb.cxx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CapaDeDomini\Model\Reserva.cxx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CapaDeDomini\CtrlConsultaUsuari.cxx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CapaDeDomini\CtrlModificaUsuari.cxx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CapaDeDomini\CtrlEsborraUsuari.cxx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CapaDeDades\connexioBD.hxx">
@@ -76,6 +106,42 @@
     </ClInclude>
     <ClInclude Include="CapaDeDomini\Model\Usuari-odb.ixx">
       <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CapaDeDades\DAOReserva.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CapaDeDomini\CtrlConsultaUsuari.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CapaDeDomini\CtrlModificaUsuari.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CapaDeDomini\Model\Escapada.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CapaDeDomini\Model\Experiencia-odb.ixx">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CapaDeDomini\Model\Experiencia.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CapaDeDomini\Model\Reserva-odb.ixx">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CapaDeDomini\Model\Activitat.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CapaDeDomini\Model\Experiencia-odb.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CapaDeDomini\Model\Reserva-odb.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CapaDeDomini\Model\Reserva.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CapaDeDomini\CtrlEsborraUsuari.hxx">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

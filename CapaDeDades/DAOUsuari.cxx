@@ -75,3 +75,14 @@ void DAOUsuari::modUsu(shared_ptr<usuari> u) {
     db->update(u);
     t.commit();
 }
+
+void DAOUsuari::esbUsu(const string& sobrenom) {
+    using namespace odb::core;
+    // Obtenemos la conexión a la base de datos desde el singleton
+    shared_ptr<odb::database> db = connexioBD::getInstance().getDB();
+    // Abrimos transacción (escritura)
+    transaction t(db->begin());
+    // Eliminamos el objeto de la base de datos
+    db->erase<usuari>(sobrenom);
+    t.commit();
+}

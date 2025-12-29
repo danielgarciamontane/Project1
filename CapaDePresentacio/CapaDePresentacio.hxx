@@ -19,6 +19,7 @@ private:
 	void registrarUsuari();
 	void consultarUsuari();
 	void modificarUsuari();
+	void esborraUsuari();
 
 	// Mètodes auxiliars
 	void mostrarMenuPrincipal();
