@@ -105,6 +105,9 @@
     <ClCompile Include="CapaDeDomini\CtrlConsultarExperiencies.cxx">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CapaDeDomini\CtrlConsultaNovetats.cxx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CapaDeDades\connexioBD.hxx">
@@ -216,6 +219,9 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="CapaDeDomini\CtrlConsultarExperiencies.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CapaDeDomini\CtrlConsultaNovetats.hxx">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

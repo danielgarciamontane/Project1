@@ -2,10 +2,13 @@
 #include "DAOExperiencia.hxx"
 #include "connexioBD.hxx"
 #include "../CapaDeDomini/Model/Experiencia-odb.hxx"
+#include "../CapaDeDomini/Model/Experiencia.hxx"
 #include "../CapaDeDomini/Model/Escapada-odb.hxx"
 #include <odb/database.hxx>
 #include <odb/transaction.hxx>
 #include <odb/query.hxx>
+#include <vector>
+
 
 using namespace std;
 
@@ -41,4 +44,28 @@ vector<shared_ptr<Experiencia>> DAOExperiencia::obteExperienciesPerCiutat(const 
     }
     t.commit();
     return experiencies;
+}
+//vector amb ultimes 10 experiències. Si hi ha menys de 10 experiències, retorna totes.
+vector<shared_ptr<Experiencia>> DAOExperiencia::obteUltimesExperiencies(int n) {
+
+    auto db = connexioBD::getInstance().getDB();
+    vector<shared_ptr<Experiencia>> res;
+    res.reserve(static_cast<size_t>(n));
+
+    using Q = odb::query<Experiencia>;
+    odb::transaction t(db->begin());
+
+    // Ordena por la columna de fecha de alta en DESC y limita a n
+    // OJO: sustituye Q::dataAlta por el *nombre real del miembro* en tu clase.
+    odb::result<Experiencia> rs =
+        db->query<Experiencia>("ORDER BY" + Q::dataAlta + "DESC" + Q::_ref(n));
+
+    // Si Experiencia es base polimórfica, i.load() reconstruye la subclase correcta
+    for (odb::result<Experiencia>::iterator i(rs.begin()); i != rs.end(); ++i)
+    {
+        res.push_back(i.load());
+    }
+
+    t.commit();
+    return res;
 }

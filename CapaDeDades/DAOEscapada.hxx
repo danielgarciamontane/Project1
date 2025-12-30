@@ -5,4 +5,5 @@
 class DAOEscapada {
 	public:
 	DTOExperiencia obtenirEscapada(const std::string& idEscapada);
+	vector<shared_ptr<Escapada>> obteMesReservades(int n);
 };

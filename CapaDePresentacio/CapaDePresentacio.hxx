@@ -24,6 +24,8 @@ private:
 	void reservarActivitat();
 	void consultarReserves();
 	void consultarExperiencies();
+	void consultarNovetats();
+	void consultaMesReservades();
 
 	// Mètodes auxiliars
 	void mostrarMenuPrincipal();

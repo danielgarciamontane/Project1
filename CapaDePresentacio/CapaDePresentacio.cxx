@@ -14,7 +14,8 @@
 #include "../CapaDeDomini/CtrlReservarActivitat.hxx"
 #include "../CapaDeDomini/CtrlConsultarReserves.hxx"
 #include "../CapaDeDomini/CtrlConsultarExperiencies.hxx"
-
+#include "../CapaDeDomini/CtrlConsultaNovetats.hxx"
+#include "../CapaDeDomini/CtrlConsultaMesReservades.hxx"
 
 
 CapaDePresentacio* CapaDePresentacio::_instancia = nullptr;
@@ -59,7 +60,6 @@ void CapaDePresentacio::executar() {
             }
         }
         else {
-            // *** Menú quan hi ha sessi� iniciada ***
             mostrarMenuSessioIniciada();
             std::cout << "Selecciona una opció: ";
             if (!(std::cin >> opcio)) {
@@ -144,10 +144,10 @@ void CapaDePresentacio::executar() {
 						consultarExperiencies();
                         break;
                     case 2:
-                        std::cout << "Consulta novetats (pendent)\n";
+						consultarNovetats();
                         break;
                     case 3:
-                        std::cout << "Consulta m�s reservades (pendent)\n";
+                        consultaMesReservades();
                         break;
                     case 0:
                         sortir = true;
@@ -527,5 +527,76 @@ void CapaDePresentacio::consultarExperiencies() {
     }
     catch (const std::exception& e) {
         std::cout << "\n? Error en consultar experiències: " << e.what() << "\n";
+    }
+}
+
+void CapaDePresentacio::consultarNovetats() {
+    std::cout << "--- CONSULTAR NOVETATS ---\n\n";
+    try {
+        int lim = 10;
+        CtrlConsultaNovetats ctrl;
+        std::vector<DTOExperiencia> novetats = ctrl.consultarNovetats(lim);
+        if (novetats.empty()) {
+            std::cout << "No hi ha novetats disponibles.\n";
+        }
+        else {
+            int count = 0;
+            for (const auto& exp : novetats) {
+				if (count++ >= lim) break;
+                
+                if (exp.tipusExp == "Escapada") {
+                    std::cout << "Nom: " << exp.nom << "\n";
+                    std::cout << "Descripció: " << exp.descripcio << "\n";
+                    std::cout << "Ciutat: " << exp.ciutat << "\n";
+                    std::cout << "Preu: " << exp.preu << " €\n";
+                    std::cout << "Data alta: " << exp.dataAlta << "\n";
+                    std::cout << "Hotel: " << exp.hotel << "\n";
+                    std::cout << "Nº nits: " << exp.numNits << "\n\n";
+                }
+                if (exp.tipusExp == "Activitat") {
+                    std::cout << "Nom: " << exp.nom << "\n";
+                    std::cout << "Descripció: " << exp.descripcio << "\n";
+                    std::cout << "Ciutat: " << exp.ciutat << "\n";
+                    std::cout << "Preu: " << exp.preu << " €\n";
+                    std::cout << "Data alta: " << exp.dataAlta << "\n";
+                    std::cout << "Durada: " << exp.durada << " hores\n\n";
+                }
+
+            }
+        }
+    }
+    catch (const std::exception& e) {
+        std::cout << "\n? Error en consultar novetats: " << e.what() << "\n";
+    }
+}
+
+void CapaDePresentacio::consultaMesReservades() {
+    std::cout << "--- CONSULTAR MÉS RESERVADES ---\n\n";
+    try {
+        CtrlConsultaMesReservades ctrl;
+        std::vector<DTOExperiencia> escapades = ctrl.consEscMesReservades(5);
+        std::vector<DTOExperiencia> activitats = ctrl.consActMesReservades(5);
+        std::cout << "**Escapades més reservades**:\n";
+        for (const auto& exp : escapades) {
+            std::cout << "Nom: " << exp.nom << "\n";
+            std::cout << "Descripció: " << exp.descripcio << "\n";
+            std::cout << "Ciutat: " << exp.ciutat << "\n";
+            std::cout << "Preu: " << exp.preu << " €\n";
+            std::cout << "Número de reserves: " << exp.numReserves << "\n";
+			std::cout << "Hotel: " << exp.hotel << "\n";
+			std::cout << "Nº nits: " << exp.numNits << "\n\n";
+        }
+        std::cout << "**Activitats més reservades**:\n";
+        for (const auto& exp : activitats) {
+            std::cout << "Nom: " << exp.nom << "\n";
+            std::cout << "Descripció: " << exp.descripcio << "\n";
+            std::cout << "Ciutat: " << exp.ciutat << "\n";
+            std::cout << "Preu: " << exp.preu << " €\n";
+            std::cout << "Número de reserves: " << exp.numReserves << "\n";
+			std::cout << "Durada: " << exp.durada << " hores\n\n";
+        }
+    }
+    catch (const std::exception& e) {
+        std::cout << "\n? Error en consultar més reservades: " << e.what() << "\n";
     }
 }

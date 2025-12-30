@@ -140,6 +140,8 @@
     <ClInclude Include="CapaDeDomini\DTOs\DTOLlistaReserves.hxx" />
     <ClInclude Include="CapaDeDomini\DTOs\DTOReserva.hxx" />
     <ClInclude Include="CapaDeDomini\CtrlConsultarExperiencies.hxx" />
+    <ClInclude Include="CapaDeDomini\CtrlConsultaNovetats.hxx" />
+    <ClInclude Include="CapaDeDomini\CtrlConsultaMesReservades.hxx" />
     <ClInclude Include="CapaDeDomini\Model\Activitat-odb.ixx">
       <FileType>Document</FileType>
     </ClInclude>
@@ -187,6 +189,8 @@
     <ClCompile Include="CapaDeDomini\CtrlReservarActivitat.cxx" />
     <ClCompile Include="CapaDeDomini\CtrlConsultarReserves.cxx" />
     <ClCompile Include="CapaDeDomini\CtrlConsultarExperiencies.cxx" />
+    <ClCompile Include="CapaDeDomini\CtrlConsultaNovetats.cxx" />
+    <ClCompile Include="CapaDeDomini\CtrlConsultaMesReservades.cxx" />
     <ClCompile Include="CapaDePresentacio\CapaDePresentacio.cxx" />
     <ClCompile Include="CapaDeDomini\Model\Escapada-odb.cxx" />
     <ClInclude Include="CapaDeDomini\Model\Escapada-odb.ixx">
