@@ -57,13 +57,21 @@ namespace odb
     //
     if (--d != 0)
     {
-      if (base_traits::grow (*i.base, t + 1UL))
+      if (base_traits::grow (*i.base, t + 2UL))
         i.base->version++;
     }
 
-    // dies
+    // _hotel
     //
-    t[0UL] = 0;
+    if (t[0UL])
+    {
+      i._hotel_value.capacity (i._hotel_size);
+      grew = true;
+    }
+
+    // _numNits
+    //
+    t[1UL] = 0;
 
     return grew;
   }
@@ -90,12 +98,22 @@ namespace odb
       n += id_size;
     }
 
-    // dies
+    // _hotel
+    //
+    b[n].buffer_type = MYSQL_TYPE_STRING;
+    b[n].buffer = i._hotel_value.data ();
+    b[n].buffer_length = static_cast<unsigned long> (
+      i._hotel_value.capacity ());
+    b[n].length = &i._hotel_size;
+    b[n].is_null = &i._hotel_null;
+    n++;
+
+    // _numNits
     //
     b[n].buffer_type = MYSQL_TYPE_LONG;
     b[n].is_unsigned = 0;
-    b[n].buffer = &i.dies_value;
-    b[n].is_null = &i.dies_null;
+    b[n].buffer = &i._numNits_value;
+    b[n].is_null = &i._numNits_null;
     n++;
 
     // _nom
@@ -126,18 +144,39 @@ namespace odb
 
     bool grew (false);
 
-    // dies
+    // _hotel
+    //
+    {
+      ::std::string const& v =
+        o._hotel;
+
+      bool is_null (false);
+      std::size_t size (0);
+      std::size_t cap (i._hotel_value.capacity ());
+      mysql::value_traits<
+          ::std::string,
+          mysql::id_string >::set_image (
+        i._hotel_value,
+        size,
+        is_null,
+        v);
+      i._hotel_null = is_null;
+      i._hotel_size = static_cast<unsigned long> (size);
+      grew = grew || (cap != i._hotel_value.capacity ());
+    }
+
+    // _numNits
     //
     {
       int const& v =
-        o.dies;
+        o._numNits;
 
       bool is_null (false);
       mysql::value_traits<
           int,
           mysql::id_long >::set_image (
-        i.dies_value, is_null, v);
-      i.dies_null = is_null;
+        i._numNits_value, is_null, v);
+      i._numNits_null = is_null;
     }
 
     return grew;
@@ -158,18 +197,33 @@ namespace odb
     if (--d != 0)
       base_traits::init (o, *i.base, db);
 
-    // dies
+    // _hotel
+    //
+    {
+      ::std::string& v =
+        o._hotel;
+
+      mysql::value_traits<
+          ::std::string,
+          mysql::id_string >::set_value (
+        v,
+        i._hotel_value,
+        i._hotel_size,
+        i._hotel_null);
+    }
+
+    // _numNits
     //
     {
       int& v =
-        o.dies;
+        o._numNits;
 
       mysql::value_traits<
           int,
           mysql::id_long >::set_value (
         v,
-        i.dies_value,
-        i.dies_null);
+        i._numNits_value,
+        i._numNits_null);
     }
   }
 
@@ -189,14 +243,16 @@ namespace odb
   const char access::object_traits_impl< ::Escapada, id_mysql >::persist_statement[] =
   "INSERT INTO `Escapada` "
   "(`nom`, "
-  "`dies`) "
+  "`hotel`, "
+  "`numNits`) "
   "VALUES "
-  "(?, ?)";
+  "(?, ?, ?)";
 
   const char* const access::object_traits_impl< ::Escapada, id_mysql >::find_statements[] =
   {
     "SELECT "
-    "`Escapada`.`dies`, "
+    "`Escapada`.`hotel`, "
+    "`Escapada`.`numNits`, "
     "`Experiencia`.`nom`, "
     "`Experiencia`.`typeid`, "
     "`Experiencia`.`descripcio`, "
@@ -210,21 +266,23 @@ namespace odb
     "WHERE `Escapada`.`nom`=?",
 
     "SELECT "
-    "`Escapada`.`dies` "
+    "`Escapada`.`hotel`, "
+    "`Escapada`.`numNits` "
     "FROM `Escapada` "
     "WHERE `Escapada`.`nom`=?"
   };
 
   const std::size_t access::object_traits_impl< ::Escapada, id_mysql >::find_column_counts[] =
   {
-    9UL,
-    1UL
+    10UL,
+    2UL
   };
 
   const char access::object_traits_impl< ::Escapada, id_mysql >::update_statement[] =
   "UPDATE `Escapada` "
   "SET "
-  "`dies`=? "
+  "`hotel`=?, "
+  "`numNits`=? "
   "WHERE `nom`=?";
 
   const char access::object_traits_impl< ::Escapada, id_mysql >::erase_statement[] =
@@ -233,7 +291,8 @@ namespace odb
 
   const char access::object_traits_impl< ::Escapada, id_mysql >::query_statement[] =
   "SELECT\n"
-  "`Escapada`.`dies`,\n"
+  "`Escapada`.`hotel`,\n"
+  "`Escapada`.`numNits`,\n"
   "`Experiencia`.`nom`,\n"
   "`Experiencia`.`typeid`,\n"
   "`Experiencia`.`descripcio`,\n"
@@ -252,7 +311,7 @@ namespace odb
   "`Escapada`";
 
   void access::object_traits_impl< ::Escapada, id_mysql >::
-  persist (database& db, const object_type& obj, bool top, bool dyn)
+  persist (database& db, object_type& obj, bool top, bool dyn)
   {
     ODB_POTENTIALLY_UNUSED (top);
 
@@ -277,7 +336,7 @@ namespace odb
 
     if (top)
       callback (db,
-                obj,
+                static_cast<const object_type&> (obj),
                 callback_event::pre_persist);
 
     base_traits::persist (db, obj, false, false);
@@ -305,7 +364,7 @@ namespace odb
 
     if (top)
       callback (db,
-                obj,
+                static_cast<const object_type&> (obj),
                 callback_event::post_persist);
   }
 

@@ -5,7 +5,8 @@ using namespace std;
 
 class DTOExperiencia {
 	public:
-
+	
+	string tipusExp;
 	string nom;
 	string descripcio;
 	string ciutat;
@@ -21,9 +22,9 @@ class DTOExperiencia {
 	int durada;
 	unsigned long id;
 
-	DTOExperiencia() = default;
-	DTOExperiencia(const string& n, const string& desc, const string& c,
-		const string& tipus, int maxPlaces, int numRes,
-		float pr, boost::gregorian::date& data);
+	DTOExperiencia();
+	DTOExperiencia(const string& nom, const string& descipcio, const string& ciutat,
+		const string& tipusExp, int maxPlaces, int numReserves,
+		float preu, boost::gregorian::date& data);
 	
 };

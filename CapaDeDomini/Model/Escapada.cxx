@@ -1,24 +1,47 @@
 #include "Escapada.hxx"
 
-Escapada::Escapada(const std::string& nom,
-    double preu,
-    int dies)
-    : Experiencia(nom, preu),
-    dies(dies)
+Escapada::Escapada() : Experiencia(), _hotel(""), _numNits(1) {
+}
+
+Escapada::Escapada(const string& nom, const string& descripcio, const string& ciutat,
+    int maxPlaces, float preu, const string& hotel, int numNits)
+    : Experiencia(nom, descripcio, ciutat, maxPlaces, preu), _hotel(hotel), _numNits(numNits) 
 {
+    if (numNits <= 0) {
+        throw invalid_argument("El numero de nits ha de ser superior a 0");
+	}
+}
+//Getters
+string Escapada::get_hotel() const {
+    return _hotel;
+}
+int Escapada::get_numNits() const {
+    return _numNits;
+}
+
+//Setters
+void Escapada::set_hotel(const string& hotel) {
+    _hotel = hotel;
+}
+void Escapada::set_numNits(int numNits) {
+    if (numNits <= 0) {
+        throw invalid_argument("El numero de nits ha de ser superior a 0");
+    }
+    _numNits = numNits;
 }
 
 
-std::string Escapada::get_tipus() const
-{
-    return "ESCAPADA";
+void Escapada::print_info_detalls(std::ostream& os) const {
+    os << "Hotel: " << _hotel << "\n";
+    os << "Nits: " << _numNits << "\n";
 }
 
-void Escapada::print_info_detalls(std::ostream& os) const
-{
-    os << "Dies: " << dies << "\n";
+float Escapada::calculaPreu(int nPersones) const {
+    return Experiencia::obteInfoExperiencia().preu;
 }
 
-float Escapada::calculaPreuEscapada(int nPersones) const {
-    return _preu;
+void Escapada::atributsEscapada(DTOExperiencia& dto) {
+    dto.tipusExp = "ESCAPADA";
+    dto.hotel = _hotel;
+    dto.numNits = _numNits;
 }

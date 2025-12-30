@@ -138,7 +138,19 @@ namespace odb
 
     static const nom_type_ nom;
 
-    // dies
+    // hotel
+    //
+    typedef
+    mysql::query_column<
+      mysql::value_traits<
+        ::std::string,
+        mysql::id_string >::query_type,
+      mysql::id_string >
+    hotel_type_;
+
+    static const hotel_type_ hotel;
+
+    // numNits
     //
     typedef
     mysql::query_column<
@@ -146,9 +158,9 @@ namespace odb
         int,
         mysql::id_long >::query_type,
       mysql::id_long >
-    dies_type_;
+    numNits_type_;
 
-    static const dies_type_ dies;
+    static const numNits_type_ numNits;
   };
 
   template <typename A>
@@ -157,9 +169,14 @@ namespace odb
   nom (A::table_name, "`nom`", 0);
 
   template <typename A>
-  const typename query_columns< ::Escapada, id_mysql, A >::dies_type_
+  const typename query_columns< ::Escapada, id_mysql, A >::hotel_type_
   query_columns< ::Escapada, id_mysql, A >::
-  dies (A::table_name, "`dies`", 0);
+  hotel (A::table_name, "`hotel`", 0);
+
+  template <typename A>
+  const typename query_columns< ::Escapada, id_mysql, A >::numNits_type_
+  query_columns< ::Escapada, id_mysql, A >::
+  numNits (A::table_name, "`numNits`", 0);
 
   template <typename A>
   struct pointer_query_columns< ::Escapada, id_mysql, A >:
@@ -190,10 +207,16 @@ namespace odb
       unsigned long _nom_size;
       my_bool _nom_null;
 
-      // dies
+      // _hotel
       //
-      int dies_value;
-      my_bool dies_null;
+      details::buffer _hotel_value;
+      unsigned long _hotel_size;
+      my_bool _hotel_null;
+
+      // _numNits
+      //
+      int _numNits_value;
+      my_bool _numNits_null;
 
       std::size_t version;
     };
@@ -247,7 +270,7 @@ namespace odb
 
     typedef mysql::query_base query_base_type;
 
-    static const std::size_t column_count = 2UL;
+    static const std::size_t column_count = 3UL;
     static const std::size_t id_column_count = 1UL;
     static const std::size_t inverse_column_count = 0UL;
     static const std::size_t readonly_column_count = 0UL;
@@ -269,7 +292,7 @@ namespace odb
     static const char table_name[];
 
     static void
-    persist (database&, const object_type&, bool top = true, bool dyn = true);
+    persist (database&, object_type&, bool top = true, bool dyn = true);
 
     static pointer_type
     find (database&, const id_type&);

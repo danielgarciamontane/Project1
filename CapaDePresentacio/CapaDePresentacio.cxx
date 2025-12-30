@@ -108,7 +108,7 @@ void CapaDePresentacio::executar() {
 
                     switch (opcioReserves) {
                     case 1:
-                        std::cout << "Reservar escapada (pendent)\n";
+						reservarEscapada();
                         break;
                     case 2:
                         std::cout << "Reservar activitat (pendent)\n";

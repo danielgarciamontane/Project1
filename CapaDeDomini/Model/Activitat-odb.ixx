@@ -72,8 +72,7 @@ namespace odb
   {
     v[0UL] = i.version;
     v[1UL] = i.base->version;
-    b[0UL].version++;
-    b[1UL].version++;
+    b[0].version++;
   }
 }
 

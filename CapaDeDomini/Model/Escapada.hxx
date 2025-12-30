@@ -4,21 +4,29 @@
 #pragma db object
 class Escapada : public Experiencia {
 public:
-    Escapada() = default;
+    Escapada();
 
-    Escapada(const std::string& nom,
-        double preu,
-        int dies);
+    Escapada(const string& nom, const string& descipcio, const string& ciutat,
+        int maxPlaces, float preu, const string& hotel, int numNits);
 
     //Getters
-	float calculaPreuEscapada(int numP) const;
+	string get_hotel() const;
+	int get_numNits() const;
 
-
-    std::string get_tipus() const override;
+	//Setters
+	void set_hotel(const string& hotel);
+	void set_numNits(int numNits);
+    
     void print_info_detalls(std::ostream& os) const override;
+
+    //Getters
+
+	float calculaPreu(int numP) const override;
+
+    void atributsEscapada(DTOExperiencia& dto);
 
 private:
     friend class odb::access;   
-    float _preu;
-    int dies;
+    string _hotel;
+    int _numNits;
 };

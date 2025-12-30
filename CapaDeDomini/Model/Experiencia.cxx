@@ -3,9 +3,21 @@
 #include "PlanGo.hxx"
 #include "Escapada.hxx"
 
-Experiencia::Experiencia(const std::string& nom, float preu)
-    : _nom(nom), _preu(preu)
+Experiencia::Experiencia() : _nom(""), _descripcio(""), _ciutat(""), _maxPlaces(1), _preu(0.0f),
+    _dataAlta(boost::gregorian::day_clock::local_day()), _numReserves(0) {
+}
+
+Experiencia::Experiencia(const string& nom, const string& descripcio, const string& ciutat,
+    int maxPlaces, float preu)
+    : _nom(nom), _descripcio(descripcio), _ciutat(ciutat), _maxPlaces(maxPlaces), _preu(preu),
+    _dataAlta(boost::gregorian::day_clock::local_day()), _numReserves(0) 
 {
+    if (maxPlaces <= 0) {
+        throw invalid_argument("El nombre maxim de places ha de ser superior a 0");
+    }
+    if (preu < 0.0f) {
+        throw invalid_argument("El preu no pot ser negatiu");
+    }
 }
 
 void Experiencia::print_info(std::ostream& os) const
@@ -32,8 +44,7 @@ float Experiencia::calculaPreu(int numP, bool primRes) const {
     if (numP <= 0) {
         throw invalid_argument("El nombre de persones ha de ser superior a 0");
     }
-    Escapada esc;
-    float preuTotal =esc.calculaPreuEscapada(numP);
+    float preuTotal =calculaPreu(numP);
 
     if (primRes) {
         float descompte = PlanGo::getInstance().getDescompte();
@@ -41,6 +52,25 @@ float Experiencia::calculaPreu(int numP, bool primRes) const {
     }
 
     return preuTotal;
+}
+
+string Experiencia::get_nom() const {
+    return _nom;
+}
+string Experiencia::get_descripcio() const {
+    return _descripcio;
+}
+string Experiencia::get_ciutat() const {
+    return _ciutat;
+}
+float Experiencia::get_preu() const {
+    return _preu;
+}
+boost::gregorian::date Experiencia::get_dataAlta() const {
+    return _dataAlta;
+}
+int Experiencia::get_numReserves() const {
+    return _numReserves;
 }
 
 int Experiencia::get_maxPlaces() const {

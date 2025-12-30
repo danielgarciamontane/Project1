@@ -138,10 +138,14 @@
     <ClCompile Include="CapaDeDades\DAOEscapada.cxx" />
     <ClCompile Include="CapaDeDades\DAOExperiencia.cxx" />
     <ClCompile Include="CapaDeDomini\Model\Activitat-odb.cxx" />
-    <ClCompile Include="CapaDeDomini\Model\Activitat-odb.ixx" />
+    <ClInclude Include="CapaDeDomini\Model\Activitat-odb.ixx">
+      <FileType>Document</FileType>
+    </ClInclude>
     <ClCompile Include="CapaDeDomini\Model\Activitat.cxx" />
     <ClCompile Include="CapaDeDomini\Model\Escapada-odb.cxx" />
-    <ClCompile Include="CapaDeDomini\Model\Escapada-odb.ixx" />
+    <ClInclude Include="CapaDeDomini\Model\Escapada-odb.ixx">
+      <FileType>Document</FileType>
+    </ClInclude>
     <ClCompile Include="CapaDeDomini\Model\Escapada.cxx" />
     <ClInclude Include="CapaDeDades\DAOReserva.hxx" />
     <ClInclude Include="CapaDeDades\DAOEscapada.hxx" />
@@ -199,6 +203,23 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="configuracio.env" />
+    <None Include="Project1\x64\Debug\Project1.exe.recipe" />
+    <None Include="Project1\x64\Debug\Project1.ilk" />
+    <None Include="Project1\x64\Debug\Project1.tlog\CL.command.1.tlog" />
+    <None Include="Project1\x64\Debug\Project1.tlog\Cl.items.tlog" />
+    <None Include="Project1\x64\Debug\Project1.tlog\CL.read.1.tlog" />
+    <None Include="Project1\x64\Debug\Project1.tlog\CL.write.1.tlog" />
+    <None Include="Project1\x64\Debug\Project1.tlog\link.command.1.tlog" />
+    <None Include="Project1\x64\Debug\Project1.tlog\link.read.1.tlog" />
+    <None Include="Project1\x64\Debug\Project1.tlog\link.secondary.1.tlog" />
+    <None Include="Project1\x64\Debug\Project1.tlog\link.write.1.tlog" />
+    <None Include="Project1\x64\Debug\Project1.tlog\Project1.lastbuildstate" />
+    <None Include="Project1\x64\Debug\Project1.tlog\unsuccessfulbuild" />
+    <None Include="Project1\x64\Debug\vc143.idb" />
+    <None Include="Project1\x64\Debug\vc143.pdb" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Project1\x64\Debug\Project1.log" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

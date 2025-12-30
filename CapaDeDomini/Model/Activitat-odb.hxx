@@ -74,6 +74,7 @@ namespace odb
     typedef ::Experiencia base_type;
     typedef object_traits<root_type>::discriminator_type discriminator_type;
     typedef polymorphic_concrete_info<root_type> info_type;
+    typedef polymorphic_abstract_info<root_type> abstract_info_type;
 
     static const std::size_t depth = 2UL;
 
@@ -81,7 +82,7 @@ namespace odb
 
     static const bool auto_id = false;
 
-    static const bool abstract = false;
+    static const bool abstract = true;
 
     static id_type
     id (const object_type&);
@@ -172,13 +173,12 @@ namespace odb
     public access::object_traits< ::Activitat >
   {
     public:
-    typedef polymorphic_entry<object_type, id_mysql> entry_type;
     typedef object_traits_impl<root_type, id_mysql> root_traits;
     typedef object_traits_impl<base_type, id_mysql> base_traits;
 
     typedef root_traits::id_image_type id_image_type;
 
-    static const info_type info;
+    static const abstract_info_type info;
 
     struct image_type
     {
@@ -259,8 +259,8 @@ namespace odb
     static const bool versioned = false;
 
     static const char persist_statement[];
-    static const char* const find_statements[depth];
-    static const std::size_t find_column_counts[depth];
+    static const char* const find_statements[1];
+    static const std::size_t find_column_counts[1];
     static const char update_statement[];
     static const char erase_statement[];
     static const char query_statement[];
@@ -269,7 +269,7 @@ namespace odb
     static const char table_name[];
 
     static void
-    persist (database&, const object_type&, bool top = true, bool dyn = true);
+    persist (database&, object_type&, bool top = true, bool dyn = true);
 
     static pointer_type
     find (database&, const id_type&);
@@ -298,17 +298,13 @@ namespace odb
     public:
     static bool
     find_ (statements_type&,
-           const id_type*,
-           std::size_t = depth);
+           const id_type*);
 
     static void
     load_ (statements_type&,
            object_type&,
            bool reload,
            std::size_t = depth);
-
-    static void
-    load_ (database&, root_type&, std::size_t);
   };
 
   template <>
