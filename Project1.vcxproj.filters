@@ -57,9 +57,6 @@
     <ClCompile Include="CapaDeDomini\Model\Experiencia.cxx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CapaDeDomini\Model\Reserva-odb.cxx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="CapaDeDomini\Model\Reserva.cxx">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -97,6 +94,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CapaDeDades\DAOActivitat.cxx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CapaDeDomini\CtrlConsultarReserves.cxx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CapaDeDomini\Model\Reserva-odb.cxx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CapaDeDomini\CtrlConsultarExperiencies.cxx">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -146,13 +152,7 @@
     <ClInclude Include="CapaDeDomini\Model\Experiencia.hxx">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CapaDeDomini\Model\Reserva-odb.ixx">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="CapaDeDomini\Model\Activitat.hxx">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CapaDeDomini\Model\Reserva-odb.hxx">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CapaDeDomini\Model\Reserva.hxx">
@@ -198,6 +198,24 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CapaDeDades\DAOActivitat.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CapaDeDomini\CtrlConsultarReserves.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CapaDeDomini\DTOs\DTOLlistaReserves.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CapaDeDomini\DTOs\DTOReserva.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CapaDeDomini\Model\Reserva-odb.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CapaDeDomini\Model\Reserva-odb.ixx">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CapaDeDomini\CtrlConsultarExperiencies.hxx">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

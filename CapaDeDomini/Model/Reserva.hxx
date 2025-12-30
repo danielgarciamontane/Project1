@@ -7,6 +7,7 @@
 #include "Usuari.hxx"
 #include <memory>
 #include "Experiencia.hxx"
+#include "../DTOs/DTOReserva.hxx"
 using std::shared_ptr;
 
 class usuari;
@@ -32,6 +33,8 @@ public:
     void set_numPlaces(const int& numPlaces);
     void set_preuPagat(const float& preuPagat);
 
+	DTOReserva obteInfoRes() const;
+
 private:
     friend class odb::access;
 
@@ -47,10 +50,9 @@ private:
     int _numPlaces;
     float _preuPagat;
 
-    #pragma db member(_usuari) not_null on_delete(cascade)
+    #pragma db not_null on_delete(cascade)
     shared_ptr<usuari> _usuari;
 
-    #pragma db member(_experiencia) not_null
+    #pragma db not_null
     shared_ptr<Experiencia> _experiencia;
 };
-#pragma db member(Reserva::_data) unique(Reserva::_usuari, Reserva::_experiencia)

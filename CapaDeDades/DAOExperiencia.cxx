@@ -28,3 +28,17 @@ shared_ptr<Experiencia> DAOExperiencia::obte(const string& nom) {
     t.commit();
     return experiencia;
 }
+vector<shared_ptr<Experiencia>> DAOExperiencia::obteExperienciesPerCiutat(const string& ciutat) {
+    using namespace odb::core;
+    using query = odb::query<Experiencia>;
+    using result = odb::result<Experiencia>;
+    shared_ptr<odb::database> db = connexioBD::getInstance().getDB();
+    transaction t(db->begin());
+    result r(db->query<Experiencia>(query::ciutat == ciutat));
+    vector<shared_ptr<Experiencia>> experiencies;
+    for (result::iterator i(r.begin()); i != r.end(); ++i) {
+        experiencies.push_back(i.load());
+    }
+    t.commit();
+    return experiencies;
+}

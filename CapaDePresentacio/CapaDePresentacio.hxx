@@ -22,6 +22,8 @@ private:
 	void esborraUsuari();
 	void reservarEscapada();
 	void reservarActivitat();
+	void consultarReserves();
+	void consultarExperiencies();
 
 	// Mètodes auxiliars
 	void mostrarMenuPrincipal();

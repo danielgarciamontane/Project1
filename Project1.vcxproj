@@ -136,6 +136,10 @@
     <ClCompile Include="CapaDeDomini\Model\Activitat-odb.cxx" />
     <ClInclude Include="CapaDeDades\DAOActivitat.hxx" />
     <ClInclude Include="CapaDeDomini\CtrlReservarActivitat.hxx" />
+    <ClInclude Include="CapaDeDomini\CtrlConsultarReserves.hxx" />
+    <ClInclude Include="CapaDeDomini\DTOs\DTOLlistaReserves.hxx" />
+    <ClInclude Include="CapaDeDomini\DTOs\DTOReserva.hxx" />
+    <ClInclude Include="CapaDeDomini\CtrlConsultarExperiencies.hxx" />
     <ClInclude Include="CapaDeDomini\Model\Activitat-odb.ixx">
       <FileType>Document</FileType>
     </ClInclude>
@@ -158,8 +162,8 @@
     <ClInclude Include="CapaDeDomini\Model\Escapada.hxx" />
     <ClCompile Include="CapaDeDomini\Model\Experiencia.cxx" />
     <ClInclude Include="CapaDeDomini\Model\Experiencia.hxx" />
-    <ClCompile Include="CapaDeDomini\Model\Reserva-odb.cxx" />
     <ClInclude Include="CapaDeDomini\Model\PlanGo.hxx" />
+    <ClCompile Include="CapaDeDomini\Model\Reserva-odb.cxx" />
     <ClInclude Include="CapaDeDomini\Model\Reserva-odb.ixx">
       <FileType>Document</FileType>
     </ClInclude>
@@ -181,6 +185,8 @@
     <ClCompile Include="CapaDeDomini\CtrlEsborraUsuari.cxx" />
     <ClCompile Include="CapaDeDomini\CtrlReservarEscapada.cxx" />
     <ClCompile Include="CapaDeDomini\CtrlReservarActivitat.cxx" />
+    <ClCompile Include="CapaDeDomini\CtrlConsultarReserves.cxx" />
+    <ClCompile Include="CapaDeDomini\CtrlConsultarExperiencies.cxx" />
     <ClCompile Include="CapaDePresentacio\CapaDePresentacio.cxx" />
     <ClCompile Include="CapaDeDomini\Model\Escapada-odb.cxx" />
     <ClInclude Include="CapaDeDomini\Model\Escapada-odb.ixx">

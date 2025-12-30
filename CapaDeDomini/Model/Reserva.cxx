@@ -1,5 +1,6 @@
 #include "Reserva.hxx"
 
+
 // Constructor per defecte
 Reserva::Reserva() : _idReserva(0), _dataReserva(day_clock::local_day()), _numPlaces(1), _preuPagat(0.0f) {}
 
@@ -74,4 +75,16 @@ shared_ptr<Reserva> Reserva::creaReserva(shared_ptr<usuari> u, shared_ptr<Experi
     e->sumaReserva();
 
     return reserva;
+}
+
+DTOReserva Reserva::obteInfoRes() const {
+    DTOReserva dto;
+	dto.idReserva = _idReserva;
+	dto.numPersones = _numPlaces;
+	dto.preuTotal = _preuPagat;
+	dto.dataReserva = _dataReserva;
+    if (_experiencia != nullptr) {
+        dto.experienciaReservada = _experiencia->obteInfoExperiencia();
+	}
+    return dto;
 }

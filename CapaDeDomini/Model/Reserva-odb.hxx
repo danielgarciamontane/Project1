@@ -28,6 +28,8 @@
 
 #include "Reserva.hxx"
 
+#include "Escapada-odb.hxx"
+#include "Experiencia-odb.hxx"
 #include "Usuari-odb.hxx"
 
 #include <memory>
@@ -171,6 +173,18 @@ namespace odb
     usuari_type_;
 
     static const usuari_type_ usuari;
+
+    // experiencia
+    //
+    typedef
+    mysql::query_column<
+      mysql::value_traits<
+        ::std::string,
+        mysql::id_string >::query_type,
+      mysql::id_string >
+    experiencia_type_;
+
+    static const experiencia_type_ experiencia;
   };
 
   template <typename A>
@@ -196,7 +210,12 @@ namespace odb
   template <typename A>
   const typename pointer_query_columns< ::Reserva, id_mysql, A >::usuari_type_
   pointer_query_columns< ::Reserva, id_mysql, A >::
-  usuari (A::table_name, "`usuari_username`", 0);
+  usuari (A::table_name, "`usuari`", 0);
+
+  template <typename A>
+  const typename pointer_query_columns< ::Reserva, id_mysql, A >::experiencia_type_
+  pointer_query_columns< ::Reserva, id_mysql, A >::
+  experiencia (A::table_name, "`experiencia`", 0);
 
   template <>
   class access::object_traits_impl< ::Reserva, id_mysql >:
@@ -239,12 +258,19 @@ namespace odb
       unsigned long _usuari_size;
       my_bool _usuari_null;
 
+      // _experiencia
+      //
+      details::buffer _experiencia_value;
+      unsigned long _experiencia_size;
+      my_bool _experiencia_null;
+
       std::size_t version;
     };
 
     struct extra_statement_cache_type;
 
     struct usuari_tag;
+    struct experiencia_tag;
 
     using object_traits<object_type>::id;
 
@@ -280,7 +306,7 @@ namespace odb
 
     typedef mysql::query_base query_base_type;
 
-    static const std::size_t column_count = 5UL;
+    static const std::size_t column_count = 6UL;
     static const std::size_t id_column_count = 1UL;
     static const std::size_t inverse_column_count = 0UL;
     static const std::size_t readonly_column_count = 0UL;
@@ -356,6 +382,15 @@ namespace odb
   };
 
   template <>
+  struct alias_traits<
+    ::Experiencia,
+    id_mysql,
+    access::object_traits_impl< ::Reserva, id_mysql >::experiencia_tag>
+  {
+    static const char table_name[];
+  };
+
+  template <>
   struct query_columns_base< ::Reserva, id_mysql >
   {
     // usuari
@@ -366,6 +401,15 @@ namespace odb
       id_mysql,
       access::object_traits_impl< ::Reserva, id_mysql >::usuari_tag>
     usuari_alias_;
+
+    // experiencia
+    //
+    typedef
+    odb::alias_traits<
+      ::Experiencia,
+      id_mysql,
+      access::object_traits_impl< ::Reserva, id_mysql >::experiencia_tag>
+    experiencia_alias_;
   };
 
   template <typename A>
@@ -447,6 +491,34 @@ namespace odb
     };
 
     static const usuari_type_ usuari;
+
+    // experiencia
+    //
+    typedef
+    mysql::query_column<
+      mysql::value_traits<
+        ::std::string,
+        mysql::id_string >::query_type,
+      mysql::id_string >
+    experiencia_column_type_;
+
+    typedef
+    odb::query_pointer<
+      odb::pointer_query_columns<
+        ::Experiencia,
+        id_mysql,
+        experiencia_alias_ > >
+    experiencia_pointer_type_;
+
+    struct experiencia_type_: experiencia_pointer_type_, experiencia_column_type_
+    {
+      experiencia_type_ (const char* t, const char* c, const char* conv)
+        : experiencia_column_type_ (t, c, conv)
+      {
+      }
+    };
+
+    static const experiencia_type_ experiencia;
   };
 
   template <typename A>
@@ -472,7 +544,12 @@ namespace odb
   template <typename A>
   const typename query_columns< ::Reserva, id_mysql, A >::usuari_type_
   query_columns< ::Reserva, id_mysql, A >::
-  usuari (A::table_name, "`usuari_username`", 0);
+  usuari (A::table_name, "`usuari`", 0);
+
+  template <typename A>
+  const typename query_columns< ::Reserva, id_mysql, A >::experiencia_type_
+  query_columns< ::Reserva, id_mysql, A >::
+  experiencia (A::table_name, "`experiencia`", 0);
 }
 
 #include "Reserva-odb.ixx"

@@ -12,7 +12,8 @@
 #include "../CapaDeDomini/CtrlEsborraUsuari.hxx"
 #include "../CapaDeDomini/CtrlReservaEscapada.hxx"
 #include "../CapaDeDomini/CtrlReservarActivitat.hxx"
-
+#include "../CapaDeDomini/CtrlConsultarReserves.hxx"
+#include "../CapaDeDomini/CtrlConsultarExperiencies.hxx"
 
 
 
@@ -106,7 +107,7 @@ void CapaDePresentacio::executar() {
                 int opcioReserves = -1;
                 while (opcioReserves != 0) {
                     mostrarMenuGestioReserves();
-                    std::cout << "Selecciona una opci�: ";
+                    std::cout << "Selecciona una opció: ";
                     std::cin >> opcioReserves;
                     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
@@ -118,13 +119,13 @@ void CapaDePresentacio::executar() {
                         reservarActivitat();
                         break;
                     case 3:
-                        std::cout << "Visualitzar reserves (pendent)\n";
+						consultarReserves();
                         break;
                     case 0:
                         sortir = true;
-                        std::cout << "\nAd�u! Gr�cies per utilitzar PlanGo.\n";
+                        std::cout << "\nAdéu! Gràcies per utilitzar PlanGo.\n";
                     break;                    default:
-                        std::cout << "Opci� no v�lida.\n";
+                        std::cout << "Opció no vàlida.\n";
                     }
                 }
                 break;
@@ -140,7 +141,7 @@ void CapaDePresentacio::executar() {
 
                     switch (opcioConsultes) {
                     case 1:
-                        std::cout << "Consulta experiencies (pendent)\n";
+						consultarExperiencies();
                         break;
                     case 2:
                         std::cout << "Consulta novetats (pendent)\n";
@@ -450,5 +451,81 @@ void CapaDePresentacio::reservarActivitat() {
     }
     catch (const std::exception& e) {
         std::cout << "\n? Error en reservar activitat: " << e.what() << "\n";
+    }
+}
+
+void CapaDePresentacio::consultarReserves() {
+    std::cout << "--- CONSULTAR RESERVES ---\n\n";
+    try {
+        DTOLlistaReserves dto;
+        CtrlConsultarReserves ctrl;
+        dto = ctrl.consultarReservesUsuari(_usuariActual);
+		std::cout << "Total pagat en totes les reserves: " << dto.totalPagat << " €\n\n";
+        std::cout << " **Escapades**" << "\n";
+        for (const auto& reserva : dto.llistaReserves) {
+            if (reserva.experienciaReservada.tipusExp == "Escapada") {
+                std::cout << "ID Reserva: " << reserva.idReserva << "\n";
+                std::cout << "Nom: " << reserva.experienciaReservada.nom << "\n";
+                std::cout << "Descripció: " << reserva.experienciaReservada.descripcio << "\n";
+                std::cout << "Ciutat: " << reserva.experienciaReservada.ciutat << "\n";
+                std::cout << "Preu total: " << reserva.preuTotal << " €\n";
+                std::cout << "Hotel: " << reserva.experienciaReservada.hotel << "\n";
+                std::cout << "Nº nits: " << reserva.experienciaReservada.numNits << "\n";
+            }
+        }
+        for (const auto& reserva : dto.llistaReserves) {
+            if (reserva.experienciaReservada.tipusExp == "Activitat") {
+                std::cout << "ID Reserva: " << reserva.idReserva << "\n";
+                std::cout << "Nom: " << reserva.experienciaReservada.nom << "\n";
+                std::cout << "Descripció: " << reserva.experienciaReservada.descripcio << "\n";
+                std::cout << "Ciutat: " << reserva.experienciaReservada.ciutat << "\n";
+                std::cout << "Preu total: " << reserva.preuTotal << " €\n";
+                std::cout << "Durada: " << reserva.experienciaReservada.durada << " hores\n";
+            }
+        }
+    }
+    catch (const std::exception& e) {
+        std::cout << "\n? Error en consultar reserves: " << e.what() << "\n";
+    }
+}
+
+void CapaDePresentacio::consultarExperiencies() {
+    std::cout << "--- CONSULTAR EXPERIENCIES ---\n\n";
+    try {
+        std::string ciutat;
+		int numPlaces;
+        std::cout << "Introdueix la ciutat per consultar les experiències disponibles: ";
+        std::getline(std::cin, ciutat);
+        std::cout << "Introdueix el nombre mínim de places disponibles: ";
+        cin >> numPlaces;
+        CtrlConsultarExperiencies ctrl;
+        std::vector<DTOExperiencia> experiencies = ctrl.consultarExperienciesPerCiutat(ciutat, numPlaces);
+        if (experiencies.empty()) {
+            std::cout << "No hi ha experiències disponibles a la ciutat de " << ciutat << ".\n";
+        }
+        else {
+            std::cout << "**Escapades** " << ciutat << ":\n";
+            for (const auto& exp : experiencies) {
+                if (exp.tipusExp != "Escapada") continue;
+                std::cout << "Nom: " << exp.nom << "\n";
+                std::cout << "Descripció: " << exp.descripcio << "\n";
+                std::cout << "Tipus: " << exp.tipusExp << "\n";
+                std::cout << "Preu: " << exp.preu << " €\n";
+                std::cout << "Data alta: " << exp.dataAlta << "\n\n";
+            }
+            std::cout << "**Escapades** " << ciutat << ":\n";
+            for (const auto& exp : experiencies) {
+                if (exp.tipusExp != "Activitat") continue;
+                std::cout << "**Activitats** " << ciutat << ":\n";
+                std::cout << "Nom: " << exp.nom << "\n";
+                std::cout << "Descripció: " << exp.descripcio << "\n";
+                std::cout << "Tipus: " << exp.tipusExp << "\n";
+                std::cout << "Preu: " << exp.preu << " €\n";
+                std::cout << "Data alta: " << exp.dataAlta << "\n\n";
+            }
+        }
+    }
+    catch (const std::exception& e) {
+        std::cout << "\n? Error en consultar experiències: " << e.what() << "\n";
     }
 }
