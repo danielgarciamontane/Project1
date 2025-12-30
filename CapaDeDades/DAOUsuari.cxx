@@ -64,22 +64,25 @@ void DAOUsuari::crearUsuari(shared_ptr<usuari> u) {
     db->persist(u);
     t.commit();
 }
-void DAOUsuari::modifica(const usuari& u)
-{
+
+void DAOUsuari::modUsu(shared_ptr<usuari> u) {
     using namespace odb::core;
-
+    // Obtenemos la conexión a la base de datos desde el singleton
     shared_ptr<odb::database> db = connexioBD::getInstance().getDB();
+    // Abrimos transacción (escritura)
     transaction t(db->begin());
-
+    // Actualizamos el objeto en la base de datos
     db->update(u);
-
     t.commit();
 }
-void DAOUsuari::esborra(const std::string& username) {
 
+void DAOUsuari::esbUsu(const string& sobrenom) {
     using namespace odb::core;
+    // Obtenemos la conexión a la base de datos desde el singleton
     shared_ptr<odb::database> db = connexioBD::getInstance().getDB();
+    // Abrimos transacción (escritura)
     transaction t(db->begin());
-    db->erase<usuari>(username);
+    // Eliminamos el objeto de la base de datos
+    db->erase<usuari>(sobrenom);
     t.commit();
 }

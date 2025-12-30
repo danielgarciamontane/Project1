@@ -5,9 +5,13 @@
 DROP TABLE IF EXISTS `Experiencia`;
 
 CREATE TABLE `Experiencia` (
-  `id` BIGINT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `nom` VARCHAR(128) NOT NULL PRIMARY KEY,
   `typeid` VARCHAR(128) NOT NULL,
-  `nom` TEXT NOT NULL,
-  `preu` DOUBLE NOT NULL)
+  `descripcio` TEXT NOT NULL,
+  `ciutat` TEXT NOT NULL,
+  `maxPlaces` INT NOT NULL,
+  `preu` FLOAT NOT NULL,
+  `dataAlta` DATE NULL,
+  `numReserves` INT NOT NULL)
  ENGINE=InnoDB;
 

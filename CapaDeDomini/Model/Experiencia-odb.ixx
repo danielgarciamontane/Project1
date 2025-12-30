@@ -14,7 +14,7 @@ namespace odb
   access::object_traits< ::Experiencia >::
   id (const object_type& o)
   {
-    return o.id;
+    return o._nom;
   }
 
   inline

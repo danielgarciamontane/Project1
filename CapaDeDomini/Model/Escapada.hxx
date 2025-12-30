@@ -1,19 +1,29 @@
 #pragma once
 #include "Experiencia.hxx"
 
-#pragma db object
+#pragma db object polymorphic
+#pragma db table("Escapada")
 class Escapada : public Experiencia {
 public:
-    Escapada() = default;
+    Escapada();
 
-    Escapada(const std::string& nom,
-        double preu,
-        int dies);
+    Escapada(const string& nom, const string& descripcio, const string& ciutat,
+        int maxPlaces, float preu, const string& hotel, int numNits);
 
-    std::string get_tipus() const override;
+    string get_hotel() const;
+    int get_numNits() const;
+
+    void set_hotel(const string& hotel);
+    void set_numNits(int numNits);
+
     void print_info_detalls(std::ostream& os) const override;
 
+    float calculaPreu(int numP) const override;
+
+    void atributsEscapada(DTOExperiencia& dto);
+
 private:
-    friend class odb::access;   
-    int dies;
+    friend class odb::access;
+    string _hotel;
+    int _numNits;
 };

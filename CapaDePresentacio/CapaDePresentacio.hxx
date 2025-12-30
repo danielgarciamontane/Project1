@@ -18,15 +18,22 @@ private:
 	void tancarSessio();
 	void registrarUsuari();
 	void consultarUsuari();
-	void modificaUsuari();
+	void modificarUsuari();
 	void esborraUsuari();
-	// Mï¿½todes auxiliars
+	void reservarEscapada();
+	void reservarActivitat();
+	void consultarReserves();
+	void consultarExperiencies();
+	void consultarNovetats();
+	void consultaMesReservades();
+	void executarConsultes();
+	// Mètodes auxiliars
 	void mostrarMenuPrincipal();
 	void mostrarMenuSessioIniciada();
 	void mostrarMenuGestioUsuari();
 	void mostrarMenuGestioReserves();
 	void mostrarMenuConsultes();
-	void executarConsultes();
+	
 	string _usuariActual;
 	static CapaDePresentacio* _instancia;
 };

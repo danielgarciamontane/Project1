@@ -7,6 +7,17 @@
 #ifndef EXPERIENCIA_ODB_HXX
 #define EXPERIENCIA_ODB_HXX
 
+// Begin prologue.
+//
+#include <odb/boost/version.hxx>
+#if ODB_BOOST_VERSION != 2050000 // 2.5.0
+#  error ODB and C++ compilers see different libodb-boost interface versions
+#endif
+#include <odb/boost/date-time/mysql/gregorian-traits.hxx>
+#include <odb/boost/date-time/mysql/posix-time-traits.hxx>
+//
+// End prologue.
+
 #include <odb/version.hxx>
 
 #if ODB_VERSION != 20500UL
@@ -28,7 +39,8 @@
 #include <odb/wrapper-traits.hxx>
 #include <odb/pointer-traits.hxx>
 #include <odb/container-traits.hxx>
-#include <odb/no-op-cache-traits.hxx>
+#include <odb/session.hxx>
+#include <odb/cache-traits.hxx>
 #include <odb/polymorphic-info.hxx>
 #include <odb/result.hxx>
 #include <odb/polymorphic-object-result.hxx>
@@ -64,9 +76,9 @@ namespace odb
 
     static const std::size_t depth = 1UL;
 
-    typedef long unsigned int id_type;
+    typedef ::std::string id_type;
 
-    static const bool auto_id = true;
+    static const bool auto_id = false;
 
     static const bool abstract = true;
 
@@ -74,11 +86,15 @@ namespace odb
     id (const object_type&);
 
     typedef
-    no_op_pointer_cache_traits<pointer_type>
+    odb::pointer_cache_traits<
+      pointer_type,
+      odb::session >
     pointer_cache_traits;
 
     typedef
-    no_op_reference_cache_traits<object_type>
+    odb::reference_cache_traits<
+      object_type,
+      odb::session >
     reference_cache_traits;
 
     static void
@@ -104,17 +120,17 @@ namespace odb
   template <typename A>
   struct query_columns< ::Experiencia, id_mysql, A >
   {
-    // id
+    // nom
     //
     typedef
     mysql::query_column<
       mysql::value_traits<
-        long unsigned int,
-        mysql::id_ulonglong >::query_type,
-      mysql::id_ulonglong >
-    id_type_;
+        ::std::string,
+        mysql::id_string >::query_type,
+      mysql::id_string >
+    nom_type_;
 
-    static const id_type_ id;
+    static const nom_type_ nom;
 
     // typeid_
     //
@@ -128,7 +144,7 @@ namespace odb
 
     static const typeid__type_ typeid_;
 
-    // nom
+    // descripcio
     //
     typedef
     mysql::query_column<
@@ -136,32 +152,70 @@ namespace odb
         ::std::string,
         mysql::id_string >::query_type,
       mysql::id_string >
-    nom_type_;
+    descripcio_type_;
 
-    static const nom_type_ nom;
+    static const descripcio_type_ descripcio;
+
+    // ciutat
+    //
+    typedef
+    mysql::query_column<
+      mysql::value_traits<
+        ::std::string,
+        mysql::id_string >::query_type,
+      mysql::id_string >
+    ciutat_type_;
+
+    static const ciutat_type_ ciutat;
+
+    // maxPlaces
+    //
+    typedef
+    mysql::query_column<
+      mysql::value_traits<
+        int,
+        mysql::id_long >::query_type,
+      mysql::id_long >
+    maxPlaces_type_;
+
+    static const maxPlaces_type_ maxPlaces;
 
     // preu
     //
     typedef
     mysql::query_column<
       mysql::value_traits<
-        double,
-        mysql::id_double >::query_type,
-      mysql::id_double >
+        float,
+        mysql::id_float >::query_type,
+      mysql::id_float >
     preu_type_;
 
     static const preu_type_ preu;
+
+    // dataAlta
+    //
+    typedef
+    mysql::query_column<
+      mysql::value_traits<
+        ::boost::gregorian::date,
+        mysql::id_date >::query_type,
+      mysql::id_date >
+    dataAlta_type_;
+
+    static const dataAlta_type_ dataAlta;
+
+    // numReserves
+    //
+    typedef
+    mysql::query_column<
+      mysql::value_traits<
+        int,
+        mysql::id_long >::query_type,
+      mysql::id_long >
+    numReserves_type_;
+
+    static const numReserves_type_ numReserves;
   };
-
-  template <typename A>
-  const typename query_columns< ::Experiencia, id_mysql, A >::id_type_
-  query_columns< ::Experiencia, id_mysql, A >::
-  id (A::table_name, "`id`", 0);
-
-  template <typename A>
-  const typename query_columns< ::Experiencia, id_mysql, A >::typeid__type_
-  query_columns< ::Experiencia, id_mysql, A >::
-  typeid_ (A::table_name, "`typeid`", 0);
 
   template <typename A>
   const typename query_columns< ::Experiencia, id_mysql, A >::nom_type_
@@ -169,9 +223,39 @@ namespace odb
   nom (A::table_name, "`nom`", 0);
 
   template <typename A>
+  const typename query_columns< ::Experiencia, id_mysql, A >::typeid__type_
+  query_columns< ::Experiencia, id_mysql, A >::
+  typeid_ (A::table_name, "`typeid`", 0);
+
+  template <typename A>
+  const typename query_columns< ::Experiencia, id_mysql, A >::descripcio_type_
+  query_columns< ::Experiencia, id_mysql, A >::
+  descripcio (A::table_name, "`descripcio`", 0);
+
+  template <typename A>
+  const typename query_columns< ::Experiencia, id_mysql, A >::ciutat_type_
+  query_columns< ::Experiencia, id_mysql, A >::
+  ciutat (A::table_name, "`ciutat`", 0);
+
+  template <typename A>
+  const typename query_columns< ::Experiencia, id_mysql, A >::maxPlaces_type_
+  query_columns< ::Experiencia, id_mysql, A >::
+  maxPlaces (A::table_name, "`maxPlaces`", 0);
+
+  template <typename A>
   const typename query_columns< ::Experiencia, id_mysql, A >::preu_type_
   query_columns< ::Experiencia, id_mysql, A >::
   preu (A::table_name, "`preu`", 0);
+
+  template <typename A>
+  const typename query_columns< ::Experiencia, id_mysql, A >::dataAlta_type_
+  query_columns< ::Experiencia, id_mysql, A >::
+  dataAlta (A::table_name, "`dataAlta`", 0);
+
+  template <typename A>
+  const typename query_columns< ::Experiencia, id_mysql, A >::numReserves_type_
+  query_columns< ::Experiencia, id_mysql, A >::
+  numReserves (A::table_name, "`numReserves`", 0);
 
   template <typename A>
   struct pointer_query_columns< ::Experiencia, id_mysql, A >:
@@ -197,7 +281,8 @@ namespace odb
 
     struct id_image_type
     {
-      unsigned long long id_value;
+      details::buffer id_value;
+      unsigned long id_size;
       my_bool id_null;
 
       std::size_t version;
@@ -208,10 +293,11 @@ namespace odb
 
     struct image_type
     {
-      // id
+      // _nom
       //
-      unsigned long long id_value;
-      my_bool id_null;
+      details::buffer _nom_value;
+      unsigned long _nom_size;
+      my_bool _nom_null;
 
       // typeid_
       //
@@ -219,16 +305,37 @@ namespace odb
       unsigned long typeid_size;
       my_bool typeid_null;
 
-      // nom
+      // _descripcio
       //
-      details::buffer nom_value;
-      unsigned long nom_size;
-      my_bool nom_null;
+      details::buffer _descripcio_value;
+      unsigned long _descripcio_size;
+      my_bool _descripcio_null;
 
-      // preu
+      // _ciutat
       //
-      double preu_value;
-      my_bool preu_null;
+      details::buffer _ciutat_value;
+      unsigned long _ciutat_size;
+      my_bool _ciutat_null;
+
+      // _maxPlaces
+      //
+      int _maxPlaces_value;
+      my_bool _maxPlaces_null;
+
+      // _preu
+      //
+      float _preu_value;
+      my_bool _preu_null;
+
+      // _dataAlta
+      //
+      MYSQL_TIME _dataAlta_value;
+      my_bool _dataAlta_null;
+
+      // _numReserves
+      //
+      int _numReserves_value;
+      my_bool _numReserves_null;
 
       std::size_t version;
     };
@@ -236,9 +343,6 @@ namespace odb
     struct extra_statement_cache_type;
 
     using object_traits<object_type>::id;
-
-    static id_type
-    id (const id_image_type&);
 
     static id_type
     id (const image_type&);
@@ -279,7 +383,7 @@ namespace odb
 
     typedef mysql::query_base query_base_type;
 
-    static const std::size_t column_count = 4UL;
+    static const std::size_t column_count = 8UL;
     static const std::size_t id_column_count = 1UL;
     static const std::size_t inverse_column_count = 0UL;
     static const std::size_t readonly_column_count = 1UL;
@@ -302,7 +406,7 @@ namespace odb
     static const char table_name[];
 
     static void
-    persist (database&, object_type&, bool top = true, bool dyn = true);
+    persist (database&, const object_type&, bool top = true, bool dyn = true);
 
     static pointer_type
     find (database&, const id_type&);

@@ -32,7 +32,12 @@ namespace odb
   const char alias_traits<  ::usuari,
     id_mysql,
     access::object_traits_impl< ::Reserva, id_mysql >::usuari_tag>::
-  table_name[] = "`usuari_username`";
+  table_name[] = "`usuari`";
+
+  const char alias_traits<  ::Experiencia,
+    id_mysql,
+    access::object_traits_impl< ::Reserva, id_mysql >::experiencia_tag>::
+  table_name[] = "`experiencia_Experiencia`";
 
   struct access::object_traits_impl< ::Reserva, id_mysql >::extra_statement_cache_type
   {
@@ -99,6 +104,14 @@ namespace odb
       grew = true;
     }
 
+    // _experiencia
+    //
+    if (t[5UL])
+    {
+      i._experiencia_value.capacity (i._experiencia_size);
+      grew = true;
+    }
+
     return grew;
   }
 
@@ -154,6 +167,16 @@ namespace odb
       i._usuari_value.capacity ());
     b[n].length = &i._usuari_size;
     b[n].is_null = &i._usuari_null;
+    n++;
+
+    // _experiencia
+    //
+    b[n].buffer_type = MYSQL_TYPE_STRING;
+    b[n].buffer = i._experiencia_value.data ();
+    b[n].buffer_length = static_cast<unsigned long> (
+      i._experiencia_value.capacity ());
+    b[n].length = &i._experiencia_size;
+    b[n].is_null = &i._experiencia_null;
     n++;
   }
 
@@ -269,6 +292,38 @@ namespace odb
         throw null_pointer ();
     }
 
+    // _experiencia
+    //
+    {
+      ::std::shared_ptr< ::Experiencia > const& v =
+        o._experiencia;
+
+      typedef object_traits< ::Experiencia > obj_traits;
+      typedef odb::pointer_traits< ::std::shared_ptr< ::Experiencia > > ptr_traits;
+
+      bool is_null (ptr_traits::null_ptr (v));
+      if (!is_null)
+      {
+        const obj_traits::id_type& ptr_id (
+          obj_traits::id (ptr_traits::get_ref (v)));
+
+        std::size_t size (0);
+        std::size_t cap (i._experiencia_value.capacity ());
+        mysql::value_traits<
+            obj_traits::id_type,
+            mysql::id_string >::set_image (
+          i._experiencia_value,
+          size,
+          is_null,
+          ptr_id);
+        i._experiencia_null = is_null;
+        i._experiencia_size = static_cast<unsigned long> (size);
+        grew = grew || (cap != i._experiencia_value.capacity ());
+      }
+      else
+        throw null_pointer ();
+    }
+
     return grew;
   }
 
@@ -368,6 +423,38 @@ namespace odb
             obj_traits::object_type > (ptr_id));
       }
     }
+
+    // _experiencia
+    //
+    {
+      ::std::shared_ptr< ::Experiencia >& v =
+        o._experiencia;
+
+      typedef object_traits< ::Experiencia > obj_traits;
+      typedef odb::pointer_traits< ::std::shared_ptr< ::Experiencia > > ptr_traits;
+
+      if (i._experiencia_null)
+        v = ptr_traits::pointer_type ();
+      else
+      {
+        obj_traits::id_type ptr_id;
+        mysql::value_traits<
+            obj_traits::id_type,
+            mysql::id_string >::set_value (
+          ptr_id,
+          i._experiencia_value,
+          i._experiencia_size,
+          i._experiencia_null);
+
+        // If a compiler error points to the line below, then
+        // it most likely means that a pointer used in a member
+        // cannot be initialized from an object pointer.
+        //
+        v = ptr_traits::pointer_type (
+          static_cast<mysql::database*> (db)->load<
+            obj_traits::object_type > (ptr_id));
+      }
+    }
   }
 
   void access::object_traits_impl< ::Reserva, id_mysql >::
@@ -389,9 +476,10 @@ namespace odb
   "`dataReserva`, "
   "`numPlaces`, "
   "`preuPagat`, "
-  "`usuari_username`) "
+  "`usuari`, "
+  "`experiencia`) "
   "VALUES "
-  "(?, ?, ?, ?, ?)";
+  "(?, ?, ?, ?, ?, ?)";
 
   const char access::object_traits_impl< ::Reserva, id_mysql >::find_statement[] =
   "SELECT "
@@ -399,7 +487,8 @@ namespace odb
   "`Reserva`.`dataReserva`, "
   "`Reserva`.`numPlaces`, "
   "`Reserva`.`preuPagat`, "
-  "`Reserva`.`usuari_username` "
+  "`Reserva`.`usuari`, "
+  "`Reserva`.`experiencia` "
   "FROM `Reserva` "
   "WHERE `Reserva`.`idReserva`=?";
 
@@ -409,7 +498,8 @@ namespace odb
   "`dataReserva`=?, "
   "`numPlaces`=?, "
   "`preuPagat`=?, "
-  "`usuari_username`=? "
+  "`usuari`=?, "
+  "`experiencia`=? "
   "WHERE `idReserva`=?";
 
   const char access::object_traits_impl< ::Reserva, id_mysql >::erase_statement[] =
@@ -422,9 +512,11 @@ namespace odb
   "`Reserva`.`dataReserva`,\n"
   "`Reserva`.`numPlaces`,\n"
   "`Reserva`.`preuPagat`,\n"
-  "`Reserva`.`usuari_username`\n"
+  "`Reserva`.`usuari`,\n"
+  "`Reserva`.`experiencia`\n"
   "FROM `Reserva`\n"
-  "LEFT JOIN `usuari` AS `usuari_username` ON `usuari_username`.`username`=`Reserva`.`usuari_username`";
+  "LEFT JOIN `usuari` AS `usuari` ON `usuari`.`username`=`Reserva`.`usuari`\n"
+  "LEFT JOIN `Experiencia` AS `experiencia_Experiencia` ON `experiencia_Experiencia`.`nom`=`Reserva`.`experiencia`";
 
   const char access::object_traits_impl< ::Reserva, id_mysql >::erase_query_statement[] =
   "DELETE FROM `Reserva`";

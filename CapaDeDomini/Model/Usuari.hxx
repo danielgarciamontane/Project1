@@ -8,6 +8,7 @@
 #include "Reserva.hxx"
 #include <vector>
 #include <memory>
+#include "Escapada.hxx"
 using namespace std;
 
 class Reserva;
@@ -43,10 +44,13 @@ public:
     // Setters
     void set_username(const std::string& v);
     void set_nomcomplet(const std::string& v);
+	void set_correuElectronic(const std::string& v);
     void set_edat(const int& d);
     void set_correuElectronic(const std::string& v) {
         _correuElectronic = v;
     }
+
+    float afegirReserva(shared_ptr<Experiencia>& escapada);
 
 private:
     // Permet a ODB accedir als membres privats de la classe per fer la persistència
