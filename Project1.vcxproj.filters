@@ -81,15 +81,6 @@
     <ClCompile Include="CapaDeDades\DAOExperiencia.cxx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CapaDeDomini\Model\Escapada-odb.cxx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="CapaDeDomini\Model\Experiencia-odb.cxx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="CapaDeDomini\Model\Activitat-odb.cxx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="CapaDeDomini\CtrlReservarActivitat.cxx">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -106,6 +97,18 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CapaDeDomini\CtrlConsultaNovetats.cxx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CapaDeDomini\CtrlConsultaMesReservades.cxx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CapaDeDomini\Model\Activitat-odb.cxx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CapaDeDomini\Model\Escapada-odb.cxx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CapaDeDomini\Model\Experiencia-odb.cxx">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -179,24 +182,6 @@
     <ClInclude Include="CapaDeDades\DAOExperiencia.hxx">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CapaDeDomini\Model\Escapada-odb.hxx">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CapaDeDomini\Model\Experiencia-odb.hxx">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CapaDeDomini\Model\Activitat-odb.hxx">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CapaDeDomini\Model\Experiencia-odb.ixx">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CapaDeDomini\Model\Escapada-odb.ixx">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CapaDeDomini\Model\Activitat-odb.ixx">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="CapaDeDomini\CtrlReservarActivitat.hxx">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -223,6 +208,27 @@
     </ClInclude>
     <ClInclude Include="CapaDeDomini\CtrlConsultaNovetats.hxx">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CapaDeDomini\CtrlConsultaMesReservades.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CapaDeDomini\Model\Activitat-odb.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CapaDeDomini\Model\Activitat-odb.ixx">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CapaDeDomini\Model\Escapada-odb.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CapaDeDomini\Model\Escapada-odb.ixx">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CapaDeDomini\Model\Experiencia-odb.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CapaDeDomini\Model\Experiencia-odb.ixx">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

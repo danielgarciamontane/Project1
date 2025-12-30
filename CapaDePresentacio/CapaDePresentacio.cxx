@@ -51,53 +51,50 @@ void CapaDePresentacio::executar() {
             case 2:
                 registrarUsuari();
                 break;
+            case 3:
+                executarConsultes();
+                break;
             case 0:
                 sortir = true;
-                cout << "\nAdéu! Gr�cies per utilitzar PlanGo.\n";
+                cout << "\nAdéu! Gràcies per utilitzar PlanGo.\n";
                 break;
             default:
-                cout << "\nOpció no v�lida. Torna-ho a intentar.\n";
+                cout << "\nOpció no vàlida.\n";
             }
         }
         else {
             mostrarMenuSessioIniciada();
-            std::cout << "Selecciona una opció: ";
-            if (!(std::cin >> opcio)) {
-                std::cin.clear();
-                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                continue;
-            }
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            cout << "Selecciona una opció: ";
+            cin >> opcio;
+            cin.ignore();
 
             switch (opcio) {
             case 1: {
                 int opcioUsuari = -1;
                 while (opcioUsuari != 0) {
                     mostrarMenuGestioUsuari();
-                    std::cout << "Selecciona una opció: ";
-                    std::cin >> opcioUsuari;
-                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                    cout << "Selecciona una opció: ";
+                    cin >> opcioUsuari;
+                    cin.ignore();
 
                     switch (opcioUsuari) {
                     case 1:
                         consultarUsuari();
                         break;
                     case 2:
-						modificarUsuari();
+                        modificarUsuari();
                         break;
                     case 3:
-						esborraUsuari();
+                        esborraUsuari();
                         break;
                     case 4:
                         tancarSessio();
-                        opcioUsuari = 0; // salir del submenú
+                        opcioUsuari = 0;
                         break;
                     case 0:
-                        sortir = true;
-                        std::cout << "\nAd�u! Gràcies per utilitzar PlanGo.\n";
                         break;
                     default:
-                        std::cout << "Opció no vàlida.\n";
+                        cout << "Opció no vàlida.\n";
                     }
                 }
                 break;
@@ -107,68 +104,44 @@ void CapaDePresentacio::executar() {
                 int opcioReserves = -1;
                 while (opcioReserves != 0) {
                     mostrarMenuGestioReserves();
-                    std::cout << "Selecciona una opció: ";
-                    std::cin >> opcioReserves;
-                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                    cout << "Selecciona una opció: ";
+                    cin >> opcioReserves;
+                    cin.ignore();
 
                     switch (opcioReserves) {
                     case 1:
-						reservarEscapada();
+                        reservarEscapada();
                         break;
                     case 2:
                         reservarActivitat();
                         break;
                     case 3:
-						consultarReserves();
+                        consultarReserves();
                         break;
                     case 0:
-                        sortir = true;
-                        std::cout << "\nAdéu! Gràcies per utilitzar PlanGo.\n";
-                    break;                    default:
-                        std::cout << "Opció no vàlida.\n";
-                    }
-                }
-                break;
-            }
-
-            case 3: {
-                int opcioConsultes = -1;
-                while (opcioConsultes != 0) {
-                    mostrarMenuConsultes();
-                    std::cout << "Selecciona una opci�: ";
-                    std::cin >> opcioConsultes;
-                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-
-                    switch (opcioConsultes) {
-                    case 1:
-						consultarExperiencies();
-                        break;
-                    case 2:
-						consultarNovetats();
-                        break;
-                    case 3:
-                        consultaMesReservades();
-                        break;
-                    case 0:
-                        sortir = true;
-                        std::cout << "\nAdéu! Gr�cies per utilitzar PlanGo.\n";
                         break;
                     default:
-                        std::cout << "Opció no vàlida.\n";
+                        cout << "Opció no vàlida.\n";
                     }
                 }
                 break;
             }
 
-            case 4:
-                tancarSessio(); // <-- implementar a sota
+            case 3:
+                executarConsultes();
                 break;
+
+            case 4:
+                tancarSessio();
+                break;
+
             case 0:
                 sortir = true;
-                std::cout << "\nAd�u! Gr�cies per utilitzar PlanGo.\n";
+                cout << "\nAdéu! Gràcies per utilitzar PlanGo.\n";
                 break;
+
             default:
-                std::cout << "\nOpci� no v�lida. Torna-ho a intentar.\n";
+                cout << "Opció no vàlida.\n";
             }
         }
     }
@@ -177,56 +150,83 @@ void CapaDePresentacio::executar() {
 void CapaDePresentacio::mostrarMenuPrincipal() {
     cout << "-----------------------------------------\n";
     cout << "-          SISTEMA PLAN-GO                -\n";
-    cout << "-    Gestió de Reserves d'Experiències  -\n";
-    cout << "------------------------------------------\n\n";
+    cout << "-----------------------------------------\n\n";
     cout << "  1. Iniciar sessió\n";
     cout << "  2. Registrar-se\n";
     cout << "  3. Consultes\n";
     cout << "  0. Sortir\n\n";
 }
 
-
 void CapaDePresentacio::mostrarMenuSessioIniciada() {
-    std::cout << "-----------------------------------------\n";
-    std::cout << "-           Sessio iniciada             -\n";
-    std::cout << "-----------------------------------------\n\n";
-    std::cout << " Usuari: " << _usuariActual << "\n\n";
-    std::cout << "  1. Gestio usuaris\n";
-    std::cout << "  2. Gestio reserves\n";
-    std::cout << "  3. Consultes\n";
-    std::cout << "  4. Tancar sessio\n";
-    std::cout << "  0. Sortir\n\n";
+    cout << "-----------------------------------------\n";
+    cout << "-           Sessió iniciada              -\n";
+    cout << "-----------------------------------------\n\n";
+    cout << " Usuari: " << _usuariActual << "\n\n";
+    cout << "  1. Gestió usuaris\n";
+    cout << "  2. Gestió reserves\n";
+    cout << "  3. Consultes\n";
+    cout << "  4. Tancar sessió\n";
+    cout << "  0. Sortir\n\n";
 }
+
 void CapaDePresentacio::mostrarMenuGestioUsuari() {
-    std::cout << "-----------------------------------------\n";
-    std::cout << "-           Gestio Usuari             -\n";
-    std::cout << "-----------------------------------------\n\n";
-    std::cout << " Usuari: " << _usuariActual << "\n\n";
-    std::cout << "  1. Consulta usuari\n";
-    std::cout << "  2. Modifica usuari\n";
-    std::cout << "  3. Esborra usuari\n";
-    std::cout << "  4. Tancar sessio\n";
-    std::cout << "  0. Sortir\n\n";
+    cout << "-----------------------------------------\n";
+    cout << "-           Gestió usuari                -\n";
+    cout << "-----------------------------------------\n\n";
+    cout << "  1. Consultar usuari\n";
+    cout << "  2. Modificar usuari\n";
+    cout << "  3. Esborrar usuari\n";
+    cout << "  4. Tancar sessió\n";
+    cout << "  0. Sortir\n\n";
 }
+
 void CapaDePresentacio::mostrarMenuGestioReserves() {
-    std::cout << "-----------------------------------------\n";
-    std::cout << "-         Gestio Reserves             -\n";
-    std::cout << "-----------------------------------------\n\n";
-    std::cout << " Usuari: " << _usuariActual << "\n\n";
-    std::cout << "  1. Reservar escapada\n";
-    std::cout << "  2. Reservar activitat\n";
-    std::cout << "  3. Visualtizar reserves\n";
-    std::cout << "  0. Sortir\n\n";
+    cout << "-----------------------------------------\n";
+    cout << "-           Gestió reserves              -\n";
+    cout << "-----------------------------------------\n\n";
+    cout << "  1. Reservar escapada\n";
+    cout << "  2. Reservar activitat\n";
+    cout << "  3. Consultar reserves\n";
+    cout << "  0. Sortir\n\n";
 }
+
 void CapaDePresentacio::mostrarMenuConsultes() {
-    std::cout << "-----------------------------------------\n";
-    std::cout << "-              Consultes               -\n";
-    std::cout << "-----------------------------------------\n\n";
-    std::cout << "  1. Consulta experiencies \n";
-    std::cout << "  2. Consulta novetats\n";
-    std::cout << "  3. Consulta m�s reservades \n";
-    std::cout << "  0. Sortir\n\n";
+    cout << "-----------------------------------------\n";
+    cout << "-              Consultes                 -\n";
+    cout << "-----------------------------------------\n\n";
+    cout << "  1. Consultar experiències\n";
+    cout << "  2. Consultar novetats\n";
+    cout << "  3. Consultar més reservades\n";
+    cout << "  0. Sortir\n\n";
 }
+
+
+void CapaDePresentacio::executarConsultes() {
+    int opcioConsultes = -1;
+    while (opcioConsultes != 0) {
+        mostrarMenuConsultes();
+        cout << "Selecciona una opció: ";
+        cin >> opcioConsultes;
+        cin.ignore();
+
+        switch (opcioConsultes) {
+        case 1:
+            consultarExperiencies();
+            break;
+        case 2:
+            consultarNovetats();
+            break;
+        case 3:
+            consultaMesReservades();
+            break;
+        case 0:
+            break;
+        default:
+            cout << "Opció no vàlida.\n";
+        }
+    }
+}
+
 
 
 void CapaDePresentacio::iniciarSessio() {
