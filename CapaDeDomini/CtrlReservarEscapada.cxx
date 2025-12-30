@@ -5,10 +5,9 @@
 #include <stdexcept>
 
 DTOExperiencia CtrlReservaEscapada::consultarEscapada(const std::string& nomExp){
-	DTOExperiencia dto;
-	DAOEscapada dao;
-	dto = dao.obtenirEscapada(nomExp);
-	return dto;
+	DAOExperiencia dao;
+	shared_ptr<Experiencia> esc = dao.obte(nomExp);
+	return esc->obteInfoExperiencia();
 }
 
 float CtrlReservaEscapada::reservarEscapada(const std::string& sobrenom, std::string& nomEsc){

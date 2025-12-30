@@ -61,7 +61,7 @@ namespace odb
         i.base->version++;
     }
 
-    // durada
+    // _durada
     //
     t[0UL] = 0;
 
@@ -90,12 +90,12 @@ namespace odb
       n += id_size;
     }
 
-    // durada
+    // _durada
     //
     b[n].buffer_type = MYSQL_TYPE_LONG;
     b[n].is_unsigned = 0;
-    b[n].buffer = &i.durada_value;
-    b[n].is_null = &i.durada_null;
+    b[n].buffer = &i._durada_value;
+    b[n].is_null = &i._durada_null;
     n++;
 
     // _nom
@@ -126,18 +126,18 @@ namespace odb
 
     bool grew (false);
 
-    // durada
+    // _durada
     //
     {
       int const& v =
-        o.durada;
+        o._durada;
 
       bool is_null (false);
       mysql::value_traits<
           int,
           mysql::id_long >::set_image (
-        i.durada_value, is_null, v);
-      i.durada_null = is_null;
+        i._durada_value, is_null, v);
+      i._durada_null = is_null;
     }
 
     return grew;
@@ -158,18 +158,18 @@ namespace odb
     if (--d != 0)
       base_traits::init (o, *i.base, db);
 
-    // durada
+    // _durada
     //
     {
       int& v =
-        o.durada;
+        o._durada;
 
       mysql::value_traits<
           int,
           mysql::id_long >::set_value (
         v,
-        i.durada_value,
-        i.durada_null);
+        i._durada_value,
+        i._durada_null);
     }
   }
 
@@ -239,7 +239,7 @@ namespace odb
   "`Activitat`";
 
   void access::object_traits_impl< ::Activitat, id_mysql >::
-  persist (database& db, object_type& obj, bool top, bool dyn)
+  persist (database& db, const object_type& obj, bool top, bool dyn)
   {
     ODB_POTENTIALLY_UNUSED (top);
 

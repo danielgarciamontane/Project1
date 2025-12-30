@@ -78,7 +78,7 @@ namespace odb
 
     typedef ::std::string id_type;
 
-    static const bool auto_id = true;
+    static const bool auto_id = false;
 
     static const bool abstract = true;
 
@@ -345,9 +345,6 @@ namespace odb
     using object_traits<object_type>::id;
 
     static id_type
-    id (const id_image_type&);
-
-    static id_type
     id (const image_type&);
 
     static discriminator_type
@@ -409,7 +406,7 @@ namespace odb
     static const char table_name[];
 
     static void
-    persist (database&, object_type&, bool top = true, bool dyn = true);
+    persist (database&, const object_type&, bool top = true, bool dyn = true);
 
     static pointer_type
     find (database&, const id_type&);

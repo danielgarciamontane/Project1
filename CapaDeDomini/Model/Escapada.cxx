@@ -41,7 +41,7 @@ float Escapada::calculaPreu(int nPersones) const {
 }
 
 void Escapada::atributsEscapada(DTOExperiencia& dto) {
-    dto.tipusExp = "ESCAPADA";
+    dto.tipusExp = "Escapada";
     dto.hotel = _hotel;
     dto.numNits = _numNits;
 }

@@ -1,6 +1,7 @@
 #pragma once
 #include "Experiencia.hxx"
 
+#pragma db table("Escapada")
 #pragma db object
 class Escapada : public Experiencia {
 public:
@@ -26,7 +27,7 @@ public:
     void atributsEscapada(DTOExperiencia& dto);
 
 private:
-    friend class odb::access;   
+    friend class odb::access;  
     string _hotel;
     int _numNits;
 };

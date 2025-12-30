@@ -227,18 +227,11 @@ namespace odb
     }
   }
 
-  const access::object_traits_impl< ::Escapada, id_mysql >::info_type
+  const access::object_traits_impl< ::Escapada, id_mysql >::abstract_info_type
   access::object_traits_impl< ::Escapada, id_mysql >::info (
     typeid (::Escapada),
     &object_traits_impl< ::Experiencia, id_mysql >::info,
-    0,
-    "Escapada",
-    &odb::create_impl< ::Escapada >,
-    &odb::dispatch_impl< ::Escapada, id_mysql >,
-    &statements_type::delayed_loader);
-
-  static const access::object_traits_impl< ::Escapada, id_mysql >::entry_type
-  polymorphic_entry_for_Escapada;
+    0);
 
   const char access::object_traits_impl< ::Escapada, id_mysql >::persist_statement[] =
   "INSERT INTO `Escapada` "
@@ -263,19 +256,12 @@ namespace odb
     "`Experiencia`.`numReserves` "
     "FROM `Escapada` "
     "LEFT JOIN `Experiencia` ON `Experiencia`.`nom`=`Escapada`.`nom` "
-    "WHERE `Escapada`.`nom`=?",
-
-    "SELECT "
-    "`Escapada`.`hotel`, "
-    "`Escapada`.`numNits` "
-    "FROM `Escapada` "
     "WHERE `Escapada`.`nom`=?"
   };
 
   const std::size_t access::object_traits_impl< ::Escapada, id_mysql >::find_column_counts[] =
   {
-    10UL,
-    2UL
+    10UL
   };
 
   const char access::object_traits_impl< ::Escapada, id_mysql >::update_statement[] =
@@ -311,7 +297,7 @@ namespace odb
   "`Escapada`";
 
   void access::object_traits_impl< ::Escapada, id_mysql >::
-  persist (database& db, object_type& obj, bool top, bool dyn)
+  persist (database& db, const object_type& obj, bool top, bool dyn)
   {
     ODB_POTENTIALLY_UNUSED (top);
 
@@ -333,11 +319,6 @@ namespace odb
       mysql::transaction::current ().connection (db));
     statements_type& sts (
       conn.statement_cache ().find_object<object_type> ());
-
-    if (top)
-      callback (db,
-                static_cast<const object_type&> (obj),
-                callback_event::pre_persist);
 
     base_traits::persist (db, obj, false, false);
 
@@ -361,11 +342,6 @@ namespace odb
     insert_statement& st (sts.persist_statement ());
     if (!st.execute ())
       throw object_already_persistent ();
-
-    if (top)
-      callback (db,
-                static_cast<const object_type&> (obj),
-                callback_event::post_persist);
   }
 
   void access::object_traits_impl< ::Escapada, id_mysql >::
@@ -388,9 +364,6 @@ namespace odb
         return;
       }
     }
-
-    if (top)
-      callback (db, obj, callback_event::pre_update);
 
     mysql::transaction& tr (mysql::transaction::current ());
     mysql::connection& conn (tr.connection (db));
@@ -418,12 +391,6 @@ namespace odb
     update_statement& st (sts.update_statement ());
     if (st.execute () == 0)
       throw object_not_persistent ();
-
-    if (top)
-    {
-      callback (db, obj, callback_event::post_update);
-      pointer_cache_traits::update (db, obj);
-    }
   }
 
   void access::object_traits_impl< ::Escapada, id_mysql >::
@@ -442,40 +409,19 @@ namespace odb
     {
       discriminator_type d;
       root_traits::discriminator_ (sts.root_statements (), id, &d);
+      const info_type& pi (root_traits::map->find (d));
 
-      if (d != info.discriminator)
-      {
-        const info_type& pi (root_traits::map->find (d));
+      if (!pi.derived (info))
+        throw object_not_persistent ();
 
-        if (!pi.derived (info))
-          throw object_not_persistent ();
-
-        pi.dispatch (info_type::call_erase, db, 0, &id);
-        return;
-      }
-    }
-
-    if (top)
-    {
-      id_image_type& i (sts.id_image ());
-      init (i, id);
-
-      binding& idb (sts.id_image_binding ());
-      if (i.version != sts.id_image_version () || idb.version == 0)
-      {
-        bind (idb.bind, i);
-        sts.id_image_version (i.version);
-        idb.version++;
-      }
+      pi.dispatch (info_type::call_erase, db, 0, &id);
+      return;
     }
 
     if (sts.erase_statement ().execute () != 1)
       throw object_not_persistent ();
 
     base_traits::erase (db, id, false, false);
-
-    if (top)
-      pointer_cache_traits::erase (db, id);
   }
 
   void access::object_traits_impl< ::Escapada, id_mysql >::
@@ -533,8 +479,7 @@ namespace odb
     else
       root_traits::discriminator_ (rsts, id, &d);
 
-    const info_type& pi (
-      d == info.discriminator ? info : root_traits::map->find (d));
+    const info_type& pi (root_traits::map->find (d));
 
     root_traits::pointer_type rp (pi.create ());
     pointer_type p (
@@ -583,45 +528,9 @@ namespace odb
 
     using namespace mysql;
 
-    if (dyn)
-    {
-      const std::type_info& t (typeid (obj));
-
-      if (t != info.type)
-      {
-        const info_type& pi (root_traits::map->find (t));
-        return pi.dispatch (info_type::call_find, db, &obj, &id);
-      }
-    }
-
-    mysql::connection& conn (
-      mysql::transaction::current ().connection (db));
-    statements_type& sts (
-      conn.statement_cache ().find_object<object_type> ());
-    root_statements_type& rsts (sts.root_statements ());
-
-    statements_type::auto_lock l (rsts);
-    assert (l.locked ()) /* Must be a top-level call. */;
-
-    if (!find_ (sts, &id))
-      return false;
-
-    select_statement& st (sts.find_statement (depth));
-    ODB_POTENTIALLY_UNUSED (st);
-
-    reference_cache_traits::position_type pos (
-      reference_cache_traits::insert (db, id, obj));
-    reference_cache_traits::insert_guard ig (pos);
-
-    callback (db, obj, callback_event::pre_load);
-    init (obj, sts.image (), &db);
-    load_ (sts, obj, false);
-    rsts.load_delayed (0);
-    l.unlock ();
-    callback (db, obj, callback_event::post_load);
-    reference_cache_traits::load (pos);
-    ig.release ();
-    return true;
+    const std::type_info& t (typeid (obj));
+    const info_type& pi (root_traits::map->find (t));
+    return pi.dispatch (info_type::call_find, db, &obj, &id);
   }
 
   bool access::object_traits_impl< ::Escapada, id_mysql >::
@@ -631,65 +540,30 @@ namespace odb
 
     using namespace mysql;
 
-    if (dyn)
-    {
-      const std::type_info& t (typeid (obj));
-
-      if (t != info.type)
-      {
-        const info_type& pi (root_traits::map->find (t));
-        return pi.dispatch (info_type::call_reload, db, &obj, 0);
-      }
-    }
-
-    mysql::connection& conn (
-      mysql::transaction::current ().connection (db));
-    statements_type& sts (
-      conn.statement_cache ().find_object<object_type> ());
-    root_statements_type& rsts (sts.root_statements ());
-
-    statements_type::auto_lock l (rsts);
-    assert (l.locked ()) /* Must be a top-level call. */;
-
-    const id_type& id (object_traits_impl::id (obj));
-    if (!find_ (sts, &id))
-      return false;
-
-    select_statement& st (sts.find_statement (depth));
-    ODB_POTENTIALLY_UNUSED (st);
-
-    callback (db, obj, callback_event::pre_load);
-    init (obj, sts.image (), &db);
-    load_ (sts, obj, true);
-    rsts.load_delayed (0);
-    l.unlock ();
-    callback (db, obj, callback_event::post_load);
-    return true;
+    const std::type_info& t (typeid (obj));
+    const info_type& pi (root_traits::map->find (t));
+    return pi.dispatch (info_type::call_reload, db, &obj, 0);
   }
 
   bool access::object_traits_impl< ::Escapada, id_mysql >::
   find_ (statements_type& sts,
-         const id_type* id,
-         std::size_t d)
+         const id_type* id)
   {
     using namespace mysql;
 
-    if (d == depth)
-    {
-      id_image_type& i (sts.id_image ());
-      init (i, *id);
+    id_image_type& i (sts.id_image ());
+    init (i, *id);
 
-      binding& idb (sts.id_image_binding ());
-      if (i.version != sts.id_image_version () || idb.version == 0)
-      {
-        bind (idb.bind, i);
-        sts.id_image_version (i.version);
-        idb.version++;
-      }
+    binding& idb (sts.id_image_binding ());
+    if (i.version != sts.id_image_version () || idb.version == 0)
+    {
+      bind (idb.bind, i);
+      sts.id_image_version (i.version);
+      idb.version++;
     }
 
     image_type& im (sts.image ());
-    binding& imb (sts.select_image_binding (d));
+    binding& imb (sts.select_image_binding (depth));
 
     if (imb.version == 0 ||
         check_version (sts.select_image_versions (), im))
@@ -700,7 +574,7 @@ namespace odb
                       sts.select_image_bindings ());
     }
 
-    select_statement& st (sts.find_statement (d));
+    select_statement& st (sts.find_statement (depth));
 
     st.execute ();
     auto_result ar (st);
@@ -708,7 +582,7 @@ namespace odb
 
     if (r == select_statement::truncated)
     {
-      if (grow (im, sts.select_image_truncated (), d))
+      if (grow (im, sts.select_image_truncated (), depth))
         im.version++;
 
       if (check_version (sts.select_image_versions (), im))
@@ -734,29 +608,6 @@ namespace odb
 
     if (--d != 0)
       base_traits::load_ (sts.base_statements (), obj, reload);
-  }
-
-  void access::object_traits_impl< ::Escapada, id_mysql >::
-  load_ (database& db, root_type& r, std::size_t d)
-  {
-    using namespace mysql;
-
-    object_type& obj (static_cast<object_type&> (r));
-    mysql::connection& conn (
-      mysql::transaction::current ().connection (db));
-    statements_type& sts (
-      conn.statement_cache ().find_object<object_type> ());
-
-    d = depth - d;
-
-    if (!find_ (sts, 0, d))
-      throw object_not_persistent ();
-
-    select_statement& st (sts.find_statement (d));
-    ODB_POTENTIALLY_UNUSED (st);
-
-    init (obj, sts.image (), &db, d);
-    load_ (sts, obj, false, d);
   }
 
   result< access::object_traits_impl< ::Escapada, id_mysql >::object_type >

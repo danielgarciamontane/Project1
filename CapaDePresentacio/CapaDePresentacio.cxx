@@ -11,6 +11,10 @@
 #include "../CapaDeDomini/CtrlModificaUsuari.hxx"
 #include "../CapaDeDomini/CtrlEsborraUsuari.hxx"
 #include "../CapaDeDomini/CtrlReservaEscapada.hxx"
+#include "../CapaDeDomini/CtrlReservarActivitat.hxx"
+
+
+
 
 CapaDePresentacio* CapaDePresentacio::_instancia = nullptr;
 
@@ -111,7 +115,7 @@ void CapaDePresentacio::executar() {
 						reservarEscapada();
                         break;
                     case 2:
-                        std::cout << "Reservar activitat (pendent)\n";
+                        reservarActivitat();
                         break;
                     case 3:
                         std::cout << "Visualitzar reserves (pendent)\n";
@@ -384,6 +388,7 @@ void CapaDePresentacio::esborraUsuari() {
 void CapaDePresentacio::reservarEscapada() {
     std::cout << "--- RESERVAR ESCAPADA ---\n\n";
     try {
+
         CtrlReservaEscapada ctrl;
         DTOExperiencia dto;
         string nomEscapada;
@@ -411,4 +416,39 @@ void CapaDePresentacio::reservarEscapada() {
     catch (const std::exception& e) {
         std::cout << "\n? Error en reservar escapada: " << e.what() << "\n";
 	}
+}
+
+void CapaDePresentacio::reservarActivitat() {
+    std::cout << "--- RESERVAR ACTIVITAT ---\n\n";
+    try {
+        CtrlReservarActivitat ctrl;
+        DTOExperiencia dto;
+        string nomActivitat;
+        cin >> nomActivitat;
+        dto = ctrl.consultarActivitat(nomActivitat);
+        cout << "Informació de l'activitat:\n";
+        cout << "Nom: " << dto.nom << "\n";
+        cout << "Descripció: " << dto.descripcio << "\n";
+        cout << "Ciutat: " << dto.ciutat << "\n";
+        cout << "Places: " << dto.maxPlaces << "\n";
+        cout << "Preu: " << dto.preu << " €\n";
+        cout << "Data alta: " << dto.dataAlta << "\n";
+        cout << "Durada: " << dto.durada << " hores\n";
+        cout << "Introdueix el nombre de persones que volen realitzar l'activitat: ";
+        int numPersones;
+        cin >> numPersones;
+        if (numPersones > dto.maxPlaces) {
+            throw std::runtime_error("No hi ha places suficients per a l'activitat.");
+        }
+        char siono;
+        std::cout << "Vols continuar amb la reserva? (S/N)\n";
+        std::cin >> siono;
+        if (siono == 'S') {
+            float preu = ctrl.reservarActivitat(_usuariActual, nomActivitat);
+            std::cout << "Reserva realitzada correctament. Preu total: " << preu << " €\n";
+        }
+    }
+    catch (const std::exception& e) {
+        std::cout << "\n? Error en reservar activitat: " << e.what() << "\n";
+    }
 }

@@ -21,6 +21,7 @@ private:
 	void modificarUsuari();
 	void esborraUsuari();
 	void reservarEscapada();
+	void reservarActivitat();
 
 	// Mètodes auxiliars
 	void mostrarMenuPrincipal();

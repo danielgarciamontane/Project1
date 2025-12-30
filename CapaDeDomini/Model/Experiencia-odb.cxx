@@ -45,27 +45,6 @@ namespace odb
 
   access::object_traits_impl< ::Experiencia, id_mysql >::id_type
   access::object_traits_impl< ::Experiencia, id_mysql >::
-  id (const id_image_type& i)
-  {
-    mysql::database* db (0);
-    ODB_POTENTIALLY_UNUSED (db);
-
-    id_type id;
-    {
-      mysql::value_traits<
-          ::std::string,
-          mysql::id_string >::set_value (
-        id,
-        i.id_value,
-        i.id_size,
-        i.id_null);
-    }
-
-    return id;
-  }
-
-  access::object_traits_impl< ::Experiencia, id_mysql >::id_type
-  access::object_traits_impl< ::Experiencia, id_mysql >::
   id (const image_type& i)
   {
     mysql::database* db (0);
@@ -634,7 +613,7 @@ namespace odb
   "`Experiencia`";
 
   void access::object_traits_impl< ::Experiencia, id_mysql >::
-  persist (database& db, object_type& obj, bool top, bool dyn)
+  persist (database& db, const object_type& obj, bool top, bool dyn)
   {
     ODB_POTENTIALLY_UNUSED (top);
 
@@ -663,8 +642,6 @@ namespace odb
     if (init (im, obj, statement_insert))
       im.version++;
 
-    im._nom_value = 0;
-
     if (im.version != sts.insert_image_version () ||
         imb.version == 0)
     {
@@ -673,22 +650,9 @@ namespace odb
       imb.version++;
     }
 
-    {
-      id_image_type& i (sts.id_image ());
-      binding& b (sts.id_image_binding ());
-      if (i.version != sts.id_image_version () || b.version == 0)
-      {
-        bind (b.bind, i);
-        sts.id_image_version (i.version);
-        b.version++;
-      }
-    }
-
     insert_statement& st (sts.persist_statement ());
     if (!st.execute ())
       throw object_already_persistent ();
-
-    obj._nom = id (sts.id_image ());
 
     id_image_type& i (sts.id_image ());
     init (i, id (obj));

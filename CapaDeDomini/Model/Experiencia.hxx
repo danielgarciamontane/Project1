@@ -40,7 +40,7 @@ protected:
 private:
     friend class odb::access;   
 
-    #pragma db id auto
+    #pragma db  id
     string _nom;
     string _descripcio;
 	string _ciutat;

@@ -132,21 +132,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CapaDeDades\DAOActivitat.cxx" />
+    <ClCompile Include="CapaDeDomini\Model\Activitat-odb.cxx" />
+    <ClInclude Include="CapaDeDades\DAOActivitat.hxx" />
+    <ClInclude Include="CapaDeDomini\CtrlReservarActivitat.hxx" />
+    <ClInclude Include="CapaDeDomini\Model\Activitat-odb.ixx">
+      <FileType>Document</FileType>
+    </ClInclude>
     <ClCompile Include="CapaDeDades\connexioBD.cxx" />
     <ClCompile Include="CapaDeDades\DAOReserva.cxx" />
     <ClCompile Include="CapaDeDades\DAOUsuari.cxx" />
     <ClCompile Include="CapaDeDades\DAOEscapada.cxx" />
     <ClCompile Include="CapaDeDades\DAOExperiencia.cxx" />
-    <ClCompile Include="CapaDeDomini\Model\Activitat-odb.cxx" />
-    <ClInclude Include="CapaDeDomini\Model\Activitat-odb.ixx">
-      <FileType>Document</FileType>
-    </ClInclude>
     <ClCompile Include="CapaDeDomini\Model\Activitat.cxx" />
-    <ClCompile Include="CapaDeDomini\Model\Escapada-odb.cxx" />
-    <ClInclude Include="CapaDeDomini\Model\Escapada-odb.ixx">
-      <FileType>Document</FileType>
-    </ClInclude>
     <ClCompile Include="CapaDeDomini\Model\Escapada.cxx" />
+    <ClInclude Include="CapaDeDomini\Model\Activitat-odb.hxx" />
     <ClInclude Include="CapaDeDades\DAOReserva.hxx" />
     <ClInclude Include="CapaDeDades\DAOEscapada.hxx" />
     <ClInclude Include="CapaDeDades\DAOExperiencia.hxx" />
@@ -155,15 +155,8 @@
     <ClInclude Include="CapaDeDomini\CtrlModificaUsuari.hxx" />
     <ClInclude Include="CapaDeDomini\CtrlReservaEscapada.hxx" />
     <ClInclude Include="CapaDeDomini\DTOs\DTOExperiencia.hxx" />
-    <ClInclude Include="CapaDeDomini\Model\Activitat-odb.hxx" />
-    <ClInclude Include="CapaDeDomini\Model\Escapada-odb.hxx" />
     <ClInclude Include="CapaDeDomini\Model\Escapada.hxx" />
-    <ClCompile Include="CapaDeDomini\Model\Experiencia-odb.cxx" />
-    <ClInclude Include="CapaDeDomini\Model\Experiencia-odb.ixx">
-      <FileType>Document</FileType>
-    </ClInclude>
     <ClCompile Include="CapaDeDomini\Model\Experiencia.cxx" />
-    <ClInclude Include="CapaDeDomini\Model\Experiencia-odb.hxx" />
     <ClInclude Include="CapaDeDomini\Model\Experiencia.hxx" />
     <ClCompile Include="CapaDeDomini\Model\Reserva-odb.cxx" />
     <ClInclude Include="CapaDeDomini\Model\PlanGo.hxx" />
@@ -187,10 +180,21 @@
     <ClCompile Include="CapaDeDomini\CtrlModificaUsuari.cxx" />
     <ClCompile Include="CapaDeDomini\CtrlEsborraUsuari.cxx" />
     <ClCompile Include="CapaDeDomini\CtrlReservarEscapada.cxx" />
+    <ClCompile Include="CapaDeDomini\CtrlReservarActivitat.cxx" />
     <ClCompile Include="CapaDePresentacio\CapaDePresentacio.cxx" />
+    <ClCompile Include="CapaDeDomini\Model\Escapada-odb.cxx" />
+    <ClInclude Include="CapaDeDomini\Model\Escapada-odb.ixx">
+      <FileType>Document</FileType>
+    </ClInclude>
+    <ClCompile Include="CapaDeDomini\Model\Experiencia-odb.cxx" />
+    <ClInclude Include="CapaDeDomini\Model\Experiencia-odb.ixx">
+      <FileType>Document</FileType>
+    </ClInclude>
     <ClCompile Include="main.cpp" />
     <ClInclude Include="CapaDeDomini\CtrlTancaSessio.hxx" />
     <ClInclude Include="CapaDeDomini\CtrlRegistraUsuari.hxx" />
+    <ClInclude Include="CapaDeDomini\Model\Escapada-odb.hxx" />
+    <ClInclude Include="CapaDeDomini\Model\Experiencia-odb.hxx" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CapaDeDades\connexioBD.hxx" />

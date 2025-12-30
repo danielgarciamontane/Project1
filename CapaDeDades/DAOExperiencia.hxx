@@ -3,6 +3,7 @@
 #include <string>
 #include <memory>
 #include "../CapaDeDomini/Model/Experiencia.hxx"
+#include "../CapaDeDomini/Model/Escapada.hxx"
 class DAOExperiencia {
 	public:
 	shared_ptr<Experiencia> obte(const std::string& nomExp);

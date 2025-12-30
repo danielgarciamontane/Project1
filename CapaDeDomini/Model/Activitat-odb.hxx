@@ -190,10 +190,10 @@ namespace odb
       unsigned long _nom_size;
       my_bool _nom_null;
 
-      // durada
+      // _durada
       //
-      int durada_value;
-      my_bool durada_null;
+      int _durada_value;
+      my_bool _durada_null;
 
       std::size_t version;
     };
@@ -269,7 +269,7 @@ namespace odb
     static const char table_name[];
 
     static void
-    persist (database&, object_type&, bool top = true, bool dyn = true);
+    persist (database&, const object_type&, bool top = true, bool dyn = true);
 
     static pointer_type
     find (database&, const id_type&);

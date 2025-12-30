@@ -20,9 +20,8 @@ class DTOExperiencia {
 	string hotel;
 	int numNits;
 	int durada;
-	unsigned long id;
 
-	DTOExperiencia();
+	DTOExperiencia() = default;
 	DTOExperiencia(const string& nom, const string& descipcio, const string& ciutat,
 		const string& tipusExp, int maxPlaces, int numReserves,
 		float preu, boost::gregorian::date& data);
