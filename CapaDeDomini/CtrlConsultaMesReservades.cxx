@@ -29,5 +29,6 @@ vector<DTOExperiencia> CtrlConsultaMesReservades::consActMesReservades(int n) {
 	for (const auto& act : acts) {
 			mesReservades.push_back(act->obteInfoExperiencia());
 		}
+	return mesReservades;
 }
 

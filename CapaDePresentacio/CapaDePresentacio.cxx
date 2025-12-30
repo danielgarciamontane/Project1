@@ -53,7 +53,7 @@ void CapaDePresentacio::executar() {
                 break;
             case 0:
                 sortir = true;
-                cout << "\nAdéu! Gr�cies per utilitzar PlanGo.\n";
+                cout << "\nAdéu! Gràcies per utilitzar PlanGo.\n";
                 break;
             default:
                 cout << "\nOpció no v�lida. Torna-ho a intentar.\n";
@@ -151,7 +151,7 @@ void CapaDePresentacio::executar() {
                         break;
                     case 0:
                         sortir = true;
-                        std::cout << "\nAdéu! Gr�cies per utilitzar PlanGo.\n";
+                        std::cout << "\nAdéu! Gràcies per utilitzar PlanGo.\n";
                         break;
                     default:
                         std::cout << "Opció no vàlida.\n";
@@ -165,10 +165,10 @@ void CapaDePresentacio::executar() {
                 break;
             case 0:
                 sortir = true;
-                std::cout << "\nAd�u! Gr�cies per utilitzar PlanGo.\n";
+                std::cout << "\nAdéu! Gr�cies per utilitzar PlanGo.\n";
                 break;
             default:
-                std::cout << "\nOpci� no v�lida. Torna-ho a intentar.\n";
+                std::cout << "\nOpció no vàlida. Torna-ho a intentar.\n";
             }
         }
     }
@@ -176,7 +176,7 @@ void CapaDePresentacio::executar() {
 
 void CapaDePresentacio::mostrarMenuPrincipal() {
     cout << "-----------------------------------------\n";
-    cout << "-          SISTEMA PLAN-GO                -\n";
+    cout << "-                PLAN-GO                -\n";
     cout << "-    Gestió de Reserves d'Experiències  -\n";
     cout << "------------------------------------------\n\n";
     cout << "  1. Iniciar sessió\n";

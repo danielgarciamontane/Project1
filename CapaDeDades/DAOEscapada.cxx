@@ -27,14 +27,14 @@ DTOExperiencia DAOEscapada::obtenirEscapada(const std::string& nomExp) {
 
 vector<shared_ptr<Escapada>> DAOEscapada::obteMesReservades(int n) {
 	auto db = connexioBD::getInstance().getDB();
-	using Q = odb::query<Escapada>;
+	using query = odb::query<Escapada>;
+	using result = odb::result<Escapada>;
 	odb::transaction t(db->begin());
-	typedef odb::query<Escapada> query;
-	typedef odb::result<Escapada> result;
-
-	result res(db->query<Escapada>(query::true_expr + "ORDER BY" + query::numReserves + "DESC LIMIT" +
-		query::_ref(n)));
+	result res = db->query<Escapada>(
+		" ORDER BY " + query::numReserves + " DESC LIMIT " + query::_ref(n)
+	);
 	vector<shared_ptr<Escapada>> escapades;
+	escapades.reserve(static_cast<size_t>(n));
 	for (result::iterator i(res.begin()); i != res.end(); ++i) {
 		escapades.push_back(i.load());
 	}

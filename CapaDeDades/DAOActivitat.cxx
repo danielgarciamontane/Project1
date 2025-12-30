@@ -24,14 +24,23 @@ DTOExperiencia DAOActivitat::obtenirActivitat(const std::string& nomExp) {
 	return u->obteInfoExperiencia();
 }
 vector<shared_ptr<Activitat>> DAOActivitat::obteMesReservades(int n) {
+
 	auto db = connexioBD::getInstance().getDB();
-	using Q = odb::query<Activitat>;
+	using query = odb::query<Activitat>;
+	using result = odb::result<Activitat>;
+
 	odb::transaction t(db->begin());
-	typedef odb::query<Activitat> query;
-	typedef odb::result<Activitat> result;
-	result res(db->query<Activitat>(query::true_expr + "ORDER BY" + query::numReserves + "DESC LIMIT" +
-		query::_ref(n)));
+
+	// ORDER BY numReserves DESC y limitamos a n (sin usar true_expr).
+
+	result res = db->query<Activitat>(
+		" ORDER BY " + query::numReserves + " DESC LIMIT " + query::_ref(n)
+	);
+
+
 	vector<shared_ptr<Activitat>> activitats;
+	activitats.reserve(static_cast<size_t>(n));
+
 	for (result::iterator i(res.begin()); i != res.end(); ++i) {
 		activitats.push_back(i.load());
 	}
