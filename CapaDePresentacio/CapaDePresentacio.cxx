@@ -119,6 +119,39 @@ void CapaDePresentacio::executar() {
                         consultarReserves();
                         break;
                     case 0:
+<<<<<<< HEAD
+=======
+                        sortir = true;
+                        std::cout << "\nAdéu! Gràcies per utilitzar PlanGo.\n";
+                    break;                    default:
+                        std::cout << "Opció no vàlida.\n";
+                    }
+                }
+                break;
+            }
+
+            case 3: {
+                int opcioConsultes = -1;
+                while (opcioConsultes != 0) {
+                    mostrarMenuConsultes();
+                    std::cout << "Selecciona una opci�: ";
+                    std::cin >> opcioConsultes;
+                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+                    switch (opcioConsultes) {
+                    case 1:
+						consultarExperiencies();
+                        break;
+                    case 2:
+						consultarNovetats();
+                        break;
+                    case 3:
+                        consultaMesReservades();
+                        break;
+                    case 0:
+                        sortir = true;
+                        std::cout << "\nAdéu! Gràcies per utilitzar PlanGo.\n";
+>>>>>>> d8fbc9f5baa58f095e57e1a3caa2eb03a6695a23
                         break;
                     default:
                         cout << "Opció no vàlida.\n";
@@ -137,11 +170,19 @@ void CapaDePresentacio::executar() {
 
             case 0:
                 sortir = true;
+<<<<<<< HEAD
                 cout << "\nAdéu! Gràcies per utilitzar PlanGo.\n";
+=======
+                std::cout << "\nAdéu! Gr�cies per utilitzar PlanGo.\n";
+>>>>>>> d8fbc9f5baa58f095e57e1a3caa2eb03a6695a23
                 break;
 
             default:
+<<<<<<< HEAD
                 cout << "Opció no vàlida.\n";
+=======
+                std::cout << "\nOpció no vàlida. Torna-ho a intentar.\n";
+>>>>>>> d8fbc9f5baa58f095e57e1a3caa2eb03a6695a23
             }
         }
     }
@@ -149,8 +190,14 @@ void CapaDePresentacio::executar() {
 
 void CapaDePresentacio::mostrarMenuPrincipal() {
     cout << "-----------------------------------------\n";
+<<<<<<< HEAD
     cout << "-          SISTEMA PLAN-GO                -\n";
     cout << "-----------------------------------------\n\n";
+=======
+    cout << "-                PLAN-GO                -\n";
+    cout << "-    Gestió de Reserves d'Experiències  -\n";
+    cout << "------------------------------------------\n\n";
+>>>>>>> d8fbc9f5baa58f095e57e1a3caa2eb03a6695a23
     cout << "  1. Iniciar sessió\n";
     cout << "  2. Registrar-se\n";
     cout << "  3. Consultes\n";
