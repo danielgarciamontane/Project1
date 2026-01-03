@@ -4,13 +4,13 @@
 #include "Escapada.hxx"
 
 Experiencia::Experiencia() : _nom(""), _descripcio(""), _ciutat(""), _maxPlaces(1), _preu(0.0f),
-    _dataAlta(boost::gregorian::day_clock::local_day()), _numReserves(0) {
+_dataAlta(boost::gregorian::day_clock::local_day()), _numReserves(0) {
 }
 
 Experiencia::Experiencia(const string& nom, const string& descripcio, const string& ciutat,
     int maxPlaces, float preu)
     : _nom(nom), _descripcio(descripcio), _ciutat(ciutat), _maxPlaces(maxPlaces), _preu(preu),
-    _dataAlta(boost::gregorian::day_clock::local_day()), _numReserves(0) 
+    _dataAlta(boost::gregorian::day_clock::local_day()), _numReserves(0)
 {
     if (maxPlaces <= 0) {
         throw invalid_argument("El nombre maxim de places ha de ser superior a 0");
@@ -28,15 +28,15 @@ void Experiencia::print_info(std::ostream& os) const
     print_info_detalls(os);
 }
 
-DTOExperiencia Experiencia::obteInfoExperiencia() const{
+DTOExperiencia Experiencia::obteInfoExperiencia() const {
     DTOExperiencia dto;
     dto.nom = _nom;
-	dto.descripcio = _descripcio;
-	dto.ciutat = _ciutat;
-	dto.maxPlaces = _maxPlaces;
-	dto.preu = _preu;
-	dto.dataAlta = _dataAlta;
-	dto.numReserves = _numReserves;
+    dto.descripcio = _descripcio;
+    dto.ciutat = _ciutat;
+    dto.maxPlaces = _maxPlaces;
+    dto.preu = _preu;
+    dto.dataAlta = _dataAlta;
+    dto.numReserves = _numReserves;
     return dto;
 }
 
@@ -44,7 +44,7 @@ float Experiencia::calculaPreu(int numP, bool primRes) const {
     if (numP <= 0) {
         throw invalid_argument("El nombre de persones ha de ser superior a 0");
     }
-    float preuTotal =calculaPreu(numP);
+    float preuTotal = calculaPreu(numP);
 
     if (primRes) {
         float descompte = PlanGo::getInstance().getDescompte();
@@ -74,7 +74,7 @@ int Experiencia::get_numReserves() const {
 }
 
 int Experiencia::get_maxPlaces() const {
-	return _maxPlaces;
+    return _maxPlaces;
 }
 void Experiencia::sumaReserva() {
     _numReserves++;
