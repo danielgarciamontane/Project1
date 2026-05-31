@@ -1,0 +1,8 @@
+USE amep06;
+
+CREATE TABLE IF NOT EXISTS Equip (
+    idEquip VARCHAR(100) PRIMARY KEY,
+    nom VARCHAR(100) NOT NULL,
+    dataFundacio DATETIME NOT NULL,
+    esport VARCHAR(100) NOT NULL
+);
